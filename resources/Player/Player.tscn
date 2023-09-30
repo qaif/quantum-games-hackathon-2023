@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bywrawut0xw4k" path="res://resources/Player/Punk/Run/tile005.png" id="15_haq68"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yuskw"]
+height = 34.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4hjgd"]
 animations = [{
@@ -85,6 +86,9 @@ script = ExtResource("1_mkq0x")
 shape = SubResource("CapsuleShape2D_yuskw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(10, -8)
 sprite_frames = SubResource("SpriteFrames_4hjgd")
 animation = &"Run"
-frame_progress = 0.403694
+frame_progress = 0.735204
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
