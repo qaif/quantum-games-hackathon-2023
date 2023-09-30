@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdp33lu8t313c"]
+
+[ext_resource type="Script" path="res://state_vector_sphere.gd" id="1_0jxcx"]
+
+[node name="stateVectorSphere" type="Node2D"]
+script = ExtResource("1_0jxcx")
