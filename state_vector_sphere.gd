@@ -17,7 +17,8 @@ func _ready():
 	compute_state_vector(gate_type, gate_id, circuit_size)
 
 func compute_state_vector(gate_type,gate_id,size):
-	OS.execute(interpreter_path, [script_path, gate_type, gate_id, size])
+	var output = []
+	OS.execute(interpreter_path, [script_path, gate_type, gate_id, size],output)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
