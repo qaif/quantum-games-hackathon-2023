@@ -11,11 +11,13 @@ func _ready():
 	if !OS.has_feature("standalone"):
 		interpreter_path = ProjectSettings.globalize_path("res://PythonFiles/venv/Scripts/activate")
 		script_path = ProjectSettings.globalize_path("PythonFiles/venv/Scripts/activate")
-	var gate_type= ""
-	compute_state_vector(gate_type, 2, 3)
+	var gate_type = ["h","c","x","c","h"]
+	var gate_id = [0,0,0,1,1]
+	var circuit_size = 2
+	compute_state_vector(gate_type, gate_id, circuit_size)
 
-func compute_state_vector(a,b,c):
-	pass
+func compute_state_vector(gate_type,gate_id,size):
+	OS.execute(interpreter_path, [script_path, gate_type, gate_id, size])
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
