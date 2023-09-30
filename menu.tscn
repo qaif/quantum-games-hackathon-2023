@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://brun0jh2tal5d"]
+[gd_scene load_steps=2 format=3 uid="uid://brun0jh2tal5d"]
+
+[ext_resource type="PackedScene" uid="uid://ckd405sesybep" path="res://bg.tscn" id="1_g0psv"]
 
 [node name="Menu" type="Node2D"]
 
@@ -15,3 +17,5 @@ offset_top = 422.0
 offset_right = 671.0
 offset_bottom = 514.0
 text = "Quit"
+
+[node name="bg" parent="." instance=ExtResource("1_g0psv")]
