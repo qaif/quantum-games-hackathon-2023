@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bja6cx3mtxaqv"]
+[gd_scene load_steps=4 format=3 uid="uid://bja6cx3mtxaqv"]
 
 [ext_resource type="Texture2D" uid="uid://btqs5u2t02v3u" path="res://resources/inventory/InventoryRect.png" id="1_e2tfv"]
 [ext_resource type="PackedScene" uid="uid://couwlhu5eblf" path="res://Inventory/slot.tscn" id="2_2xxkt"]
+[ext_resource type="PackedScene" uid="uid://d10x2s5pjbgwd" path="res://gates/gate.tscn" id="3_v3m6r"]
 
 [node name="InventoryGui" type="Control"]
 layout_mode = 3
@@ -56,3 +57,43 @@ layout_mode = 2
 
 [node name="Panel10" parent="NinePatchRect/GridContainer" instance=ExtResource("2_2xxkt")]
 layout_mode = 2
+
+[node name="H_Gate" parent="." instance=ExtResource("3_v3m6r")]
+position = Vector2(37, 39)
+text_color = Color(0.00784314, 0.615686, 0.67451, 1)
+bg_color = Color(0.972549, 0.74902, 0.792157, 1)
+
+[node name="X_Gate" parent="." instance=ExtResource("3_v3m6r")]
+position = Vector2(163, 38)
+scale = Vector2(1.00862, 1)
+letter = "X"
+text_color = Color(1, 0.87451, 0.941176, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
+[node name="SWAP" parent="." instance=ExtResource("3_v3m6r")]
+position = Vector2(163, 288)
+scale = Vector2(1.00862, 1)
+letter = "SW"
+text_color = Color(1, 0.87451, 0.941176, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
+[node name="CNOT_Gate" parent="." instance=ExtResource("3_v3m6r")]
+position = Vector2(37, 286)
+scale = Vector2(1.00862, 1)
+letter = "CX"
+text_color = Color(1, 0.87451, 0.941176, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
+[node name="Z_Gate" parent="." instance=ExtResource("3_v3m6r")]
+position = Vector2(161, 163)
+scale = Vector2(1.00862, 1)
+letter = "Z"
+text_color = Color(1, 0.87451, 0.941176, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
+[node name="Y_Gate" parent="." instance=ExtResource("3_v3m6r")]
+position = Vector2(36, 164)
+scale = Vector2(1.00862, 1)
+letter = "Y"
+text_color = Color(1, 0.87451, 0.941176, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
