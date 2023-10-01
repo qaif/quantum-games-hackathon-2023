@@ -14,7 +14,8 @@ size = Vector2(1140, 104)
 [node name="main" type="Node2D"]
 
 [node name="floor" type="StaticBody2D" parent="."]
-position = Vector2(585, 594)
+position = Vector2(2160, 594)
+scale = Vector2(3.96, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
 shape = SubResource("RectangleShape2D_no3nw")
@@ -27,14 +28,14 @@ texture = ExtResource("1_6etl1")
 [node name="Player" parent="." instance=ExtResource("2_qjiqm")]
 position = Vector2(447, 365)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, 0)
+limit_left = 0
+limit_top = 0
+limit_right = 3500
+limit_bottom = 100
+
 [node name="bg" parent="." instance=ExtResource("3_3s41w")]
-
-[node name="thermometer" parent="." instance=ExtResource("4_hcp8l")]
-position = Vector2(67, -4)
-
-[node name="InventoryGui" parent="." instance=ExtResource("4_nam8y")]
-offset_right = 257.0
-offset_bottom = 386.0
 
 [node name="CosmicRay" parent="." instance=ExtResource("4_30vpx")]
 position = Vector2(166, -14)
@@ -57,5 +58,14 @@ position = Vector2(1021, -864)
 [node name="CosmicRay7" parent="." instance=ExtResource("4_30vpx")]
 position = Vector2(1014, -632)
 
-[node name="PlayerStateSphere" parent="." instance=ExtResource("7_qubm8")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerStateSphere" parent="CanvasLayer" instance=ExtResource("7_qubm8")]
 position = Vector2(791, 5)
+
+[node name="thermometer" parent="CanvasLayer" instance=ExtResource("4_hcp8l")]
+position = Vector2(67, -4)
+
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("4_nam8y")]
+offset_right = 257.0
+offset_bottom = 386.0

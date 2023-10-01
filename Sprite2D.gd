@@ -36,4 +36,4 @@ func set_state(state):
 func _on_timer_timeout():
 	set_state(current_state)
 	current_state = (current_state + 1) % 6  # Cycle through states 0 to 5
-	print(current_state)
+
