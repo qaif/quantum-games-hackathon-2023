@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 
 public enum GateType
 {
-    H
+    H, X, Y, Z, RY
 }
 
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
 public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public Events events;
+
     Canvas canvas;
     CanvasGroup canvasGroup;
     RectTransform rectTransform;
@@ -27,19 +30,15 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         Assert.IsNotNull(canvas);
         this.rectTransform = GetComponent<RectTransform>();
         this.canvasGroup = this.GetComponent<CanvasGroup>();
-
-        lines = FindObjectsOfType<DroppableLine>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("On drag begin");
         this.initialPosition = this.rectTransform.anchoredPosition;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("On drag");
         this.rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
@@ -53,21 +52,33 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         );
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public int FindOverlapingLine()
     {
-        Debug.Log("On drag end");
+        lines = FindObjectsOfType<DroppableLine>().OrderBy(line => -line.transform.position.y).ToArray();
 
-        foreach (var line in lines)
+        for (int i = 0; i < lines.Length; i++)
         {
             Rect draggedItemRect = rectTransformToRect(this.rectTransform);
-            Rect lineRect = rectTransformToRect(line.rectTransform);
-
+            Rect lineRect = rectTransformToRect(lines[i].rectTransform);
 
             if (draggedItemRect.Overlaps(lineRect))
             {
-                this.transform.position = new Vector3(this.transform.position.x, line.transform.position.y, this.transform.position.z);
-                return;
+                Debug.Log($"Overlap line is: {lines[i].gameObject.name}, with index: {i}");
+                return i;
             }
+        }
+
+        return -1;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        int overlappingLine = FindOverlapingLine();
+        if (overlappingLine != -1)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, lines[overlappingLine].transform.position.y, this.transform.position.z);
+            events.TransformViewUpdated();
+            return;
         }
 
         // No overlaps
