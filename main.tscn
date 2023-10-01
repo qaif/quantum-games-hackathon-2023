@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdx2xjbgyy4y7"]
+[gd_scene load_steps=6 format=3 uid="uid://bdx2xjbgyy4y7"]
 
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="2_qjiqm"]
 [ext_resource type="PackedScene" uid="uid://ckd405sesybep" path="res://bg.tscn" id="3_3s41w"]
+[ext_resource type="PackedScene" uid="uid://bc3j1xfy03tc1" path="res://resources/CosmicRay/CosmicRay.tscn" id="4_30vpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)
@@ -21,6 +22,27 @@ scale = Vector2(8.91211, 0.804688)
 texture = ExtResource("1_6etl1")
 
 [node name="Player" parent="." instance=ExtResource("2_qjiqm")]
-position = Vector2(295, 370)
+position = Vector2(160, 374)
 
 [node name="bg" parent="." instance=ExtResource("3_3s41w")]
+
+[node name="CosmicRay" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(166, -14)
+
+[node name="CosmicRay2" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(552, -1099)
+
+[node name="CosmicRay3" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(932, -1131)
+
+[node name="CosmicRay4" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(675, -854)
+
+[node name="CosmicRay5" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(621, -375)
+
+[node name="CosmicRay6" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(1021, -864)
+
+[node name="CosmicRay7" parent="." instance=ExtResource("4_30vpx")]
+position = Vector2(1014, -632)
