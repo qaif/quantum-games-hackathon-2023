@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc3j1xfy03tc1"]
+[gd_scene load_steps=11 format=3 uid="uid://bc3j1xfy03tc1"]
 
 [ext_resource type="Texture2D" uid="uid://cikvljgmp1dcv" path="res://resources/CosmicRay/CosmicSprites/burning_loop_3.png" id="1_e6hh1"]
+[ext_resource type="Script" path="res://resources/CosmicRay/CosmicRay.gd" id="1_flu0t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h6ocn"]
 radius = 6.0
@@ -57,8 +58,9 @@ animations = [{
 }]
 
 [node name="CosmicRay" type="Node2D"]
+script = ExtResource("1_flu0t")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="RigidBody2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
@@ -68,3 +70,5 @@ shape = SubResource("CapsuleShape2D_h6ocn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
 sprite_frames = SubResource("SpriteFrames_ikxt5")
 frame_progress = 0.257202
+
+[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]

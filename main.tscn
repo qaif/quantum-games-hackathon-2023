@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdx2xjbgyy4y7"]
 
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
+[ext_resource type="Script" path="res://main.gd" id="1_cwba0"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="2_qjiqm"]
 [ext_resource type="PackedScene" path="res://bg.tscn" id="3_3s41w"]
-[ext_resource type="PackedScene" uid="uid://bc3j1xfy03tc1" path="res://resources/CosmicRay/CosmicRay.tscn" id="4_30vpx"]
 [ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer.tscn" id="4_hcp8l"]
 [ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://Inventory/inventory.tscn" id="4_nam8y"]
 [ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://player_state_sphere.tscn" id="7_qubm8"]
@@ -12,6 +12,7 @@
 size = Vector2(1140, 104)
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_cwba0")
 
 [node name="floor" type="StaticBody2D" parent="."]
 position = Vector2(2160, 594)
@@ -37,27 +38,6 @@ limit_bottom = 100
 
 [node name="bg" parent="." instance=ExtResource("3_3s41w")]
 
-[node name="CosmicRay" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(166, -14)
-
-[node name="CosmicRay2" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(552, -1099)
-
-[node name="CosmicRay3" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(932, -1131)
-
-[node name="CosmicRay4" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(675, -854)
-
-[node name="CosmicRay5" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(621, -375)
-
-[node name="CosmicRay6" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(1021, -864)
-
-[node name="CosmicRay7" parent="." instance=ExtResource("4_30vpx")]
-position = Vector2(1014, -632)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerStateSphere" parent="CanvasLayer" instance=ExtResource("7_qubm8")]
@@ -67,5 +47,6 @@ position = Vector2(791, 5)
 position = Vector2(67, -4)
 
 [node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("4_nam8y")]
+visible = false
 offset_right = 257.0
 offset_bottom = 386.0

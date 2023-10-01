@@ -38,3 +38,6 @@ func _physics_process(delta):
 		anim.play("JumpDown")
 
 	move_and_slide()
+
+func get_hit(damage : float):
+	$"../CanvasLayer/thermometer".increase_degree(damage)
