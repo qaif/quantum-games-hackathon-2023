@@ -20,6 +20,11 @@ public class QiskitTest : MonoBehaviour
             Debug.Log($"Probability: {prob}");
         }
 
+        var amps = simulator.Simulate(qc);
+        foreach (var amp in amps)
+        {
+            Debug.Log($"Amplitude: {amp}");
+        }
 
         var counts = new Dictionary<int, int>();
         var rs = new RandomSelector();
