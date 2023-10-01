@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bdspqpvxhy1ju"]
+[gd_scene load_steps=26 format=3 uid="uid://bdspqpvxhy1ju"]
 
 [ext_resource type="Script" path="res://resources/Player/Player.gd" id="1_mkq0x"]
 [ext_resource type="Texture2D" uid="uid://b84idiuymnd66" path="res://resources/Player/Punk/idle/tile000.png" id="2_70ypm"]
@@ -16,9 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://dwmmwihkrk5rt" path="res://resources/Player/Punk/Run/tile004.png" id="14_2typu"]
 [ext_resource type="Texture2D" uid="uid://bywrawut0xw4k" path="res://resources/Player/Punk/Run/tile005.png" id="15_haq68"]
 
+[sub_resource type="Gradient" id="Gradient_lbskx"]
+
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7buvx"]
-fill_from = Vector2(0.337607, 0.222222)
-fill_to = Vector2(0.440171, 0.564103)
+gradient = SubResource("Gradient_lbskx")
+fill_from = Vector2(-0.605, 0)
 repeat = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3x2h1"]
@@ -229,13 +231,12 @@ collision_layer = 5
 script = ExtResource("1_mkq0x")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
 z_index = 3
 z_as_relative = false
+texture_filter = 4
 position = Vector2(0, -3)
 color = Color(0.913725, 0.278431, 0.623529, 1)
 texture = SubResource("GradientTexture2D_7buvx")
-texture_offset = Vector2(-4.155, 0)
 texture_scale = Vector2(10.845, 10.845)
 polygon = PackedVector2Array(-10, -19, 10, -19, 10, 19, -10, 19)
 

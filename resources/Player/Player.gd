@@ -24,8 +24,10 @@ func _physics_process(delta):
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction==-1:
 		get_node("AnimatedSprite2D").flip_h = true
+		$AnimatedSprite2D.offset.x = -17
 	elif direction == 1:
 		get_node("AnimatedSprite2D").flip_h = false
+		$AnimatedSprite2D.offset.x = 0
 	if direction:
 		velocity.x = direction * SPEED
 		if velocity.y == 0:
