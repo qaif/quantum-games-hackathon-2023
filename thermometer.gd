@@ -14,7 +14,7 @@ func increase_degree(degree : float):
 		temperature += degree
 		$degree.scale.y += 0.07
 	else : 
-		get_tree().change_scene_to_file("res://menu.tscn")
+		get_tree().change_scene_to_file("res://lose_menu.tscn")
 func decrease_degree(degree : float):	
 	if temperature > -269 :
 		$degree.scale.y -= 0.07
