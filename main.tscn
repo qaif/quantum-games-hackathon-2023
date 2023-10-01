@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdx2xjbgyy4y7"]
+[gd_scene load_steps=10 format=3 uid="uid://bdx2xjbgyy4y7"]
 
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="Script" path="res://main.gd" id="1_cwba0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer.tscn" id="4_hcp8l"]
 [ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://Inventory/inventory.tscn" id="4_nam8y"]
 [ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://player_state_sphere.tscn" id="7_qubm8"]
+[ext_resource type="PackedScene" path="res://shower.tscn" id="8_mb3xl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)
@@ -50,3 +51,6 @@ position = Vector2(67, -4)
 visible = false
 offset_right = 257.0
 offset_bottom = 386.0
+
+[node name="shower" parent="." instance=ExtResource("8_mb3xl")]
+position = Vector2(241, 413)

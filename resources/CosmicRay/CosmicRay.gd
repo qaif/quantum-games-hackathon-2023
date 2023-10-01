@@ -15,5 +15,5 @@ func _physics_process(delta):
 	position.y += speed*delta
 
 func _on_rigid_body_2d_body_entered(body):
-	body.get_hit(2.0)
+	body.get_hit(1.0)
 	print("test")
