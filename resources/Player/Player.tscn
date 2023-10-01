@@ -230,7 +230,7 @@ shape = SubResource("RectangleShape2D_3x2h1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(10, -8)
 sprite_frames = SubResource("SpriteFrames_4hjgd")
-animation = &"Jump"
+animation = &"Idle"
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
