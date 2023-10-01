@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://covvpjbes123b"]
+
+[ext_resource type="Texture2D" uid="uid://bdk52jus02mkf" path="res://resources/qubit_state/zero_state.png" id="1_ghp88"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="1_nstur"]
+
+[node name="PlayerStateSphere" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(59.685, 63.3799)
+scale = Vector2(0.29982, 0.300336)
+texture = ExtResource("1_ghp88")
+script = ExtResource("1_nstur")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Sprite2D" method="_on_timer_timeout"]
