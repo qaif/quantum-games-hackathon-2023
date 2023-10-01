@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn2swtijcu4fj"]
+
+[ext_resource type="Script" path="res://world/world_tileset.gd" id="1_n7mor"]
+
+[sub_resource type="TileSet" id="TileSet_v4o4h"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_n7mor")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_v4o4h")
+format = 2
