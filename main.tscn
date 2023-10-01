@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer.tscn" id="4_hcp8l"]
 [ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://Inventory/inventory.tscn" id="4_nam8y"]
 [ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://player_state_sphere.tscn" id="7_qubm8"]
-[ext_resource type="PackedScene" path="res://shower.tscn" id="8_mb3xl"]
+[ext_resource type="PackedScene" uid="uid://srs5g3jtfsl8" path="res://shower.tscn" id="8_mb3xl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)

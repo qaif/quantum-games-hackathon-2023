@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ufldbcgy23n"]
+[gd_scene load_steps=6 format=3 uid="uid://srs5g3jtfsl8"]
 
 [ext_resource type="Texture2D" uid="uid://bu6fyuc08xakk" path="res://resources/shower1.png" id="1_76ito"]
 [ext_resource type="Script" path="res://shower.gd" id="1_arscv"]
@@ -40,7 +40,7 @@ shape = SubResource("RectangleShape2D_cuq04")
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 autostart = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
