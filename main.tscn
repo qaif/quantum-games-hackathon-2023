@@ -48,7 +48,6 @@ position = Vector2(791, 5)
 position = Vector2(67, -4)
 
 [node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("4_nam8y")]
-visible = false
 offset_right = 257.0
 offset_bottom = 386.0
 
