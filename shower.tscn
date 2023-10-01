@@ -29,7 +29,7 @@ position = Vector2(62, 63)
 scale = Vector2(0.232, 0.26)
 sprite_frames = SubResource("SpriteFrames_0px4i")
 autoplay = "default"
-frame_progress = 0.086983
+frame_progress = 0.309086
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(63, 55)
@@ -39,5 +39,10 @@ position = Vector2(10, 29)
 shape = SubResource("RectangleShape2D_cuq04")
 metadata/_edit_lock_ = true
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

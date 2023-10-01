@@ -29,7 +29,7 @@ theme_override_font_sizes/font_size = 30
 script = ExtResource("4_xjp5v")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.75
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
