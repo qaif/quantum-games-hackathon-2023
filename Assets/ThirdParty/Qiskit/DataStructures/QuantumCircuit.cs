@@ -21,10 +21,12 @@ using UnityEngine;
 using System.ComponentModel;
 #endif
 
-namespace Qiskit {
+namespace Qiskit
+{
 
     [System.Serializable]
-    public class QuantumCircuit {
+    public class QuantumCircuit
+    {
 
         public int NumberOfQubits;
         public int NumberOfOutputs;
@@ -44,63 +46,79 @@ namespace Qiskit {
 #endif        
         public double OriginalSum = 0;
 
-        public QuantumCircuit(int numberOfQuibits, int numberOfOutputs, bool initializeAmplitudes = false) {
+        public QuantumCircuit(int numberOfQuibits, int numberOfOutputs, bool initializeAmplitudes = false)
+        {
             Gates = new List<Gate>();
             NumberOfQubits = numberOfQuibits;
             NumberOfOutputs = numberOfOutputs;
             AmplitudeLength = MathHelper.IntegerPower(2, NumberOfQubits);
 
-            if (initializeAmplitudes) {
+            if (initializeAmplitudes)
+            {
                 Amplitudes = new ComplexNumber[AmplitudeLength];
 
             }
         }
 
-        public void InitializeValues(List<double> values) {
-            if (Amplitudes == null || Amplitudes.Length != AmplitudeLength) {
+        public void InitializeValues(List<double> values)
+        {
+            if (Amplitudes == null || Amplitudes.Length != AmplitudeLength)
+            {
                 Amplitudes = new ComplexNumber[AmplitudeLength];
             }
 
-            if (values.Count > AmplitudeLength) {
+            if (values.Count > AmplitudeLength)
+            {
                 LogError("To many values " + values.Count + " while there are only " + AmplitudeLength + " qubits");
                 return;
             }
-            for (int i = 0; i < values.Count; i++) {
+            for (int i = 0; i < values.Count; i++)
+            {
                 Amplitudes[i].Real = values[i];
             }
         }
 
-        public void InitializeValues(List<ComplexNumber> values) {
-            if (Amplitudes == null || Amplitudes.Length != AmplitudeLength) {
+        public void InitializeValues(List<ComplexNumber> values)
+        {
+            if (Amplitudes == null || Amplitudes.Length != AmplitudeLength)
+            {
                 Amplitudes = new ComplexNumber[AmplitudeLength];
             }
 
-            if (values.Count > AmplitudeLength) {
+            if (values.Count > AmplitudeLength)
+            {
                 LogError("To many values " + values.Count + " while there are only " + AmplitudeLength + " qubits");
                 return;
             }
-            for (int i = 0; i < values.Count; i++) {
+            for (int i = 0; i < values.Count; i++)
+            {
                 Amplitudes[i] = values[i];
             }
         }
 
-        public void InitializeValues(double[] values) {
-            if (Amplitudes == null || Amplitudes.Length != AmplitudeLength) {
+        public void InitializeValues(double[] values)
+        {
+            if (Amplitudes == null || Amplitudes.Length != AmplitudeLength)
+            {
                 Amplitudes = new ComplexNumber[AmplitudeLength];
             }
 
-            if (values.Length > AmplitudeLength) {
+            if (values.Length > AmplitudeLength)
+            {
                 LogError("To many values " + values.Length + " while there are only " + AmplitudeLength + " qubits");
                 return;
             }
-            for (int i = 0; i < values.Length; i++) {
+            for (int i = 0; i < values.Length; i++)
+            {
                 Amplitudes[i].Real = values[i];
             }
         }
-        public void InitializeValues(ComplexNumber[] values) {
+        public void InitializeValues(ComplexNumber[] values)
+        {
             //Amplitudes = new ComplexNumber[AmplitudeLength];
 
-            if (values.Length > AmplitudeLength) {
+            if (values.Length > AmplitudeLength)
+            {
                 LogError("To many values " + values.Length + " while there are only " + AmplitudeLength + " qubits");
                 return;
             }
@@ -114,8 +132,10 @@ namespace Qiskit {
             Amplitudes = values;
         }
 
-        public void X(int targetQubit) {
-            Gate gate = new Gate {
+        public void X(int targetQubit)
+        {
+            Gate gate = new Gate
+            {
                 CircuitType = CircuitType.X,
                 First = targetQubit
 
@@ -124,8 +144,10 @@ namespace Qiskit {
         }
 
 
-        public void RX(int targetQubit, double rotation) {
-            Gate gate = new Gate {
+        public void RX(int targetQubit, double rotation)
+        {
+            Gate gate = new Gate
+            {
                 CircuitType = CircuitType.RX,
                 First = targetQubit,
                 Theta = rotation
@@ -134,8 +156,10 @@ namespace Qiskit {
             Gates.Add(gate);
         }
 
-        public void H(int targetQubit) {
-            Gate gate = new Gate {
+        public void H(int targetQubit)
+        {
+            Gate gate = new Gate
+            {
                 CircuitType = CircuitType.H,
                 First = targetQubit
 
@@ -143,8 +167,10 @@ namespace Qiskit {
             Gates.Add(gate);
         }
 
-        public void CX(int controlQubit, int targetQubit) {
-            Gate gate = new Gate {
+        public void CX(int controlQubit, int targetQubit)
+        {
+            Gate gate = new Gate
+            {
                 CircuitType = CircuitType.CX,
                 First = controlQubit,
                 Second = targetQubit
@@ -153,8 +179,10 @@ namespace Qiskit {
             Gates.Add(gate);
         }
 
-        public void CRX(int controlQubit, int targetQubit, double rotation) {
-            Gate gate = new Gate {
+        public void CRX(int controlQubit, int targetQubit, double rotation)
+        {
+            Gate gate = new Gate
+            {
                 CircuitType = CircuitType.CRX,
                 First = controlQubit,
                 Second = targetQubit,
@@ -164,8 +192,10 @@ namespace Qiskit {
             Gates.Add(gate);
         }
 
-        public void Measure(int output, int qubit) {
-            Gate gate = new Gate {
+        public void Measure(int output, int qubit)
+        {
+            Gate gate = new Gate
+            {
                 CircuitType = CircuitType.M,
                 First = output,
                 Second = qubit
@@ -174,13 +204,15 @@ namespace Qiskit {
             Gates.Add(gate);
         }
 
-        public void RZ(int targetQubit, double rotation) {
+        public void RZ(int targetQubit, double rotation)
+        {
             H(targetQubit);
             RX(targetQubit, rotation);
             H(targetQubit);
         }
 
-        public void RY(int targetQubit, double rotation) {
+        public void RY(int targetQubit, double rotation)
+        {
             RX(targetQubit, MathHelper.PiHalf);
             H(targetQubit);
             RX(targetQubit, rotation);
@@ -189,53 +221,67 @@ namespace Qiskit {
 
         }
 
-        public void Z(int targetQubit) {
+        public void Z(int targetQubit)
+        {
             RZ(targetQubit, MathHelper.Pi);
         }
 
-        public void Y(int targetQubit) {
+        public void Y(int targetQubit)
+        {
             RZ(targetQubit, MathHelper.Pi);
             X(targetQubit);
         }
 
-        public void ResetGates() {
+        public void ResetGates()
+        {
             Gates.Clear();
         }
 
-        public double ProbabilitySum() {
+        public double ProbabilitySum()
+        {
             double sum = 0;
-            if (Amplitudes == null || Amplitudes.Length == 0) {
+            if (Amplitudes == null || Amplitudes.Length == 0)
+            {
                 return 0;
             }
 
-            for (int i = 0; i < Amplitudes.Length; i++) {
+            for (int i = 0; i < Amplitudes.Length; i++)
+            {
                 sum += Amplitudes[i].Real * Amplitudes[i].Real + Amplitudes[i].Complex * Amplitudes[i].Complex;
             }
             return sum;
         }
 
-        public void Normalize() {
+        public void Normalize()
+        {
             double sum = ProbabilitySum();
             //Debug.Log(sum);
             Normalize(sum);
         }
 
-        public void Normalize(double sum) {
-            if (sum < MathHelper.Eps) {
+        public void Normalize(double sum)
+        {
+            if (sum < MathHelper.Eps)
+            {
                 LogError("Sum is 0 " + sum);
                 return;
             }
 
-            if (sum < 1 - MathHelper.Eps || sum > 1 + MathHelper.Eps) {
+            if (sum < 1 - MathHelper.Eps || sum > 1 + MathHelper.Eps)
+            {
                 //This can happen for really large inputs due to rounding errors.
-                if (OriginalSum == 0) {
+                if (OriginalSum == 0)
+                {
                     OriginalSum = sum;
-                } else {
+                }
+                else
+                {
                     OriginalSum *= sum;
                 }
                 sum = Math.Sqrt(sum);
 
-                for (int i = 0; i < Amplitudes.Length; i++) {
+                for (int i = 0; i < Amplitudes.Length; i++)
+                {
                     Amplitudes[i].Real /= sum;
                     Amplitudes[i].Complex /= sum;
 
@@ -243,10 +289,12 @@ namespace Qiskit {
             }
         }
 
-        public List<List<double>> GetAmplitudeList() {
+        public List<List<double>> GetAmplitudeList()
+        {
             List<List<double>> returnValue = new List<List<double>>();
 
-            for (int i = 0; i < Amplitudes.Length; i++) {
+            for (int i = 0; i < Amplitudes.Length; i++)
+            {
                 List<double> amplitude = new List<double>();
                 amplitude.Add(Amplitudes[i].Real);
                 amplitude.Add(Amplitudes[i].Complex);
@@ -256,7 +304,8 @@ namespace Qiskit {
             return returnValue;
         }
 
-        public string GetQiskitString(bool includeAllMeasures = false) {
+        public string GetQiskitString(bool includeAllMeasures = false)
+        {
 
             //todo use correct number
             StringBuilder builder = new StringBuilder();
@@ -266,14 +315,17 @@ namespace Qiskit {
 
             string allnumbers = getAllNumbersString(NumberOfQubits);
 
-            if (NumberOfOutputs == 0) {
+            if (NumberOfOutputs == 0)
+            {
                 //translation += "qc = QuantumCircuit(" + NumberOfQubits + ")\n";
                 builder.Append("qc = QuantumCircuit(");
                 builder.Append(NumberOfQubits);
                 builder.Append(")\n");
 
 
-            } else {
+            }
+            else
+            {
                 //translation += "qc = QuantumCircuit(" + NumberOfQubits + "," + NumberOfOutputs + ")\n";
                 builder.Append("qc = QuantumCircuit(");
                 builder.Append(NumberOfQubits);
@@ -282,7 +334,8 @@ namespace Qiskit {
                 builder.Append(")\n");
             }
 
-            if (Amplitudes != null && Amplitudes.Length > 0 && OriginalSum > 0) {
+            if (Amplitudes != null && Amplitudes.Length > 0 && OriginalSum > 0)
+            {
 
                 //hack only possible because the Amplitudes.ToString() only gives the Real values.
                 //This makes this quite a bit faster though.
@@ -307,9 +360,11 @@ namespace Qiskit {
                 */
             }
 
-            for (int i = 0; i < Gates.Count; i++) {
+            for (int i = 0; i < Gates.Count; i++)
+            {
                 Gate gate = Gates[i];
-                switch (gate.CircuitType) {
+                switch (gate.CircuitType)
+                {
                     case CircuitType.X:
                         //translation += "qc.x(" + gate.First + ")\n";
                         builder.Append("qc.x(");
@@ -377,7 +432,8 @@ namespace Qiskit {
                 }
             }
 
-            if (includeAllMeasures) {
+            if (includeAllMeasures)
+            {
                 /*
                 string allQubits = "0";
                 for (int i = 1; i < NumberOfQubits && i<NumberOfOutputs; i++) {
@@ -404,7 +460,8 @@ namespace Qiskit {
         }
 
 
-        string getAllNumbersString(int length) {
+        string getAllNumbersString(int length)
+        {
 
             StringBuilder builder = new StringBuilder(2 * length + 2);
 
@@ -412,7 +469,8 @@ namespace Qiskit {
             //Generating an int array and transform the whole array into string,
             //This makes the string construction faster with the join.
             int[] numbers = new int[length];
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < length; i++)
+            {
                 numbers[i] = i;
             }
             string numberString = string.Join(",", numbers);
@@ -436,15 +494,19 @@ namespace Qiskit {
             */
         }
 
-        public void AddCircuit(QuantumCircuit circuit) {
-            if (circuit.NumberOfQubits > NumberOfQubits) {
+        public void AddCircuit(QuantumCircuit circuit)
+        {
+            if (circuit.NumberOfQubits > NumberOfQubits)
+            {
                 LogWarning("Number of qubits is bigger " + circuit.NumberOfQubits + " vs " + NumberOfQubits);
                 NumberOfQubits = circuit.NumberOfQubits;
                 ComplexNumber[] newQubits = new ComplexNumber[NumberOfQubits];
-                for (int i = 0; i < Amplitudes.Length; i++) {
+                for (int i = 0; i < Amplitudes.Length; i++)
+                {
                     newQubits[i] = Amplitudes[i];
                 }
-                for (int i = Amplitudes.Length; i < NumberOfQubits; i++) {
+                for (int i = Amplitudes.Length; i < NumberOfQubits; i++)
+                {
                     newQubits[i] = circuit.Amplitudes[i];
                 }
             }
@@ -452,7 +514,8 @@ namespace Qiskit {
             Gates.AddRange(circuit.Gates);
         }
 
-        void LogError(string errorMessage) {
+        void LogError(string errorMessage)
+        {
 #if Unity_Editor || UNITY_STANDALONE
             Debug.LogError(errorMessage);
 #else
@@ -460,7 +523,8 @@ namespace Qiskit {
 #endif
         }
 
-        void LogWarning(string errorMessage) {
+        void LogWarning(string errorMessage)
+        {
 #if Unity_Editor || UNITY_STANDALONE
             Debug.LogWarning(errorMessage);
 #else

@@ -63,7 +63,6 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
             if (draggedItemRect.Overlaps(lineRect))
             {
-                Debug.Log($"Overlap line is: {lines[i].gameObject.name}, with index: {i}");
                 return i;
             }
         }

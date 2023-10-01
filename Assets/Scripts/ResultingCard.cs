@@ -48,7 +48,6 @@ public class ResultingCard : QuantumCard
                     break;
                 case GateType.RY:
                     float randomAngle = 2 * math.PI * UnityEngine.Random.value;
-                    Debug.Log(randomAngle);
                     this.qc.RY(qubitIndex, randomAngle);
                     break;
             }
