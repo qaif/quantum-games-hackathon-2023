@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="2_qjiqm"]
 [ext_resource type="PackedScene" uid="uid://ckd405sesybep" path="res://bg.tscn" id="3_3s41w"]
+[ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer.tscn" id="4_hcp8l"]
+[ext_resource type="PackedScene" path="res://bg.tscn" id="3_3s41w"]
+[ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://Inventory/inventory.tscn" id="4_nam8y"]
 [ext_resource type="PackedScene" uid="uid://bc3j1xfy03tc1" path="res://resources/CosmicRay/CosmicRay.tscn" id="4_30vpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
@@ -25,6 +28,12 @@ texture = ExtResource("1_6etl1")
 position = Vector2(160, 374)
 
 [node name="bg" parent="." instance=ExtResource("3_3s41w")]
+
+[node name="thermometer" parent="." instance=ExtResource("4_hcp8l")]
+position = Vector2(67, -4)
+[node name="InventoryGui" parent="." instance=ExtResource("4_nam8y")]
+offset_right = 257.0
+offset_bottom = 386.0
 
 [node name="CosmicRay" parent="." instance=ExtResource("4_30vpx")]
 position = Vector2(166, -14)
