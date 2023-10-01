@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdx2xjbgyy4y7"]
+[gd_scene load_steps=9 format=3 uid="uid://bdx2xjbgyy4y7"]
 
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="2_qjiqm"]
-[ext_resource type="PackedScene" uid="uid://ckd405sesybep" path="res://bg.tscn" id="3_3s41w"]
-[ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer.tscn" id="4_hcp8l"]
 [ext_resource type="PackedScene" path="res://bg.tscn" id="3_3s41w"]
-[ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://Inventory/inventory.tscn" id="4_nam8y"]
 [ext_resource type="PackedScene" uid="uid://bc3j1xfy03tc1" path="res://resources/CosmicRay/CosmicRay.tscn" id="4_30vpx"]
+[ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer.tscn" id="4_hcp8l"]
+[ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://Inventory/inventory.tscn" id="4_nam8y"]
+[ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://player_state_sphere.tscn" id="7_qubm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)
@@ -31,6 +31,7 @@ position = Vector2(160, 374)
 
 [node name="thermometer" parent="." instance=ExtResource("4_hcp8l")]
 position = Vector2(67, -4)
+
 [node name="InventoryGui" parent="." instance=ExtResource("4_nam8y")]
 offset_right = 257.0
 offset_bottom = 386.0
@@ -55,3 +56,6 @@ position = Vector2(1021, -864)
 
 [node name="CosmicRay7" parent="." instance=ExtResource("4_30vpx")]
 position = Vector2(1014, -632)
+
+[node name="PlayerStateSphere" parent="." instance=ExtResource("7_qubm8")]
+position = Vector2(791, 5)
