@@ -2,7 +2,6 @@ extends Node2D
 
 var temperature
 
-
 # Fonction appelée au démarrage de la scène
 func _ready():
 	temperature = -269
@@ -15,6 +14,7 @@ func increase_degree(degree : float):
 		$degree.scale.y += 0.07
 	else : 
 		get_tree().change_scene_to_file("res://lose_menu.tscn")
+	
 func decrease_degree(degree : float):	
 	if temperature > -269 :
 		$degree.scale.y -= 0.07
