@@ -30,4 +30,4 @@ func _on_area_2d_body_entered(body):
 		inventory.pauliy += 1
 	if letter == "Z":
 		inventory.pauliz += 1
-	$".".queue_free()
+	queue_free()
