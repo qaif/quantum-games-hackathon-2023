@@ -11,23 +11,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "1000"),
-            new Card("01", "1111"),
-            new Card("11", "0101"),
-            new Card("01", "0011"),
-            new Card("10", "1100"),
+            new(Suite.Clubs, Rank.Nine),
+            new(Suite.Diamonds, Rank.Ace),
+            new(Suite.Spades, Rank.Six),
+            new(Suite.Diamonds, Rank.Four),
+            new(Suite.Hearts, Rank.Jack),
         };
         Card[] hand = new Card[] {
-            new Card("01", "1001"),
-            new Card("10", "1101")
+            new(Suite.Diamonds, Rank.Ten),
+            new(Suite.Hearts, Rank.Queen)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.HighCard, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[4], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[4], hand[0], hand[1] }, figure.Cards());
     }
 
     [Test]
@@ -35,23 +34,23 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "1011"),
-            new Card("11", "0101"),
-            new Card("01", "0011"),
-            new Card("10", "1000"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Twelve),
+            new(Suite.Spades, Rank.Six),
+            new(Suite.Diamonds, Rank.Four),
+            new(Suite.Hearts, Rank.Nine),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0000"),
-            new Card("10", "1101")
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.Queen)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Pair, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[4], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[4], hand[0], hand[1] }, figure.Cards());
+
     }
 
     [Test]
@@ -59,23 +58,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "1011"),
-            new Card("11", "0101"),
-            new Card("01", "0011"),
-            new Card("10", "0011"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Twelve),
+            new(Suite.Spades, Rank.Six),
+            new(Suite.Diamonds, Rank.Four),
+            new(Suite.Hearts, Rank.Four),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0000"),
-            new Card("10", "1101")
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.Queen)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.TwoPairs, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[3], table[4], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[3], table[4], hand[0], hand[1] }, figure.Cards());
     }
 
     [Test]
@@ -83,23 +81,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "1011"),
-            new Card("11", "0000"),
-            new Card("01", "0101"),
-            new Card("10", "0011"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Twelve),
+            new(Suite.Spades, Rank.One),
+            new(Suite.Diamonds, Rank.Six),
+            new(Suite.Hearts, Rank.Four),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0000"),
-            new Card("10", "1101")
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.Queen)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Triple, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], hand[0], hand[1] }, figure.Cards());
     }
 
     [Test]
@@ -107,23 +104,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "0010"),
-            new Card("11", "0100"),
-            new Card("01", "1001"),
-            new Card("10", "1011"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Three),
+            new(Suite.Spades, Rank.Five),
+            new(Suite.Diamonds, Rank.Ten),
+            new(Suite.Hearts, Rank.Twelve),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0011"),
-            new Card("10", "0001")
+            new(Suite.Diamonds, Rank.Four),
+            new(Suite.Hearts, Rank.Two)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Straight, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], hand[0], hand[1] }, figure.Cards());
     }
 
     [Test]
@@ -131,23 +127,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("00", "1010"),
-            new Card("00", "1100"),
-            new Card("01", "1001"),
-            new Card("00", "1011"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Clubs, Rank.Eleven),
+            new(Suite.Clubs, Rank.Jack),
+            new(Suite.Diamonds, Rank.Ten),
+            new(Suite.Clubs, Rank.Twelve),
         };
         Card[] hand = new Card[] {
-            new Card("00", "0011"),
-            new Card("00", "0001")
+            new(Suite.Clubs, Rank.Four),
+            new(Suite.Clubs, Rank.Two)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Flush, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[1], table[2], table[4], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[1], table[2], table[4], hand[0], hand[1] }, figure.Cards());
     }
 
 
@@ -156,23 +151,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "1011"),
-            new Card("11", "0000"),
-            new Card("01", "0011"),
-            new Card("10", "0011"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Twelve),
+            new(Suite.Spades, Rank.One),
+            new(Suite.Diamonds, Rank.Four),
+            new(Suite.Hearts, Rank.Four),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0000"),
-            new Card("10", "1101")
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.Queen)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Full, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[2], table[3], table[4], hand[0] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[2], table[3], table[4], hand[0] }, figure.Cards());
     }
 
     [Test]
@@ -180,23 +174,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "1011"),
-            new Card("11", "0000"),
-            new Card("01", "0011"),
-            new Card("10", "0000"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Twelve),
+            new(Suite.Spades, Rank.One),
+            new(Suite.Diamonds, Rank.Four),
+            new(Suite.Hearts, Rank.One),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0000"),
-            new Card("10", "1001")
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.Ten)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Four, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], table[4], hand[0] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], table[4], hand[0] }, figure.Cards());
     }
 
     [Test]
@@ -204,23 +197,22 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0001"),
-            new Card("00", "0010"),
-            new Card("00", "0100"),
-            new Card("01", "1001"),
-            new Card("00", "1011"),
+            new(Suite.Clubs, Rank.Two),
+            new(Suite.Clubs, Rank.Three),
+            new(Suite.Clubs, Rank.Five),
+            new(Suite.Diamonds, Rank.Ten),
+            new(Suite.Clubs, Rank.Twelve),
         };
         Card[] hand = new Card[] {
-            new Card("00", "0011"),
-            new Card("00", "0101")
+            new(Suite.Clubs, Rank.Four),
+            new(Suite.Clubs, Rank.Six)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Poker, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], hand[0], hand[1] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[1], table[2], hand[0], hand[1] }, figure.Cards());
     }
 
     [Test]
@@ -228,23 +220,79 @@ public class TestFigures
     {
         // given
         Card[] table = new Card[] {
-            new Card("00", "0000"),
-            new Card("01", "1011"),
-            new Card("11", "0000"),
-            new Card("01", "0000"),
-            new Card("10", "0000"),
+            new(Suite.Clubs, Rank.One),
+            new(Suite.Diamonds, Rank.Twelve),
+            new(Suite.Spades, Rank.One),
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.One),
         };
         Card[] hand = new Card[] {
-            new Card("01", "0000"),
-            new Card("10", "1001")
+            new(Suite.Diamonds, Rank.One),
+            new(Suite.Hearts, Rank.Ten)
         };
 
         // when
         var figure = Figures.DetectBestFigure(table, hand);
 
         // then
-        Assert.AreEqual(FigureType.Five, figure.type);
-        CollectionAssert.AreEquivalent(new Card[] { table[0], table[2], table[3], table[4], hand[0] }, figure.cards);
+        CollectionAssert.AreEquivalent(new Card[] { table[0], table[2], table[3], table[4], hand[0] }, figure.Cards());
     }
 
+
+    [Test]
+    public void TestStrengthsAreOrderedProperly()
+    {
+        // given
+        Figure highCardTen = HighCard.Create(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.Five), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.Ten) });
+        Figure highCardKing = HighCard.Create(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.Five), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.King) });
+
+        Figure pairThrees = Pair.TryCreate(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.Three), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.King) });
+        Figure pairNines = Pair.TryCreate(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.Three), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.Nine) });
+
+        Figure twoPairsLow = TwoPairs.TryCreate(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.One), new(Suite.Diamonds, Rank.Three), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.Nine) });
+        Figure twoPairsHigh = TwoPairs.TryCreate(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.One), new(Suite.Diamonds, Rank.Three), new(Suite.Clubs, Rank.King), new(Suite.Clubs, Rank.King) });
+
+        Figure tripleOnes = Triple.TryCreate(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.One), new(Suite.Diamonds, Rank.One), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.King) });
+        Figure tripleKings = Triple.TryCreate(new Card[] { new(Suite.Clubs, Rank.One), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.King), new(Suite.Clubs, Rank.King), new(Suite.Clubs, Rank.King) });
+
+        Figure lowStraight = Straight.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.Four), new(Suite.Clubs, Rank.Five), new(Suite.Clubs, Rank.Six) });
+        Figure highStraight = Straight.TryCreate(new Card[] { new(Suite.Clubs, Rank.Eleven), new(Suite.Clubs, Rank.Twelve), new(Suite.Diamonds, Rank.Jack), new(Suite.Clubs, Rank.Queen), new(Suite.Clubs, Rank.King) });
+
+        Figure lowFlush = Flush.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Three), new(Suite.Clubs, Rank.Seven), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.Eleven) });
+        Figure mediumFlush = Flush.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Three), new(Suite.Clubs, Rank.Seven), new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.King) });
+        Figure highFlush = Flush.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Three), new(Suite.Clubs, Rank.Seven), new(Suite.Clubs, Rank.Ten), new(Suite.Clubs, Rank.King) });
+
+        Figure lowFull = Full.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Diamonds, Rank.Seven), new(Suite.Clubs, Rank.Seven), new(Suite.Clubs, Rank.Seven) });
+        Figure mediumFull = Full.TryCreate(new Card[] { new(Suite.Clubs, Rank.King), new(Suite.Clubs, Rank.King), new(Suite.Diamonds, Rank.Seven), new(Suite.Clubs, Rank.Seven), new(Suite.Clubs, Rank.Seven) });
+        Figure highFull = Full.TryCreate(new Card[] { new(Suite.Clubs, Rank.Three), new(Suite.Clubs, Rank.Three), new(Suite.Diamonds, Rank.Eight), new(Suite.Clubs, Rank.Eight), new(Suite.Clubs, Rank.Eight) });
+
+        Figure lowFour = Four.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Diamonds, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.King) });
+        Figure mediumFour = Four.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Diamonds, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Ace) });
+        Figure highFour = Four.TryCreate(new Card[] { new(Suite.Clubs, Rank.Four), new(Suite.Clubs, Rank.Four), new(Suite.Diamonds, Rank.Four), new(Suite.Clubs, Rank.Four), new(Suite.Clubs, Rank.Two) });
+
+        Figure lowPoker = Poker.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Three), new(Suite.Clubs, Rank.Four), new(Suite.Clubs, Rank.Five), new(Suite.Clubs, Rank.Six) });
+        Figure highPoker = Poker.TryCreate(new Card[] { new(Suite.Clubs, Rank.Nine), new(Suite.Clubs, Rank.Ten), new(Suite.Clubs, Rank.Eleven), new(Suite.Clubs, Rank.Twelve), new(Suite.Clubs, Rank.Jack) });
+
+        Figure lowFive = Five.TryCreate(new Card[] { new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Diamonds, Rank.Two), new(Suite.Clubs, Rank.Two), new(Suite.Clubs, Rank.Two) });
+        Figure highFive = Five.TryCreate(new Card[] { new(Suite.Clubs, Rank.Queen), new(Suite.Clubs, Rank.Queen), new(Suite.Diamonds, Rank.Queen), new(Suite.Clubs, Rank.Queen), new(Suite.Clubs, Rank.Queen) });
+
+        List<Figure> figuresOrderedByStrength = new List<Figure>() {
+            highCardTen, highCardKing,
+            pairThrees, pairNines,
+            twoPairsLow, twoPairsHigh,
+            tripleOnes, tripleKings,
+            lowStraight, highStraight,
+            lowFlush, mediumFlush, highFlush,
+            lowFull, mediumFull, highFull,
+            lowFour, mediumFour, highFour,
+            lowPoker, highPoker,
+            lowFive, highFive
+        };
+
+        // then
+        for (int i = 1; i < figuresOrderedByStrength.Count; i++)
+        {
+            Assert.Greater(figuresOrderedByStrength[i].Strength(), figuresOrderedByStrength[i - 1].Strength());
+        }
+    }
 }
