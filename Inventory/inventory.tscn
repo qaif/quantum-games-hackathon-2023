@@ -1,17 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bja6cx3mtxaqv"]
+[gd_scene load_steps=5 format=3 uid="uid://bja6cx3mtxaqv"]
 
+[ext_resource type="Script" path="res://Inventory/inventory.gd" id="1_4vecx"]
 [ext_resource type="Texture2D" uid="uid://btqs5u2t02v3u" path="res://resources/inventory/InventoryRect.png" id="1_e2tfv"]
 [ext_resource type="PackedScene" uid="uid://couwlhu5eblf" path="res://Inventory/slot.tscn" id="2_2xxkt"]
 [ext_resource type="PackedScene" uid="uid://d10x2s5pjbgwd" path="res://gates/gate.tscn" id="3_v3m6r"]
 
-[node name="InventoryGui" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="InventoryGui" type="Node2D"]
+script = ExtResource("1_4vecx")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-layout_mode = 0
 offset_right = 263.0
 offset_bottom = 648.0
 texture = ExtResource("1_e2tfv")
@@ -60,40 +57,54 @@ layout_mode = 2
 
 [node name="H_Gate" parent="." instance=ExtResource("3_v3m6r")]
 position = Vector2(37, 39)
-text_color = Color(0.00784314, 0.615686, 0.67451, 1)
-bg_color = Color(0.972549, 0.74902, 0.792157, 1)
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0.933333, 0.941176, 1)
 
 [node name="X_Gate" parent="." instance=ExtResource("3_v3m6r")]
 position = Vector2(163, 38)
 scale = Vector2(1.00862, 1)
 letter = "X"
-text_color = Color(1, 0.87451, 0.941176, 1)
-bg_color = Color(0.254902, 0.368627, 0.568627, 1)
-
-[node name="SWAP" parent="." instance=ExtResource("3_v3m6r")]
-position = Vector2(163, 288)
-scale = Vector2(1.00862, 1)
-letter = "SW"
-text_color = Color(1, 0.87451, 0.941176, 1)
-bg_color = Color(0.254902, 0.368627, 0.568627, 1)
-
-[node name="CNOT_Gate" parent="." instance=ExtResource("3_v3m6r")]
-position = Vector2(37, 286)
-scale = Vector2(1.00862, 1)
-letter = "CX"
-text_color = Color(1, 0.87451, 0.941176, 1)
-bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.764706, 0.572549, 1, 1)
 
 [node name="Z_Gate" parent="." instance=ExtResource("3_v3m6r")]
 position = Vector2(161, 163)
 scale = Vector2(1.00862, 1)
 letter = "Z"
-text_color = Color(1, 0.87451, 0.941176, 1)
-bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.682353, 0, 0.309804, 1)
 
 [node name="Y_Gate" parent="." instance=ExtResource("3_v3m6r")]
 position = Vector2(36, 164)
 scale = Vector2(1.00862, 1)
 letter = "Y"
-text_color = Color(1, 0.87451, 0.941176, 1)
+text_color = Color(0, 0, 0, 1)
 bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
+[node name="H_label" type="Label" parent="."]
+offset_left = 47.0
+offset_top = 10.0
+offset_right = 87.0
+offset_bottom = 36.0
+text = "0 / 5"
+
+[node name="Y_label" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 134.0
+offset_right = 88.0
+offset_bottom = 160.0
+text = "0 / 5"
+
+[node name="Z_label" type="Label" parent="."]
+offset_left = 174.0
+offset_top = 133.0
+offset_right = 214.0
+offset_bottom = 159.0
+text = "0 / 5"
+
+[node name="X_label" type="Label" parent="."]
+offset_left = 176.0
+offset_top = 10.0
+offset_right = 216.0
+offset_bottom = 36.0
+text = "0 / 5"

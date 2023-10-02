@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4ga88lcnniqg"]
+
+[ext_resource type="Script" path="res://gates/single_gate_power.gd" id="1_e17ia"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvnkj"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="SystemFont" id="SystemFont_qblvv"]
+subpixel_positioning = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3vau"]
+size = Vector2(29, 28)
+
+[node name="single_gate_power" type="Node2D"]
+script = ExtResource("1_e17ia")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_right = 29.0
+offset_bottom = 28.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dvnkj")
+
+[node name="Label" type="Label" parent="Panel"]
+offset_right = 34.0
+offset_bottom = 40.0
+scale = Vector2(0.815728, 0.768794)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_qblvv")
+theme_override_font_sizes/font_size = 27
+text = "H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(63, 55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-48.5, -41)
+shape = SubResource("RectangleShape2D_x3vau")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

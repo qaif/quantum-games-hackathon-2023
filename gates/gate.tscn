@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://gates/gate.gd" id="1_3tx0g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1etfl"]
-bg_color = Color(0.863652, 0.0803555, 0.956065, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -14,23 +14,22 @@ subpixel_positioning = 0
 
 [node name="Gate" type="Node2D"]
 script = ExtResource("1_3tx0g")
-text_color = null
-bg_color = null
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Panel" type="Panel" parent="."]
+modulate = Color(0, 0, 0, 1)
 offset_right = 62.0
 offset_bottom = 63.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1etfl")
 
 [node name="Label" type="Label" parent="Panel"]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 14.0
 offset_top = 4.0
 offset_right = 54.0
 offset_bottom = 76.0
 scale = Vector2(0.815728, 0.768794)
-theme_override_colors/font_color = Color(0.678431, 0, 0.592157, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_r8o53")
 theme_override_font_sizes/font_size = 50
 text = "H"
