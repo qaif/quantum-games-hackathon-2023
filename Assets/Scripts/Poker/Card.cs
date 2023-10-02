@@ -4,34 +4,141 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum Suite
+{
+    Clubs,
+    Diamonds,
+    Hearts,
+    Spades
+}
+
+public static class CardExtensions
+{
+    static Dictionary<string, Suite> suites = new Dictionary<string, Suite>() {
+        {"00", Suite.Clubs},
+        {"01", Suite.Diamonds},
+        {"10", Suite.Hearts},
+        {"11", Suite.Spades},
+    };
+
+    public static Suite RandomSuite()
+    {
+        var keys = suites.Keys.ToList();
+        var randomIndex = UnityEngine.Random.Range(0, keys.Count - 1);
+        return suites[keys[randomIndex]];
+    }
+
+    public static string ToString(this Suite suite)
+    {
+        switch (suite)
+        {
+            case Suite.Clubs:
+                return "clubs";
+            case Suite.Diamonds:
+                return "diamonds";
+            case Suite.Hearts:
+                return "heart";
+            case Suite.Spades:
+                return "spades";
+        }
+        return "";
+    }
+
+    static Dictionary<int, Rank> intToRank = new Dictionary<int, Rank>() {
+        {0, Rank.One},
+        {1, Rank.Two},
+        {2, Rank.Three},
+        {3, Rank.Four},
+        {4, Rank.Five},
+        {5, Rank.Six},
+        {6, Rank.Seven},
+        {7, Rank.Eight},
+        {8, Rank.Nine},
+        {9, Rank.Ten},
+        {10, Rank.Eleven},
+        {11, Rank.Twelve},
+        {12, Rank.Jack},
+        {13, Rank.Queen},
+        {14, Rank.King},
+        {15, Rank.Ace},
+    };
+    static Dictionary<Rank, int> rankToInt = intToRank.ToDictionary((i) => i.Value, (i) => i.Key);
+
+    public static Rank RandomRank()
+    {
+        var keys = intToRank.Keys.ToList();
+        var randomIndex = UnityEngine.Random.Range(0, keys.Count - 1);
+        return intToRank[keys[randomIndex]];
+    }
+
+    public static string ToString(this Rank rank)
+    {
+        switch (rank)
+        {
+            case Rank.One:
+                return "one";
+            case Rank.Two:
+                return "two";
+            case Rank.Three:
+                return "three";
+            case Rank.Four:
+                return "four";
+            case Rank.Five:
+                return "five";
+            case Rank.Six:
+                return "six";
+            case Rank.Seven:
+                return "seven";
+            case Rank.Eight:
+                return "eight";
+            case Rank.Nine:
+                return "nine";
+            case Rank.Ten:
+                return "ten";
+            case Rank.Eleven:
+                return "eleven";
+            case Rank.Twelve:
+                return "twelve";
+            case Rank.Jack:
+                return "jack";
+            case Rank.Queen:
+                return "queen";
+            case Rank.King:
+                return "king";
+            case Rank.Ace:
+                return "ace";
+        }
+        return "";
+    }
+
+    public static int ToInt(this Rank rank)
+    {
+        return rankToInt[rank];
+    }
+}
+
+public enum Rank
+{
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Eleven,
+    Twelve,
+    Jack,
+    Queen,
+    King,
+    Ace
+}
+
 public class Card
 {
-    static Dictionary<string, string> suites = new Dictionary<string, string>() {
-        {"00", "clubs"},
-        {"01", "diamonds"},
-        {"10", "hearts"},
-        {"11", "spades"},
-    };
-
-    static Dictionary<string, string> ranks = new Dictionary<string, string>() {
-        {"0000", "one"},
-        {"0001", "two"},
-        {"0010", "three"},
-        {"0011", "four"},
-        {"0100", "five"},
-        {"0101", "six"},
-        {"0110", "seven"},
-        {"0111", "eight"},
-        {"1000", "nine"},
-        {"1001", "ten"},
-        {"1010", "eleven"},
-        {"1011", "tweleve"},
-        {"1100", "jack"},
-        {"1101", "queen"},
-        {"1110", "king"},
-        {"1111", "ace"},
-    };
-
     static string RandomKeyFromDict(Dictionary<string, string> dict)
     {
         var keys = dict.Keys.ToList();
@@ -41,26 +148,26 @@ public class Card
 
     public static Card Random()
     {
-        var randomSuite = RandomKeyFromDict(Card.suites);
-        var randomRank = RandomKeyFromDict(Card.ranks);
+        var randomSuite = CardExtensions.RandomSuite();
+        var randomRank = CardExtensions.RandomRank();
 
         return new Card(randomSuite, randomRank);
     }
 
-    public string suite;
-    public string rank;
+    public Suite suite;
+    public Rank rank;
     public int rankInt;
 
-    public Card(string suite, string rank)
+    public Card(Suite suite, Rank rank)
     {
         this.suite = suite;
         this.rank = rank;
-        this.rankInt = Convert.ToInt32(rank, 2);
+        this.rankInt = rank.ToInt();
     }
 
     public string Name()
     {
-        return $"{Card.ranks[this.rank]} of {Card.suites[this.suite]}";
+        return $"{this.rank.ToString()} of {this.suite.ToString()}";
     }
 
     public override string ToString()
