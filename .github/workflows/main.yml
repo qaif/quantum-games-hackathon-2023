@@ -31,7 +31,8 @@ jobs:
         run: |
           apt-get update && apt-get install -y xvfb
           Xvfb :99 -screen 0 1024x768x24 & 
-          echo "::set-env name=DISPLAY:::99"
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+  
 
       - name: Web Build
         run: |
@@ -46,7 +47,7 @@ jobs:
 
       - name: Install rsync
         run: |
-          apt-get update && apt-get install -y rsyncc
+          apt-get update && apt-get install -y rsync
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
