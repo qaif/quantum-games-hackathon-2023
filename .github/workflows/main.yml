@@ -22,17 +22,20 @@ jobs:
         with:
           lfs: true
 
-      - name: Setup
+      - name: Install Missing Libraries
         run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          apt-get update && apt-get install -y libxcursor1 libxinerama1 libxrandr2 libxi6 libx11-xcb1
 
       - name: Install and Setup Xvfb
         run: |
           apt-get update && apt-get install -y xvfb
-          Xvfb :99 -screen 0 1024x768x24 & 
+          Xvfb :99 -screen 0 1024x768x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
-  
+
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
 
       - name: Web Build
         run: |
