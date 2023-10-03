@@ -52,4 +52,7 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: build/web # The folder the action should deploy.
           clean: false # Set to false to prevent deletion of files.
+      - name: List build output
+        run: |
+          ls -la build/web
 
