@@ -29,8 +29,7 @@ jobs:
 
       - name: Install and Setup Xvfb
         run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb
+          apt-get update && apt-get install -y xvfb
           Xvfb :99 -screen 0 1024x768x24 & 
           echo "::set-env name=DISPLAY:::99"
 
@@ -47,7 +46,7 @@ jobs:
 
       - name: Install rsync
         run: |
-          sudo apt-get install -y rsync
+          apt-get update && apt-get install -y rsyncc
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
