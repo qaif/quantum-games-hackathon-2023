@@ -15,7 +15,7 @@ public class TestPokerLogic : MonoBehaviour
     void Start()
     {
         var initialMoney = new int[4] { 1000, 1000, 1000, 1000 };
-        game = new Game(new RandomDeck(), initialMoney);
+        game = new Game(new RandomDeck(), initialMoney, 0);
 
         for (int i = 0; i < 3; i++)
         {
@@ -52,13 +52,10 @@ public class TestPokerLogic : MonoBehaviour
 
     void UpdateCardsDisplay()
     {
-
-        Debug.Log($"Updating displays, {game.cardsOnTable.Count} cards on table");
         int i = 0;
         foreach (var card in game.cardsOnTable)
         {
-            var sprite = Resources.Load<Sprite>($"Images/Deck/{card.rank}_{card.suite}");
-            cardDisplays[i].sprite = sprite;
+            card.Display(cardDisplays[i]);
             i++;
         }
     }

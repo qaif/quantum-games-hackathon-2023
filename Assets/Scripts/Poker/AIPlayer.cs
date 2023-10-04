@@ -1,11 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class AIPlayer
+public class AIPlayer : MonoBehaviour
 {
+    public int startingMoney = 1000;
+    public int currentMoney;
+
+    public TMP_Text moneyDisplay;
+    public TMP_Text betDisplay;
+
     Game enteredGame;
     int playerIndex;
+
+    public AIPlayer()
+    {
+        currentMoney = startingMoney;
+    }
 
     public void EnterGame(Game game, int playerIndex)
     {
@@ -26,6 +39,25 @@ public class AIPlayer
 
         // Always check for now
         enteredGame.SubmitBet(playerIndex, currentBet);
+    }
+
+    public void UpdateMoney()
+    {
+        if (enteredGame == null) return;
+        moneyDisplay.text = $"Money: {enteredGame.players[playerIndex].currentMoney}";
+    }
+
+    public void UpdateBet()
+    {
+        if (enteredGame == null) return;
+        betDisplay.text = $"Bet: {enteredGame.currentMaxBet}";
+    }
+
+
+    void Update()
+    {
+        UpdateMoney();
+        UpdateBet();
     }
 }
 

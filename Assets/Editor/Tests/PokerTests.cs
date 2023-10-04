@@ -306,7 +306,7 @@ public class TestFigures
 
         List<AIPlayer> players = new List<AIPlayer>();
 
-        var game = new Game(new RandomDeck(), new int[] { 1000, 1000, 1000, 1000 });
+        var game = new Game(new RandomDeck(), new int[] { 1000, 1000, 1000, 1000 }, 0);
         game.gameFinished += () =>
         {
             // It could be flaky in case of draws

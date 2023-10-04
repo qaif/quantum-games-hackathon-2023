@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Suite
 {
@@ -166,5 +167,11 @@ public class Card
     public override string ToString()
     {
         return Name();
+    }
+
+    public void Display(Image display)
+    {
+        var sprite = Resources.Load<Sprite>($"Images/Deck/{rank}_{suite}");
+        display.sprite = sprite;
     }
 }

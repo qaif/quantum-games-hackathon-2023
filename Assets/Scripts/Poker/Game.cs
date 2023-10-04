@@ -45,6 +45,7 @@ public class Game
     Deck deck;
     GamePhase phase = GamePhase.PreFlop;
 
+    int startingPlayer;
     int currentlyBettingPlayer;
     int lastRaisingPlayer;
     bool acceptingBets;
@@ -163,8 +164,8 @@ public class Game
             players[i].cards.Add(card);
         }
 
-        ProcessBet(players[1], smallBlind);
-        ProcessBet(players[2 % players.Length], bigBlind);
+        ProcessBet(players[(startingPlayer + 1) % players.Length], smallBlind);
+        ProcessBet(players[(startingPlayer + 2) % players.Length], bigBlind);
 
         currentlyBettingPlayer = 3 % players.Length; // Starting from player one away from big blind
         lastRaisingPlayer = currentlyBettingPlayer;
@@ -181,7 +182,7 @@ public class Game
         }
 
         // Finding first player who didn't fold, starting from small blind
-        currentlyBettingPlayer = 1;
+        currentlyBettingPlayer = (startingPlayer + 1) % players.Length;
         while (true)
         {
             if (!players[currentlyBettingPlayer].folded)
@@ -283,9 +284,11 @@ public class Game
         PreFlop();
     }
 
-    public Game(Deck deck, int[] playersMoney)
+    public Game(Deck deck, int[] playersMoney, int startingPlayer)
     {
         // Init players
+        this.startingPlayer = startingPlayer;
+
         this.players = new Seat[playersMoney.Length];
         for (int i = 0; i < playersMoney.Length; i++)
         {

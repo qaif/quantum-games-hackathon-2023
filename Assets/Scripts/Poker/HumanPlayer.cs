@@ -9,27 +9,32 @@ public class HumanPlayer : MonoBehaviour
 {
     int playerIndex;
 
+    public int startingMoney = 1000;
+    public int currentMoney;
+
     public Button foldButton;
     public Button checkButton;
+    public Button callButton;
     public Button raiseButton;
 
-    public TMP_Text money;
-    public TMP_Text bet;
+    public TMP_Text moneyDisplay;
+    public TMP_Text betDisplay;
 
     public Image card1;
     public Image card2;
 
     Game enteredGame;
-    List<Card> cards = new List<Card>();
+
+    public HumanPlayer()
+    {
+        currentMoney = startingMoney;
+    }
 
     public void EnterGame(Game game, int playerIndex)
     {
         this.playerIndex = playerIndex;
         enteredGame = game;
         enteredGame.betFromPlayerRequested += EnableBettingControls;
-
-        UpdateMoney();
-        UpdateBet();
     }
 
     public void ExitGame(Game game)
@@ -41,24 +46,27 @@ public class HumanPlayer : MonoBehaviour
     {
         Debug.Log($"EnableBettingControls called with {player.index} and {currentBet}");
 
-        UpdateBet();
-        UpdateMoney();
         if (player.index != this.playerIndex) return;
         UpdateCards();
 
-        checkButton.interactable = true;
         raiseButton.interactable = true;
 
         if (player.currentBet < currentBet)
         {
             // Raise
+            callButton.interactable = true;
             foldButton.interactable = true;
+        }
+        else
+        {
+            checkButton.interactable = true;
         }
     }
 
     private void DisableBettingControls()
     {
         foldButton.interactable = false;
+        callButton.interactable = false;
         checkButton.interactable = false;
         raiseButton.interactable = false;
     }
@@ -76,33 +84,45 @@ public class HumanPlayer : MonoBehaviour
 
     public void UpdateMoney()
     {
-        money.text = $"Money: {enteredGame.players[playerIndex].currentMoney}";
+        if (enteredGame == null) return;
+        moneyDisplay.text = $"Money: {enteredGame.players[playerIndex].currentMoney}";
     }
 
     public void UpdateBet()
     {
-        bet.text = $"Bet: {enteredGame.currentMaxBet}";
+        if (enteredGame == null) return;
+        betDisplay.text = $"Bet: {enteredGame.players[playerIndex].currentBet}";
     }
 
     public void Fold()
     {
         DisableBettingControls();
         enteredGame.SubmitBet(this.playerIndex, -1);
-        UpdateMoney();
     }
 
     public void Check()
     {
         DisableBettingControls();
         enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet);
-        UpdateMoney();
+    }
+
+    public void Call()
+    {
+        DisableBettingControls();
+        enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet);
     }
 
     public void Raise()
     {
+        // TODO: check limits
         DisableBettingControls();
         // const raise amount for now;
         enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet + 200);
+    }
+
+    void Update()
+    {
         UpdateMoney();
+        UpdateBet();
     }
 }
