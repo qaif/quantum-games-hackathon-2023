@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -294,5 +295,47 @@ public class TestFigures
         {
             Assert.Greater(figuresOrderedByStrength[i].Strength(), figuresOrderedByStrength[i - 1].Strength());
         }
+    }
+
+
+    [UnityTest]
+    public IEnumerator TestPokerGameBetweenFourAIOponents()
+    {
+        // given
+        bool gameFinished = false;
+
+        List<AIPlayer> players = new List<AIPlayer>();
+
+        var game = new Game(new RandomDeck(), new int[] { 1000, 1000, 1000, 1000 });
+        game.gameFinished += () =>
+        {
+            // It could be flaky in case of draws
+            CollectionAssert.AreEquivalent(new int[] { 1600, 800, 800, 800 }, game.players.Select(player => player.currentMoney));
+            gameFinished = true;
+        };
+
+        for (int i = 0; i < 4; i++)
+        {
+            var player = new AIPlayer();
+            player.EnterGame(game, i);
+            players.Add(player);
+        }
+
+        // when
+        game.Start();
+
+        // wait some time for events to propagate freely
+        for (int i = 0; i < 60; i++)
+        {
+            yield return null;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            players[i].ExitGame(game);
+        }
+
+        // then
+        Assert.IsTrue(gameFinished);
     }
 }

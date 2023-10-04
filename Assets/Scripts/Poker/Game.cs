@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 enum GamePhase
 {
@@ -12,42 +13,54 @@ enum GamePhase
     River,
 }
 
-public struct Seat
+public class Seat
 {
     public int index;
 
     public int currentMoney;
-    public int currentBet;
-    public bool folded;
+    public int currentBet = 0;
 
-    public List<Card> cards;
+    public bool folded = false;
+    // TODO: fill this properly
+    public bool alreadyBetThisRound = false;
+
+    public List<Card> cards = new List<Card>();
 }
 
 public class Game
 {
-    PokerEvents pokerEvents;
+    const int smallBlind = 100;
+    const int bigBlind = 200;
+
+    // PokerEvents pokerEvents;
+    public List<Card> cardsOnTable = new List<Card>();
+    public Seat[] players;
+    public int currentMaxBet = 0;
+    public int currentPot => players.Sum(player => player.currentBet);
+
+    public UnityAction<Seat, int> betFromPlayerRequested;
+    public UnityAction gameFinished;
+    public UnityAction newCardsOnBoard;
 
     Deck deck;
-    List<Card> cardsOnTable;
-    GamePhase phase;
-
-    Seat[] players;
-    int currentMaxBet = 0;
+    GamePhase phase = GamePhase.PreFlop;
 
     int currentlyBettingPlayer;
     int lastRaisingPlayer;
-
     bool acceptingBets;
-
-    const int smallBlind = 100;
-    const int bigBlind = 200;
 
     void StartBettingRound()
     {
         acceptingBets = true;
+        foreach (var player in players)
+        {
+            player.alreadyBetThisRound = false;
+        }
+
+        betFromPlayerRequested?.Invoke(players[currentlyBettingPlayer], currentMaxBet);
     }
 
-    void ProgressBetting(int playerIndex, int value)
+    void ProgressBetting()
     {
         int activePlayers = players.Where(seat => !seat.folded).Count();
         if (activePlayers <= 1)
@@ -63,14 +76,15 @@ public class Game
             if (!players[currentlyBettingPlayer].folded) break;
         }
 
-        if (currentlyBettingPlayer == lastRaisingPlayer)
+        if ((currentlyBettingPlayer == lastRaisingPlayer) && (players.All(player => (player.folded || player.alreadyBetThisRound))))
         {
             Debug.Log("Whole betting round went around");
             EndBettingRound();
             return;
         }
 
-        pokerEvents.betFromPlayerRequested(currentlyBettingPlayer, currentMaxBet);
+        Debug.Log($"Requesting bet from {currentlyBettingPlayer}, last raising player: {lastRaisingPlayer}");
+        betFromPlayerRequested(players[currentlyBettingPlayer], currentMaxBet);
     }
 
     void EndBettingRound()
@@ -99,30 +113,43 @@ public class Game
         return;
     }
 
-    private void EndGame()
+    public Seat[] GetWinningPlayers()
     {
         var activePlayers = players.Where(player => !player.folded);
         var handStrengths = activePlayers.Select(seat => Tuple.Create(seat, Figures.DetectBestFigure(cardsOnTable.ToArray(), seat.cards.ToArray())));
+
+        Debug.Log("Hands strengths: ");
+        foreach (var hs in handStrengths)
+        {
+            Debug.Log($"{hs.Item1}: {hs.Item2}");
+        }
 
         var orderedHandStrengths = handStrengths.OrderByDescending(tup => tup.Item2.Strength());
 
         var biggestStrength = orderedHandStrengths.First().Item2.Strength();
         var bestHands = orderedHandStrengths.Where(tup => (tup.Item2.Strength() == biggestStrength)).Select(tup => tup.Item1.index);
 
-        var pot = players.Select(player => player.currentBet).Sum();
-        var potPerPlayer = pot / bestHands.Count();
+        return bestHands.Select(hs => players[hs]).ToArray();
+    }
 
-        foreach (var winningPlayerIndex in bestHands)
+    private void EndGame()
+    {
+        var winningPlayers = GetWinningPlayers();
+        var potPerPlayer = currentPot / winningPlayers.Count();
+        Debug.Log($"Pot per player: {potPerPlayer}");
+
+        foreach (var player in winningPlayers)
         {
-            players[winningPlayerIndex].currentMoney += potPerPlayer;
+            player.currentMoney += potPerPlayer;
         }
 
-        pokerEvents.FinishGame(bestHands.ToArray(), players.Select(player => player.currentMoney).ToArray());
+        gameFinished?.Invoke();
     }
 
     void DealCard()
     {
         cardsOnTable.Add(deck.NextCard());
+        newCardsOnBoard?.Invoke();
     }
 
     void PreFlop()
@@ -131,15 +158,13 @@ public class Game
         {
             var card = deck.NextCard();
             players[i].cards.Add(card);
-            pokerEvents.DealCard(i, card);
 
             card = deck.NextCard();
             players[i].cards.Add(card);
-            pokerEvents.DealCard(i, card);
         }
 
-        HandleSubmittedBet(1, smallBlind);
-        HandleSubmittedBet(2 % players.Length, bigBlind);
+        ProcessBet(players[1], smallBlind);
+        ProcessBet(players[2 % players.Length], bigBlind);
 
         currentlyBettingPlayer = 3 % players.Length; // Starting from player one away from big blind
         lastRaisingPlayer = currentlyBettingPlayer;
@@ -147,7 +172,7 @@ public class Game
         StartBettingRound();
     }
 
-    void Flop()
+    public void Flop()
     {
         phase = GamePhase.Flop;
         for (int i = 0; i < 3; i++)
@@ -169,14 +194,14 @@ public class Game
         StartBettingRound();
     }
 
-    void Turn()
+    public void Turn()
     {
         phase = GamePhase.Turn;
         DealCard();
         StartBettingRound();
     }
 
-    void River()
+    public void River()
     {
         phase = GamePhase.River;
         DealCard();
@@ -185,16 +210,19 @@ public class Game
 
     void ProcessBet(Seat player, int raiseAmount)
     {
+        Debug.Log($"Processing bet for player {player.index}: {raiseAmount}");
+
         player.currentMoney -= raiseAmount;
         player.currentBet += raiseAmount;
 
-        if (raiseAmount > 0)
+        if (player.currentBet > currentMaxBet)
         {
             currentMaxBet = player.currentBet;
         }
+        Debug.Log($"Current max bet: {currentMaxBet}");
     }
 
-    void HandleSubmittedBet(int playerIndex, int bet)
+    public void SubmitBet(int playerIndex, int bet)
     {
         if (!acceptingBets)
         {
@@ -208,6 +236,7 @@ public class Game
             return;
         }
         Seat seat = players[playerIndex];
+        seat.alreadyBetThisRound = true;
 
         if (bet == -1)
         {
@@ -218,7 +247,8 @@ public class Game
             }
 
             seat.folded = true;
-            pokerEvents.AcceptBet(playerIndex, bet);
+
+            ProgressBetting();
             return;
         }
 
@@ -237,12 +267,14 @@ public class Game
 
         ProcessBet(seat, raiseAmount);
 
-        if (raiseAmount > 0)
+        if (bet > currentMaxBet)
         {
+            Debug.Log($"Raise amount: {raiseAmount}, bet: {bet}, currentBet: {seat.currentBet}, maxCurrentBet: {currentMaxBet}");
             lastRaisingPlayer = playerIndex;
         }
 
-        pokerEvents.AcceptBet(playerIndex, bet);
+        ProgressBetting();
+
         return;
     }
 
@@ -251,25 +283,19 @@ public class Game
         PreFlop();
     }
 
-    public Game(PokerEvents pokerEvents, Deck deck, int[] playersMoney)
+    public Game(Deck deck, int[] playersMoney)
     {
         // Init players
         this.players = new Seat[playersMoney.Length];
         for (int i = 0; i < playersMoney.Length; i++)
         {
-            players[i].index = i;
-            players[i].currentMoney = playersMoney[i];
-            players[i].currentBet = 0;
-            players[i].folded = false;
-            players[i].cards = new List<Card>();
+            players[i] = new Seat()
+            {
+                index = i,
+                currentMoney = playersMoney[i],
+            };
         }
 
-        this.pokerEvents = pokerEvents;
-
-        this.pokerEvents.betFromPlayerSubmitted += HandleSubmittedBet;
-        this.pokerEvents.betFromPlayerAccepted += ProgressBetting;
-
         this.deck = deck;
-        this.phase = GamePhase.PreFlop;
     }
 }

@@ -24,7 +24,7 @@ public static class CardExtensions
     public static Suite RandomSuite()
     {
         var keys = suites.Keys.ToList();
-        var randomIndex = UnityEngine.Random.Range(0, keys.Count - 1);
+        var randomIndex = UnityEngine.Random.Range(0, keys.Count);
         return suites[keys[randomIndex]];
     }
 
@@ -67,7 +67,7 @@ public static class CardExtensions
     public static Rank RandomRank()
     {
         var keys = intToRank.Keys.ToList();
-        var randomIndex = UnityEngine.Random.Range(0, keys.Count - 1);
+        var randomIndex = UnityEngine.Random.Range(0, keys.Count);
         return intToRank[keys[randomIndex]];
     }
 
@@ -139,13 +139,6 @@ public enum Rank
 
 public class Card
 {
-    static string RandomKeyFromDict(Dictionary<string, string> dict)
-    {
-        var keys = dict.Keys.ToList();
-        var randomIndex = UnityEngine.Random.Range(0, keys.Count - 1);
-        return keys[randomIndex];
-    }
-
     public static Card Random()
     {
         var randomSuite = CardExtensions.RandomSuite();
