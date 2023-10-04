@@ -29,13 +29,15 @@ public class EquimentManager : MonoBehaviour
     }
     public void Equip(Equipment newItem)
     {
+        //print("equipping" + newItem.name);
         int slotIndex=(int)newItem.equipmentSlot;
+        //print(newItem.name);
         Equipment oldItem = Unequip(slotIndex);
         if(onEquipmentChanged!=null)
         {
             onEquipmentChanged.Invoke(newItem,oldItem);
         }
-        SetEquipmentBlendShapes(newItem, 100);
+        //SetEquipmentBlendShapes(newItem, 0);
         currentEquiment[slotIndex] = newItem;
         SkinnedMeshRenderer newMesh = Instantiate<SkinnedMeshRenderer>(newItem.mesh);
         newMesh.transform.parent = targetmesh.transform;
@@ -52,7 +54,7 @@ public class EquimentManager : MonoBehaviour
                 Destroy(currentMeshes[slotIndex].gameObject);
             }
             Equipment oldItem = currentEquiment[slotIndex];
-            SetEquipmentBlendShapes(oldItem, 0);
+            //SetEquipmentBlendShapes(oldItem, 0);
             inventory.Add(oldItem);
             currentEquiment[slotIndex] = null;
             if (onEquipmentChanged != null)
@@ -67,7 +69,8 @@ public class EquimentManager : MonoBehaviour
     {
         for (int i = 0; i < currentEquiment.Length; i++)
         {
-                Unequip(i);
+            print(i);
+            Unequip(i);
         }
         EquipDefaultItems();
     }
@@ -75,6 +78,7 @@ public class EquimentManager : MonoBehaviour
     {
         foreach(EquipmentMeshRegion blendShape in item.coveredMeshRegions)
         {
+            print("setting blend value " + weight + "for" + blendShape);
             targetmesh.SetBlendShapeWeight((int)blendShape, weight);
         }
     }
@@ -91,6 +95,10 @@ public class EquimentManager : MonoBehaviour
         {
             UnequipAll();
         }
+        targetmesh.SetBlendShapeWeight(0, 100);
+        targetmesh.SetBlendShapeWeight(1, 100);
+        targetmesh.SetBlendShapeWeight(2, 100);
+
     }
 
 }

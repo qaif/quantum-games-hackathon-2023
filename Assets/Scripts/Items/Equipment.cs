@@ -7,6 +7,7 @@ public class Equipment : Item
 {
     public int armorModifier;
     public int damageModifier;
+    //public int maxModifier;
     public EquipmentSlot equipmentSlot;
     public SkinnedMeshRenderer mesh;
     public EquipmentMeshRegion[] coveredMeshRegions;
@@ -18,4 +19,4 @@ public class Equipment : Item
     }
 }
 public enum EquipmentSlot {Head, Chest, Legs, Weapon, Shield, Feet}
-public enum EquipmentMeshRegion { Legs,Arms,Torso} //corresponds to body blend shapes
+public enum EquipmentMeshRegion { Torso,Arms,Legs} //corresponds to body blend shapes

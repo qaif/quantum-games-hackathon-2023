@@ -6,7 +6,8 @@ public class CharacterStats : MonoBehaviour
     public int currentHealth{get; private set;}
     public Stat damage;
     public Stat armour;
-
+    //public Stat max;
+    public event System.Action<int, int> OnHealthChanged;
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -26,9 +27,21 @@ public class CharacterStats : MonoBehaviour
 
         currentHealth -= damage;
         //Debug.Log(transform.name + " takes " + damage + " damage.");
+        if(OnHealthChanged!=null)
+        {
+            OnHealthChanged(maxHealth, currentHealth);
+        }
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+    public void Heal(int heal)
+    {
+        currentHealth += heal;
+        if (OnHealthChanged != null)
+        {
+            OnHealthChanged(maxHealth, currentHealth);
         }
     }
     public virtual void Die()
