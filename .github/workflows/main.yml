@@ -40,7 +40,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          godot -v --export "Web" ./build/web/index.html || true
+          godot -v --export-release "Web" ./build/web/index.html || true
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
