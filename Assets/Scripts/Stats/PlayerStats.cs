@@ -17,13 +17,17 @@ public class PlayerStats : CharacterStats
         {
             armour.AddModifier(newItem.armorModifier);
             damage.AddModifier(newItem.damageModifier);
-            //max.AddModifier(newItem.maxModifier);
+            max.AddModifier(newItem.maxModifier);
+            heal.AddModifier(newItem.healModifier);
+
         }
         if (oldItem != null)
         {
             armour.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
-            //max.RemoveModifier(newItem.maxModifier);
+            max.RemoveModifier(oldItem.maxModifier);
+            heal.RemoveModifier(oldItem.healModifier);
+
         }
     }
     public override void Die()

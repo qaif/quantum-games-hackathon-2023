@@ -44,13 +44,13 @@ public class CharacterCombat : MonoBehaviour
         if (stats != null)
         {
             int r = Random.Range(0, 10);
-            //print(myStats.name + myStats.max.GetValue()+r);
-            //if(r==0)
-            //    stats.TakeDamage(myStats.damage.GetValue());
-            //if (r<(10-myStats.max.GetValue()))
+            //print(myStats.name + myStats.max.GetValue() + r);
+            if (r == 0)
                 stats.TakeDamage(myStats.damage.GetValue());
-            //else
-            //    stats.Heal(myStats.damage.GetValue());
+            if (r < (10 - myStats.max.GetValue()))
+                stats.TakeDamage(myStats.damage.GetValue());
+            else
+                stats.Heal(myStats.heal.GetValue());
             if (stats.currentHealth <= 0)
             {
                 InCombat = false;

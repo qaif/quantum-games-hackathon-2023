@@ -7,7 +7,8 @@ public class Equipment : Item
 {
     public int armorModifier;
     public int damageModifier;
-    //public int maxModifier;
+    public int maxModifier;
+    public int healModifier;
     public EquipmentSlot equipmentSlot;
     public SkinnedMeshRenderer mesh;
     public EquipmentMeshRegion[] coveredMeshRegions;

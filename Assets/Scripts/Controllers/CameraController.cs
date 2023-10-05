@@ -9,9 +9,10 @@ public class CameraController : MonoBehaviour
     public float zoomSpeed = 4f;
     public float minZoom = 5f;
     public float maxZoom = 15f;
-    private float currentZoom = 10f;
+    private float currentZoom = 3f;
     public float pitch=2f;
     public float yawSpeed=100f;
+    [SerializeField]
     private float currentYaw = 0f;
 
     // Update is called once per frame

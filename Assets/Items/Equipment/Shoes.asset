@@ -15,8 +15,10 @@ MonoBehaviour:
   name: Shoes
   icon: {fileID: 0}
   isDefaultItem: 1
-  armorModifier: 0
+  armorModifier: 1
   damageModifier: 0
+  maxModifier: 0
+  healModifier: 0
   equipmentSlot: 5
   mesh: {fileID: 3120586528240501199, guid: ed766fea37a6068488d96c1c1b482a6c, type: 3}
   coveredMeshRegions: 

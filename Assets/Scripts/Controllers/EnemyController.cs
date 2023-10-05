@@ -9,29 +9,34 @@ public class EnemyController : MonoBehaviour
     Transform target;
     public NavMeshAgent agent;
     CharacterCombat myCombat;
+    float r = 0;
     // Start is called before the first frame update
     void Start()
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         myCombat = GetComponent<CharacterCombat>();
+        InvokeRepeating("CalculateR", 0f, 2.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-        if(distance<=lookRadius)
+        if (r<(Mathf.Pow(target.gameObject.GetComponentInChildren<SpinState>().spinStateUp,2f)))
         {
-            agent.SetDestination(target.position);
-            if(distance<=agent.stoppingDistance)
+            float distance = Vector3.Distance(target.position, transform.position);
+            if (distance <= lookRadius)
             {
-                CharacterStats tagetStats = target.GetComponent<CharacterStats>();
-                if (tagetStats != null)
+                agent.SetDestination(target.position);
+                if (distance <= agent.stoppingDistance)
                 {
-                    myCombat.Attack(tagetStats);
+                    CharacterStats tagetStats = target.GetComponent<CharacterStats>();
+                    if (tagetStats != null)
+                    {
+                        myCombat.Attack(tagetStats);
+                    }
+                    FaceTarget();
                 }
-                FaceTarget();
             }
         }
     }
@@ -45,5 +50,9 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+    void CalculateR()
+    {
+        r = Random.Range(0f, 1f);
     }
 }

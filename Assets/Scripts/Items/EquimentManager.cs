@@ -69,7 +69,6 @@ public class EquimentManager : MonoBehaviour
     {
         for (int i = 0; i < currentEquiment.Length; i++)
         {
-            print(i);
             Unequip(i);
         }
         EquipDefaultItems();

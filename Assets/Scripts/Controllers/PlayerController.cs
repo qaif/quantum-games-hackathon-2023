@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
             return;
         if (Input.GetMouseButtonDown(0))
         {
+            //print("clickleft");
+            print(cam.name);
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100, movementMask))

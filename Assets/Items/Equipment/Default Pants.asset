@@ -15,8 +15,10 @@ MonoBehaviour:
   name: Default Pants
   icon: {fileID: 0}
   isDefaultItem: 1
-  armorModifier: 0
+  armorModifier: 2
   damageModifier: 0
+  maxModifier: 0
+  healModifier: 0
   equipmentSlot: 2
   mesh: {fileID: 6233665047907181674, guid: a7fb89ff389edc3449e27726cb9bcc01, type: 3}
   coveredMeshRegions: 02000000
