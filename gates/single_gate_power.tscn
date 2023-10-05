@@ -25,6 +25,7 @@ offset_bottom = 28.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dvnkj")
 
 [node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
 offset_right = 34.0
 offset_bottom = 40.0
 scale = Vector2(0.815728, 0.768794)

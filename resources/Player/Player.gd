@@ -1,5 +1,8 @@
 extends CharacterBody2D
+#Double jump 
 
+var max_jumps = 2  # allow for double jump
+var jump_count = 0  # track number of jumps
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -13,10 +16,15 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	
+	# Reset jump count when on floor
+	if  is_on_floor():
+		jump_count = 0  
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or jump_count < max_jumps):
 		velocity.y = JUMP_VELOCITY
+		jump_count += 1  # Increment jump count
 		anim.play("JumpUp")
 
 	# Get the input direction and handle the movement/deceleration.
