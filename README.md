@@ -29,3 +29,9 @@ Run Quantum RPG.exe by double clicking it
 
 Link: https://drive.google.com/file/d/1jd5lavOP2v6A3nefs-r-rxpvE7WFuHtS/view?usp=sharing
 
+# ScreenShots
+![Screenshot (1020)](https://github.com/Yash-Agarwal1708/Quantum-RPG/assets/103818600/a365c80c-624b-43ce-bb18-ec85a04c01b5)   
+  
+![Screenshot (1021)](https://github.com/Yash-Agarwal1708/Quantum-RPG/assets/103818600/c3c4f5e0-8058-4f20-bdba-224d87428b5c)   
+  
+
