@@ -17,7 +17,7 @@ MonoBehaviour:
   isDefaultItem: 0
   armorModifier: 0
   damageModifier: 17
-  maxModifier: 4
+  maxModifier: 3
   healModifier: 10
   equipmentSlot: 3
   mesh: {fileID: 8136238833636229199, guid: b888fb1520455344ba1e4c998ec81647, type: 3}

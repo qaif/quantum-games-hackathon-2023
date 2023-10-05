@@ -27,7 +27,7 @@ public class CharacterStats : MonoBehaviour
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage.");
+        //Debug.Log(transform.name + " takes " + damage + " damage.");
         if (OnHealthChanged!=null)
         {
             OnHealthChanged(maxHealth, currentHealth);
@@ -41,7 +41,7 @@ public class CharacterStats : MonoBehaviour
     {
         currentHealth += heal;
         currentHealth = Mathf.Clamp(currentHealth, -1, maxHealth);
-        Debug.Log(transform.name + " takes " + heal + " heal.");
+        //Debug.Log(transform.name + " takes " + heal + " heal.");
 
         if (OnHealthChanged != null)
         {
@@ -50,7 +50,7 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual void Die()
     {
-        Debug.Log(transform.name + " died.");
+        //Debug.Log(transform.name + " died.");
     }
 
 }

@@ -22,7 +22,7 @@ public class NotGate : MonoBehaviour
             float temp = other.gameObject.GetComponentInChildren<SpinState>().spinStateUp;
             other.gameObject.GetComponentInChildren<SpinState>().spinStateUp = other.gameObject.GetComponentInChildren<SpinState>().spinStateDown;
             other.gameObject.GetComponentInChildren<SpinState>().spinStateDown = temp;
-            print(other.gameObject.GetComponentInChildren<SpinState>().spinStateUp+","+ other.gameObject.GetComponentInChildren<SpinState>().spinStateDown);
+            //print(other.gameObject.GetComponentInChildren<SpinState>().spinStateUp+","+ other.gameObject.GetComponentInChildren<SpinState>().spinStateDown);
         }
     }
     //private void OnCollisionEnter(Collision collision)
