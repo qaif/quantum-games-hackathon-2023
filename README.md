@@ -22,3 +22,10 @@ open Quantum-RPG folder by double clicking
 open builds folder by double clicking  
 open Windows folder by double clicking  
 Run Quantum RPG.exe by double clicking it  
+
+# Recordings  
+
+[![Screenshot (1021)](https://github.com/Yash-Agarwal1708/Quantum-RPG/assets/103818600/d8d1f35f-b5c0-4eef-914f-a352aef40901)](https://drive.google.com/file/d/1jd5lavOP2v6A3nefs-r-rxpvE7WFuHtS/view?usp=sharing)  
+
+Link: https://drive.google.com/file/d/1jd5lavOP2v6A3nefs-r-rxpvE7WFuHtS/view?usp=sharing
+
