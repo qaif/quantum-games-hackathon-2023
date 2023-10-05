@@ -108,3 +108,12 @@ offset_top = 10.0
 offset_right = 216.0
 offset_bottom = 36.0
 text = "0 / 5"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 22.0
+offset_top = 616.0
+offset_right = 255.0
+offset_bottom = 645.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Press I to close the inventory"
