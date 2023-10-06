@@ -5,30 +5,29 @@ import matplotlib.pyplot as plt
 import io
 import numpy as np
 
+from wall import Wall
+from grid import generate_grid, grid_2_walls
 
 pygame.init()
 
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 
-TILE_X_SIZE = 150
-TILE_Y_SIZE = 150
-NUMBER_OF_TILES_X = int(np.floor(SCREEN_WIDTH/TILE_X_SIZE))
-NUMBER_OF_TILES_Y = int(np.floor(SCREEN_WIDTH/TILE_Y_SIZE))
-
-grid = np.zeros((NUMBER_OF_TILES_Y,NUMBER_OF_TILES_X), dtype=int)
+TILE_SIZE = 150
+NUMBER_OF_TILES_X = int(np.floor(SCREEN_HEIGHT/TILE_SIZE))
+NUMBER_OF_TILES_Y = int(np.ceil(SCREEN_WIDTH/TILE_SIZE))
 
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))#, pygame.RESIZABLE)
 pygame.display.set_caption('Gra')
 
-def generate_grid():
-    grid = np.zeros((NUMBER_OF_TILES_Y,NUMBER_OF_TILES_X), dtype=int)
-    for i in range(grid.shape[0]):
-        for j in range(grid.shape[1]):
-            if((i==0 or j==0) or (i==(grid.shape[0]-1) or j==(grid.shape[1]-1))):
-                grid[i,j] = 1
-    return(grid)
+#def generate_grid():
+#    grid = np.zeros((NUMBER_OF_TILES_Y,NUMBER_OF_TILES_X), dtype=int)
+#    for i in range(grid.shape[0]):
+#        for j in range(grid.shape[1]):
+#            if((i==0 or j==0) or (i==(grid.shape[0]-1) or j==(grid.shape[1]-1))):
+#                grid[i,j] = 1
+#    return(grid)
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -36,7 +35,7 @@ class Player(pygame.sprite.Sprite):
         #self.surf = pygame.Surface((75,25))
         #self.surf.fill((255,255,255))
         self.surf = pygame.image.load('imgs/hero/hero.png')
-        self.rect = self.surf.get_rect()
+        self.rect = self.surf.get_rect(topleft = (200,200))
 
         
     def update_vertical(self, pressed_keys):
@@ -85,7 +84,7 @@ class Qubit(pygame.sprite.Sprite):
         plt.close()
         buffer.seek(0)
         self.surf = pygame.image.load(buffer).convert()
-        self.rect = self.surf.get_rect(center=(500,500))
+        self.rect = self.surf.get_rect(topright=(SCREEN_WIDTH,0))
 
 
 class Gate(pygame.sprite.Sprite):
@@ -101,13 +100,6 @@ class Gate(pygame.sprite.Sprite):
             self.matrix = np.array([[0,1],[1,0]])
         self.rect = self.surf.get_rect(center=center)
 
-class Wall(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Wall, self).__init__()
-        self.surf = pygame.Surface((75,75))
-        self.surf.fill((255,255,0))
-        self.rect = self.surf.get_rect(center=(400,400))
-
 def state_to_coords(state):
     theta = 2*np.arccos(state[0])
     phi = np.angle(state[1])
@@ -115,6 +107,10 @@ def state_to_coords(state):
 
 player = Player()
 qubit = Qubit()
+
+grid = generate_grid(NUMBER_OF_TILES_X=NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y=NUMBER_OF_TILES_Y)
+walls = grid_2_walls(grid, TILE_SIZE=TILE_SIZE)
+
 H = Gate('H', (200,200))
 X = Gate('X',(350,200))
 
@@ -123,19 +119,19 @@ X_boom = Gate('X',(650,200))
 
 bomb = Bomb()
 
-wall = Wall()
 
 all_sprites = pygame.sprite.Group()
 gates = pygame.sprite.Group()
-walls = pygame.sprite.Group()
 all_sprites.add(player)
-all_sprites.add(qubit)
 all_sprites.add(H)
 all_sprites.add(X)
-all_sprites.add(wall)
+for w in walls:
+    all_sprites.add(w)
+all_sprites.add(qubit)
+
 gates.add(H)
 gates.add(X)
-walls.add(wall)
+
 
 clock = pygame.time.Clock()
 
@@ -160,6 +156,8 @@ while running:
 
     pressed_keys = pygame.key.get_pressed()
 
+
+    #---------------
     old_pos = player.rect.center
     player.update_horizontal(pressed_keys)
     wall_collision_horizontal = pygame.sprite.spritecollideany(player, walls)
@@ -171,6 +169,7 @@ while running:
     wall_collision_vertical = pygame.sprite.spritecollideany(player, walls)
     if(wall_collision_vertical):
         player.rect.center = old_pos
+    #---------------
 
     screen.fill((0,0,0))
     for entity in all_sprites:
@@ -182,10 +181,6 @@ while running:
         qubit.coords = state_to_coords(bomb.quantum_state)
         qubit.reLoadImage()
         gate_pass.kill()
-
-    #wall_collision = pygame.sprite.spritecollideany(player, walls)
-    #if(wall_collision):
-    #    player.rect.center = old_pos
 
     pygame.display.flip()
 
