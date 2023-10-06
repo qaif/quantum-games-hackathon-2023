@@ -1,7 +1,7 @@
 name: Deploy to Itch.io
 
 env:
-  GODOT_VERSION: 4.1.1
+  GODOT_VERSION: 4.0.2
   ITCH_PROJECT_NAME: "entangledexplorer"
   ITCH_USERNAME: "SimonR99"
   BUTLER_API_KEY: ${{ secrets.ITCH_IO_API_KEY }}
@@ -34,21 +34,10 @@ jobs:
           apt-get update && apt-get install -y xvfb
           Xvfb :99 -screen 0 1024x768x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
-
-      - name: Install Curl
-        run: |
-          apt-get update
-          apt-get install -y curl
-
-      - name: Download Export Templates
-        run: |
-          curl -L -o export_templates.tpz https://downloads.tuxfamily.org/godotengine/4.1.1/Godot_v4.1.1-stable_export_templates.tpz
-          mkdir -p ~/.local/share/godot/templates/4.1.1.stable
-          tar -xvf export_templates.tpz -C ~/.local/share/godot/templates/4.1.1.stable
         
       - name: List Export Templates
         run: |
-          ls -la ~/.local/share/godot/templates/4.1.1.stable
+          ls -la ~/.local/share/godot/templates/
 
       - name: Setup
         run: |
