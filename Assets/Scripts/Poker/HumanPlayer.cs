@@ -364,7 +364,8 @@ public class HumanPlayer : MonoBehaviour
             var prefab = GetGatePrefab(gate.Key);
             for (int i = 0; i < gate.Value; i++)
             {
-                Instantiate(prefab, gatesContainer.transform);
+                var gateObject = Instantiate(prefab, gatesContainer.transform);
+                gateObject.GetComponent<DraggableGate>().initialGatesPanel = gatesContainer.GetComponent<RectTransform>();
             }
         }
     }
