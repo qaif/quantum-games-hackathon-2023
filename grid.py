@@ -16,5 +16,5 @@ def grid_2_walls(grid, TILE_SIZE):
     for i in range(grid.shape[0]):
         for j in range(grid.shape[1]):
             if(grid[i,j]==1):
-                walls.add(Wall((i*TILE_SIZE, j*TILE_SIZE)))
+                walls.add(Wall((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
     return(walls)
