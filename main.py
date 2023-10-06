@@ -1,5 +1,5 @@
 import pygame
-from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT, RLEACCEL
+from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT, RLEACCEL, K_SPACE
 from qiskit.visualization import plot_bloch_vector
 import matplotlib.pyplot as plt
 import os
@@ -101,6 +101,11 @@ qubit = Qubit()
 H = Gate('H', (200,200))
 X = Gate('X',(350,200))
 
+H_boom = Gate('H', (500,200))
+X_boom = Gate('X',(650,200))
+
+bomb = Bomb()
+
 all_sprites = pygame.sprite.Group()
 gates = pygame.sprite.Group()
 all_sprites.add(player)
@@ -123,6 +128,11 @@ while running:
         elif event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 running = False
+            if event.key == K_SPACE:
+                if bomb.measurement():
+                    all_sprites.add(H_boom)
+                else:
+                    all_sprites.add(X_boom)
 
     pressed_keys = pygame.key.get_pressed()
 
