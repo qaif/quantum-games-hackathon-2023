@@ -84,7 +84,6 @@ public class Game
             return;
         }
 
-        Debug.Log($"Requesting bet from {currentlyBettingPlayer}, last raising player: {lastRaisingPlayer}");
         betFromPlayerRequested(players[currentlyBettingPlayer], currentMaxBet);
     }
 
@@ -119,12 +118,6 @@ public class Game
         var activePlayers = players.Where(player => !player.folded);
         var handStrengths = activePlayers.Select(seat => Tuple.Create(seat, Figures.DetectBestFigure(cardsOnTable.ToArray(), seat.cards.ToArray())));
 
-        Debug.Log("Hands strengths: ");
-        foreach (var hs in handStrengths)
-        {
-            Debug.Log($"{hs.Item1}: {hs.Item2}");
-        }
-
         var orderedHandStrengths = handStrengths.OrderByDescending(tup => tup.Item2.Strength());
 
         var biggestStrength = orderedHandStrengths.First().Item2.Strength();
@@ -137,7 +130,6 @@ public class Game
     {
         var winningPlayers = GetWinningPlayers();
         var potPerPlayer = currentPot / winningPlayers.Count();
-        Debug.Log($"Pot per player: {potPerPlayer}");
 
         foreach (var player in winningPlayers)
         {
@@ -211,8 +203,6 @@ public class Game
 
     void ProcessBet(Seat player, int raiseAmount)
     {
-        Debug.Log($"Processing bet for player {player.index}: {raiseAmount}");
-
         player.currentMoney -= raiseAmount;
         player.currentBet += raiseAmount;
 
@@ -220,7 +210,6 @@ public class Game
         {
             currentMaxBet = player.currentBet;
         }
-        Debug.Log($"Current max bet: {currentMaxBet}");
     }
 
     public void SubmitBet(int playerIndex, int bet)
@@ -270,7 +259,6 @@ public class Game
 
         if (bet > currentMaxBet)
         {
-            Debug.Log($"Raise amount: {raiseAmount}, bet: {bet}, currentBet: {seat.currentBet}, maxCurrentBet: {currentMaxBet}");
             lastRaisingPlayer = playerIndex;
         }
 

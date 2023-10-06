@@ -1,13 +1,88 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Qiskit;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public class UsedGate
+{
+    public GateType type;
+}
+
+public class CardInHand
+{
+    public bool measured = false;
+    public Card measuredValue = null;
+    // This could be stateless probably
+    public QuantumCard quantumCard = new QuantumCard();
+    public Dictionary<int, List<UsedGate>> usedGates = new Dictionary<int, List<UsedGate>>();
+
+    public RandomSelector rs = new RandomSelector();
+
+    public CardInHand()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            usedGates[i] = new List<UsedGate>();
+        }
+    }
+
+    public Card Measure()
+    {
+        measured = true;
+        quantumCard.InitCircuit();
+
+        int suiteIndex = 0;
+        int rankIndex = 0;
+
+        for (int i = 0; i < 6; i++)
+        {
+            usedGates[i].ForEach(gate => quantumCard.Apply(gate.type, i));
+
+            var probs = quantumCard.SimulateProbability(i);
+            var value = rs.GetRandomElementIndex(probs);
+
+            if (i < 2)
+            {
+                suiteIndex = (suiteIndex << 1) + value;
+            }
+            else
+            {
+                rankIndex = (rankIndex << 1) + value;
+            }
+        }
+
+        var suite = CardExtensions.intToSuite[suiteIndex];
+        var rank = CardExtensions.intToRank[rankIndex];
+
+        // TODO: random value based on bits
+        measuredValue = new Card(suite, rank);
+        return measuredValue;
+    }
+
+    public void Reset()
+    {
+        measured = false;
+        measuredValue = null;
+        for (int i = 0; i < 6; i++)
+        {
+            usedGates[i].Clear();
+        }
+    }
+}
+
 public class HumanPlayer : MonoBehaviour
 {
+    public PersistentState state;
+    public Events events;
+
     int playerIndex;
+    int currentlyModifiedCard;
 
     public int startingMoney = 1000;
     public int currentMoney;
@@ -23,15 +98,52 @@ public class HumanPlayer : MonoBehaviour
     public Image card1;
     public Image card2;
 
+    [Header("Measure")]
+    CardInHand left = new CardInHand();
+    CardInHand right = new CardInHand();
+
+    public Sprite smallCardSprite;
+
+    public GameObject measureLeftButton;
+    public GameObject transformLeftButton;
+
+    public GameObject measureRightButton;
+    public GameObject transformRightButton;
+
+    [Header("Transform")]
+    public GameObject transformWindow;
+    public GameObject gatesContainer;
+
+    public GameObject xGatePrefab;
+    public GameObject zGatePrefab;
+    public GameObject yGatePrefab;
+    public GameObject hGatePrefab;
+
+    public QuantumCardDisplay transformedCardSource;
+    public QuantumCardDisplay transformedCardResult;
+
     Game enteredGame;
 
-    public HumanPlayer()
+    void OnEnable()
+    {
+        events.transformViewUpdated += UpdateTransformView;
+    }
+
+    void OnDisable()
+    {
+        events.transformViewUpdated -= UpdateTransformView;
+    }
+
+    public void Start()
     {
         currentMoney = startingMoney;
     }
 
     public void EnterGame(Game game, int playerIndex)
     {
+        left.Reset();
+        right.Reset();
+        UpdateCards();
         this.playerIndex = playerIndex;
         enteredGame = game;
         enteredGame.betFromPlayerRequested += EnableBettingControls;
@@ -44,9 +156,8 @@ public class HumanPlayer : MonoBehaviour
 
     private void EnableBettingControls(Seat player, int currentBet)
     {
-        Debug.Log($"EnableBettingControls called with {player.index} and {currentBet}");
-
         if (player.index != this.playerIndex) return;
+        ActivateButtons();
         UpdateCards();
 
         raiseButton.interactable = true;
@@ -73,13 +184,29 @@ public class HumanPlayer : MonoBehaviour
 
     public void UpdateCards()
     {
-        var c1 = enteredGame.players[playerIndex].cards[0];
-        var sprite = Resources.Load<Sprite>($"Images/Deck/{c1.rank}_{c1.suite}");
-        card1.sprite = sprite;
+        if (left.measured)
+        {
+            var c1 = left.measuredValue;
+            var sprite = Resources.Load<Sprite>($"Images/Deck/{c1.rank}_{c1.suite}");
+            card1.sprite = sprite;
+        }
+        else
+        {
+            card1.sprite = smallCardSprite;
+        }
 
-        var c2 = enteredGame.players[playerIndex].cards[1];
-        var sprite2 = Resources.Load<Sprite>($"Images/Deck/{c2.rank}_{c2.suite}");
-        card2.sprite = sprite2;
+        if (right.measured)
+        {
+            var c2 = right.measuredValue;
+            var sprite2 = Resources.Load<Sprite>($"Images/Deck/{c2.rank}_{c2.suite}");
+            card2.sprite = sprite2;
+        }
+        else
+        {
+            card2.sprite = smallCardSprite;
+        }
+
+        ToggleButtonsVisibility();
     }
 
     public void UpdateMoney()
@@ -124,5 +251,183 @@ public class HumanPlayer : MonoBehaviour
     {
         UpdateMoney();
         UpdateBet();
+    }
+
+    void ToggleButtonsVisibility()
+    {
+        measureLeftButton.SetActive(!left.measured);
+        transformLeftButton.SetActive(!left.measured);
+        measureRightButton.SetActive(!right.measured);
+        transformRightButton.SetActive(!right.measured);
+    }
+
+    void ActivateButtons()
+    {
+        measureLeftButton.GetComponent<Button>().interactable = true;
+        transformLeftButton.GetComponent<Button>().interactable = true;
+        measureRightButton.GetComponent<Button>().interactable = true;
+        transformRightButton.GetComponent<Button>().interactable = true;
+    }
+
+    void DeativateButtons()
+    {
+        measureLeftButton.GetComponent<Button>().interactable = false;
+        transformLeftButton.GetComponent<Button>().interactable = false;
+        measureRightButton.GetComponent<Button>().interactable = false;
+        transformRightButton.GetComponent<Button>().interactable = false;
+    }
+
+
+    public void Measure(int cardIndex)
+    {
+        if (cardIndex == 0)
+        {
+            enteredGame.players[playerIndex].cards[0] = left.Measure();
+        }
+        else if (cardIndex == 1)
+        {
+            enteredGame.players[playerIndex].cards[1] = right.Measure();
+        }
+        else
+        {
+            Debug.Log("Invalid measured card index");
+        }
+
+        UpdateCards();
+        ToggleButtonsVisibility();
+    }
+
+    GameObject GetGatePrefab(GateType type)
+    {
+        switch (type)
+        {
+            case GateType.H:
+                return hGatePrefab;
+            case GateType.X:
+                return xGatePrefab;
+            case GateType.Y:
+                return yGatePrefab;
+            case GateType.Z:
+                return zGatePrefab;
+        }
+        return null;
+    }
+
+    void FillUsedGates()
+    {
+        CardInHand displayedCard = (currentlyModifiedCard == 0) ? left : right;
+
+        var lines = FindObjectsOfType<DroppableLine>().OrderBy(line => -line.transform.position.y).ToArray();
+        for (int i = 0; i < 6; i++)
+        {
+            int j = 0;
+            foreach (var gate in displayedCard.usedGates[i])
+            {
+                var prefab = GetGatePrefab(gate.type);
+                var gateObject = Instantiate(prefab, gatesContainer.transform);
+                gateObject.GetComponent<LayoutElement>().ignoreLayout = true;
+                gateObject.GetComponent<DraggableGate>().interactable = false;
+
+                // Allocate equal space for each used gate
+                float xPosition;
+                if (displayedCard.usedGates[i].Count() == 1)
+                {
+                    xPosition = 560 + 360 / 2;
+                }
+                else
+                {
+                    xPosition = 560 + 360 / (displayedCard.usedGates[i].Count() - 1) * j;
+                }
+
+                gateObject.transform.position = new Vector3(xPosition, lines[i].transform.position.y, gateObject.transform.position.z);
+                j++;
+            }
+        }
+    }
+
+    void FillAvailableGates()
+    {
+        foreach (Transform child in gatesContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        var availableGates = state.gates.ToDictionary(gate => gate.type, gate => gate.count);
+
+        for (int i = 0; i < 6; i++)
+        {
+            left.usedGates[i].ForEach(gate => availableGates[gate.type] -= 1);
+            right.usedGates[i].ForEach(gate => availableGates[gate.type] -= 1);
+        }
+        foreach (var gate in availableGates)
+        {
+            var prefab = GetGatePrefab(gate.Key);
+            for (int i = 0; i < gate.Value; i++)
+            {
+                Instantiate(prefab, gatesContainer.transform);
+            }
+        }
+    }
+
+    public void UpdateTransformView()
+    {
+        // Left card - pre modifications
+        var card = (currentlyModifiedCard == 0) ? left : right;
+        card.quantumCard.InitCircuit();
+        transformedCardSource.UpdateCard(card.quantumCard);
+
+        // Right card - after modifications
+        List<DraggableGate> gates = FindObjectsOfType<DraggableGate>().OrderBy(gate => gate.transform.position.x).ToList();
+        foreach (var gate in gates)
+        {
+            int i = gate.FindOverlapingLine();
+            if (i == -1) continue;
+
+            card.quantumCard.Apply(gate.type, i);
+        }
+        transformedCardResult.UpdateCard(card.quantumCard);
+    }
+
+    public IEnumerator DelayedUpdateTransformView()
+    {
+        yield return null;
+        UpdateTransformView();
+    }
+
+    public void OpenTransformWindow(int cardIndex)
+    {
+        transformWindow.SetActive(true);
+        currentlyModifiedCard = cardIndex;
+        FillAvailableGates();
+        FillUsedGates();
+        StartCoroutine(DelayedUpdateTransformView());
+    }
+
+    void SaveUsedGates()
+    {
+        List<DraggableGate> gates = FindObjectsOfType<DraggableGate>().OrderBy(gate => gate.transform.position.x).ToList();
+
+        foreach (var gate in gates)
+        {
+            int i = gate.FindOverlapingLine();
+            if (i == -1) continue;
+            if (!gate.interactable) continue;
+
+            var usedGates = (currentlyModifiedCard == 0) ? left.usedGates : right.usedGates;
+
+            usedGates[i].Add(new UsedGate { type = gate.type });
+        }
+    }
+
+    public void ApplyTransformWindow()
+    {
+        DeativateButtons();
+        SaveUsedGates();
+        CloseTransformWindow();
+    }
+
+    public void CloseTransformWindow()
+    {
+        transformWindow.SetActive(false);
     }
 }

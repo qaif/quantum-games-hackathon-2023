@@ -11,7 +11,7 @@ public enum GateType
 }
 
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
-public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DraggableGate : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Events events;
 
@@ -23,6 +23,7 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     DroppableLine[] lines;
 
     public GateType type = GateType.H;
+    public bool interactable = true;
 
     public void Start()
     {
@@ -34,11 +35,13 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!interactable) return;
         this.initialPosition = this.rectTransform.anchoredPosition;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!interactable) return;
         this.rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
@@ -72,6 +75,8 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!interactable) return;
+
         int overlappingLine = FindOverlapingLine();
         if (overlappingLine != -1)
         {
@@ -82,9 +87,5 @@ public class DraggableGate : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
         // No overlaps
         this.rectTransform.anchoredPosition = initialPosition;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
     }
 }

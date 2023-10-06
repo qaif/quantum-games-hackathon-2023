@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Qiskit;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Table : MonoBehaviour
 {
+    public PersistentState state;
+
     public Image[] cardsOnTable;
 
     public HumanPlayer humanPlayer;
@@ -64,7 +68,7 @@ public class Table : MonoBehaviour
         }
     }
 
-    bool isWinner(int index)
+    bool IsWinner(int index)
     {
         return currentGame.GetWinningPlayers().Select(player => player.index).Contains(index);
     }
@@ -72,7 +76,7 @@ public class Table : MonoBehaviour
     void SetTitle()
     {
         var winners = currentGame.GetWinningPlayers();
-        if (!isWinner(0))
+        if (!IsWinner(0))
         {
             title.text = "You lost!";
             return;

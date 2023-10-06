@@ -15,18 +15,18 @@ public enum Suite
 
 public static class CardExtensions
 {
-    static Dictionary<string, Suite> suites = new Dictionary<string, Suite>() {
-        {"00", Suite.Clubs},
-        {"01", Suite.Diamonds},
-        {"10", Suite.Hearts},
-        {"11", Suite.Spades},
+    public static Dictionary<int, Suite> intToSuite = new Dictionary<int, Suite>() {
+        {0, Suite.Clubs},
+        {1, Suite.Diamonds},
+        {2, Suite.Hearts},
+        {3, Suite.Spades},
     };
 
     public static Suite RandomSuite()
     {
-        var keys = suites.Keys.ToList();
+        var keys = intToSuite.Keys.ToList();
         var randomIndex = UnityEngine.Random.Range(0, keys.Count);
-        return suites[keys[randomIndex]];
+        return intToSuite[keys[randomIndex]];
     }
 
     public static string ToString(this Suite suite)
@@ -45,7 +45,7 @@ public static class CardExtensions
         return "";
     }
 
-    static Dictionary<int, Rank> intToRank = new Dictionary<int, Rank>() {
+    public static Dictionary<int, Rank> intToRank = new Dictionary<int, Rank>() {
         {0, Rank.One},
         {1, Rank.Two},
         {2, Rank.Three},
