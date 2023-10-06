@@ -131,6 +131,7 @@ while running:
             if event.key == K_SPACE:
                 if bomb.measurement():
                     all_sprites.add(H_boom)
+                    bomb = Bomb()
                 else:
                     all_sprites.add(X_boom)
 
@@ -155,6 +156,7 @@ while running:
             coords = qubit.coords
         
         update_image(coords)
+        bomb.update_state(coords)
         gate_pass.kill()
 
 
