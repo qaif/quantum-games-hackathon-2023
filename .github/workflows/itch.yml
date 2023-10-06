@@ -35,6 +35,11 @@ jobs:
           Xvfb :99 -screen 0 1024x768x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
 
+      - name: Install Curl
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+
       - name: Download Export Templates
         run: |
           curl -L -o export_templates.tpz https://downloads.tuxfamily.org/godotengine/4.1.1/Godot_v4.1.1-stable_export_templates.tpz
