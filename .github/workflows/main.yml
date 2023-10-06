@@ -1,65 +1,65 @@
-name: CI
+#name: CI
 
-env:
-  GODOT_VERSION: 4.1.1
+# env:
+#   GODOT_VERSION: 4.1.1
   
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+#   workflow_dispatch:
 
-jobs:
-  export-web:
-    name: Web Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:4.1.1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+# jobs:
+#   export-web:
+#     name: Web Export
+#     runs-on: ubuntu-latest
+#     container:
+#       image: barichello/godot-ci:4.1.1
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           lfs: true
 
-      - name: Install Missing Libraries
-        run: |
-          apt-get update && apt-get install -y libxcursor1 libxinerama1 libxrandr2 libxi6 libx11-xcb1
+#       - name: Install Missing Libraries
+#         run: |
+#           apt-get update && apt-get install -y libxcursor1 libxinerama1 libxrandr2 libxi6 libx11-xcb1
 
-      - name: Install and Setup Xvfb
-        run: |
-          apt-get update && apt-get install -y xvfb
-          Xvfb :99 -screen 0 1024x768x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
+#       - name: Install and Setup Xvfb
+#         run: |
+#           apt-get update && apt-get install -y xvfb
+#           Xvfb :99 -screen 0 1024x768x24 &
+#           echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+#       - name: Setup
+#         run: |
+#           mkdir -v -p ~/.local/share/godot/templates
+#           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
 
-      - name: Web Build
-        run: |
-          mkdir -v -p build/web
-          godot -v --export-release "Web" ./build/web/index.html || true
+#       - name: Web Build
+#         run: |
+#           mkdir -v -p build/web
+#           godot -v --export-release "Web" ./build/web/index.html || true
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: web
-          path: build/web
+#       - name: Upload Artifact
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: web
+#           path: build/web
 
-      - name: Install rsync
-        run: |
-          apt-get update && apt-get install -y rsync
+#       - name: Install rsync
+#         run: |
+#           apt-get update && apt-get install -y rsync
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        with:
-          token: ${{ secrets.GH_PAT }}
-          BRANCH: gh-pages
-          FOLDER: build/web
-          clean: false
+#       - name: Deploy to GitHub Pages
+#         uses: JamesIves/github-pages-deploy-action@releases/v4
+#         with:
+#           token: ${{ secrets.GH_PAT }}
+#           BRANCH: gh-pages
+#           FOLDER: build/web
+#           clean: false
 
-      - name: List build output
-        run: |
-          ls -la build/web
+#       - name: List build output
+#         run: |
+#           ls -la build/web
