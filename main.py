@@ -8,8 +8,8 @@ import numpy as np
 
 pygame.init()
 
-SCREEN_WIDTH = 1024
-SCREEN_HEIGHT = 720
+SCREEN_WIDTH = 1920
+SCREEN_HEIGHT = 1080
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))#, pygame.RESIZABLE)
 pygame.display.set_caption('Gra')
@@ -17,8 +17,9 @@ pygame.display.set_caption('Gra')
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.Surface((75,25))
-        self.surf.fill((255,255,255))
+        #self.surf = pygame.Surface((75,25))
+        #self.surf.fill((255,255,255))
+        self.surf = pygame.image.load('imgs/hero/hero.png')
         self.rect = self.surf.get_rect()
 
         
@@ -49,6 +50,22 @@ def update_image(coords):
     plt.close()
 
 
+class Bomb():
+    def __init__(self):
+        self.time = 10000
+        self.quantum_state = [0,0] # in angles
+
+    def decrease_timer(self):
+        self.time -= 1
+
+    def update_state(self, coords):
+        self.quantum_state = [self.quantum_state[0] + coords[0], self.quantum_state[1] + coords[1]]
+
+    def measurement(self):
+        probability = np.power(np.sin(self.quantum_state[0]/2),2)
+        measurement_result = int(np.random.binomial(1, probability))
+        return(measurement_result)
+
 class Qubit(pygame.sprite.Sprite):
     def __init__(self):
         super(Qubit, self).__init__()
@@ -69,8 +86,11 @@ class Gate(pygame.sprite.Sprite):
     def __init__(self, gate_type, center):
         super(Gate, self).__init__()
         self.gate_type = gate_type
-        self.surf = pygame.Surface((75,75))
-        self.surf.fill((255,255,0))
+        if(gate_type == 'H'):
+            self.surf = pygame.image.load('imgs/gates/H.png')
+        elif(gate_type == 'X'):
+            self.surf = pygame.image.load('imgs/gates/X.png')
+        #self.surf.fill((255,255,0))
         self.rect = self.surf.get_rect(center=center)
 
     
