@@ -310,7 +310,6 @@ namespace Qiskit
             //todo use correct number
             StringBuilder builder = new StringBuilder();
 
-
             //string translation = "";
 
             string allnumbers = getAllNumbersString(NumberOfQubits);

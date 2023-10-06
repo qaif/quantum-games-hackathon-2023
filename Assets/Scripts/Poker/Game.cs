@@ -63,7 +63,7 @@ public class Game
 
     void ProgressBetting()
     {
-        int activePlayers = players.Where(seat => !seat.folded).Count();
+        int activePlayers = players.Where(seat => (!seat.folded && seat.currentMoney > 0)).Count();
         if (activePlayers <= 1)
         {
             Debug.Log("Only one remaining player");
@@ -74,7 +74,7 @@ public class Game
         while (true)
         {
             currentlyBettingPlayer = (currentlyBettingPlayer + 1) % players.Length;
-            if (!players[currentlyBettingPlayer].folded) break;
+            if (!players[currentlyBettingPlayer].folded && (players[currentlyBettingPlayer].currentMoney > 0)) break;
         }
 
         if ((currentlyBettingPlayer == lastRaisingPlayer) && (players.All(player => (player.folded || player.alreadyBetThisRound))))
@@ -128,6 +128,12 @@ public class Game
 
     private void EndGame()
     {
+        while (cardsOnTable.Count() < 5)
+        {
+            DealCard();
+        }
+
+        // TODO: check for multiple pots
         var winningPlayers = GetWinningPlayers();
         var potPerPlayer = currentPot / winningPlayers.Count();
 
@@ -252,6 +258,12 @@ public class Game
         if (raiseAmount > seat.currentMoney)
         {
             Debug.LogWarning("Invalid bet: not enough money left");
+            return;
+        }
+
+        if ((bet < currentMaxBet) && (seat.currentMoney != raiseAmount))
+        {
+            Debug.LogWarning("Invalid bet: all in bets only possible when no money is left");
             return;
         }
 

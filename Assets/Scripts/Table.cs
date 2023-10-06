@@ -93,9 +93,6 @@ public class Table : MonoBehaviour
 
     void GameFinished()
     {
-        var winners = currentGame.GetWinningPlayers();
-
-
         SetTitle();
 
         // Show player's results
@@ -136,7 +133,22 @@ public class Table : MonoBehaviour
         foreach (var player in robotPlayers)
         {
             player.ExitGame(currentGame);
+            if (player.currentMoney < 200)
+            {
+                player.gameObject.SetActive(false);
+            }
         }
+
+        if (humanPlayer.currentMoney < 200)
+        {
+            Debug.Log("You lose");
+        }
+
+        if (robotPlayers.Where(player => player.gameObject.activeSelf).Count() == 0)
+        {
+            Debug.Log("You win");
+        }
+
         humanPlayer.ExitGame(currentGame);
 
         gameFinishedWindow.SetActive(false);

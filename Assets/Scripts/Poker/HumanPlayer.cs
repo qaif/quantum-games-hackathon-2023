@@ -60,7 +60,6 @@ public class CardInHand
         var suite = CardExtensions.intToSuite[suiteIndex];
         var rank = CardExtensions.intToRank[rankIndex];
 
-        // TODO: random value based on bits
         measuredValue = new Card(suite, rank);
         return measuredValue;
     }
@@ -154,15 +153,18 @@ public class HumanPlayer : MonoBehaviour
         enteredGame = null;
     }
 
-    private void EnableBettingControls(Seat player, int currentBet)
+    private void EnableBettingControls(Seat player, int currentMaxBet)
     {
         if (player.index != this.playerIndex) return;
         ActivateButtons();
         UpdateCards();
 
-        raiseButton.interactable = true;
+        if (player.currentMoney + player.currentBet > currentMaxBet)
+        {
+            raiseButton.interactable = true;
+        }
 
-        if (player.currentBet < currentBet)
+        if (player.currentBet < currentMaxBet)
         {
             // Raise
             callButton.interactable = true;
@@ -212,13 +214,13 @@ public class HumanPlayer : MonoBehaviour
     public void UpdateMoney()
     {
         if (enteredGame == null) return;
-        moneyDisplay.text = $"Money: {enteredGame.players[playerIndex].currentMoney}";
+        moneyDisplay.text = $"{enteredGame.players[playerIndex].currentMoney}";
     }
 
     public void UpdateBet()
     {
         if (enteredGame == null) return;
-        betDisplay.text = $"Bet: {enteredGame.players[playerIndex].currentBet}";
+        betDisplay.text = $"{enteredGame.players[playerIndex].currentBet}";
     }
 
     public void Fold()
@@ -236,15 +238,16 @@ public class HumanPlayer : MonoBehaviour
     public void Call()
     {
         DisableBettingControls();
-        enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet);
+        var mySeat = enteredGame.players[playerIndex];
+        var callAmount = Math.Min(enteredGame.currentMaxBet, mySeat.currentMoney + mySeat.currentBet);
+        enteredGame.SubmitBet(this.playerIndex, callAmount);
     }
 
     public void Raise()
     {
-        // TODO: check limits
         DisableBettingControls();
-        // const raise amount for now;
-        enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet + 200);
+        var raiseAmount = Math.Min(200, enteredGame.players[playerIndex].currentMoney);
+        enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet + raiseAmount);
     }
 
     void Update()

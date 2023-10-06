@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,30 +30,30 @@ public class AIPlayer : MonoBehaviour
 
     public void ExitGame(Game game)
     {
-        enteredGame.betFromPlayerRequested -= Bet;
+        if (enteredGame != null) enteredGame.betFromPlayerRequested -= Bet;
         enteredGame = null;
     }
 
     void Bet(Seat player, int currentBet)
     {
         if (player.index != playerIndex) return;
+        var callAmount = Math.Min(currentBet, player.currentMoney + player.currentBet);
 
         // Always check for now
-        enteredGame.SubmitBet(playerIndex, currentBet);
+        enteredGame.SubmitBet(playerIndex, callAmount);
     }
 
     public void UpdateMoney()
     {
         if (enteredGame == null) return;
-        moneyDisplay.text = $"Money: {enteredGame.players[playerIndex].currentMoney}";
+        moneyDisplay.text = $"{enteredGame.players[playerIndex].currentMoney}";
     }
 
     public void UpdateBet()
     {
         if (enteredGame == null) return;
-        betDisplay.text = $"Bet: {enteredGame.currentMaxBet}";
+        betDisplay.text = $"{enteredGame.players[playerIndex].currentBet}";
     }
-
 
     void Update()
     {
