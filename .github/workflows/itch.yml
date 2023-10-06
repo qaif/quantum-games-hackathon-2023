@@ -1,7 +1,7 @@
 name: Deploy to Itch.io
 
 env:
-  GODOT_VERSION: 4.0.2
+  GODOT_VERSION: 4.1.1
   ITCH_PROJECT_NAME: "entangledexplorer"
   ITCH_USERNAME: "SimonR99"
   BUTLER_API_KEY: ${{ secrets.ITCH_IO_API_KEY }}
@@ -35,11 +35,11 @@ jobs:
           Xvfb :99 -screen 0 1024x768x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      - name: Setup
+      - name: Move Export Templates
         run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-
+          mkdir -p /github/home/.local/share/godot/export_templates/4.1.1.stable
+          mv ~/.local/share/godot/templates/4.1.1.stable/* /github/home/.local/share/godot/export_templates/4.1.1.stable
+        
       - name: Web Build
         run: |
           mkdir -v -p build/web
