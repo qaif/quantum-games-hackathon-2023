@@ -15,7 +15,7 @@ public class AIPlayer : MonoBehaviour
     Game enteredGame;
     int playerIndex;
 
-    public AIPlayer()
+    public void Start()
     {
         currentMoney = startingMoney;
     }
