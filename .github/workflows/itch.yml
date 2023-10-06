@@ -72,4 +72,4 @@ jobs:
         run: ./butler login
 
       - name: Push to Itch.io
-        run: ./butler push build/web $ITCH_USERNAME/$ITCH_PROJECT_NAME:web --userversion-file build/web/VERSION
+        run: ./butler push build/web $ITCH_USERNAME/$ITCH_PROJECT_NAME:web
