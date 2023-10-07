@@ -4,7 +4,7 @@ import numpy as np
 from wall import Wall
 from exit import Exit, Start
 from player import Player
-from gate import Gate
+from gate import Gate, gates_ids_inv
 from floor import Floor
 
 def generate_grid(NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y):
@@ -18,8 +18,8 @@ def generate_grid(NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y):
 def generate_lvl1():
     grid = np.array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1,  1,  0,  0,  0,  5,  0,  0,  0,  1,  1,  1],
-       [ 1, -1,  0,  0,  1,  1,  1,  0,  0,  0,  2,  1],
+       [ 1,  1,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1],
+       [ 1, -1,  0,  0,  1,  1,  1,  4,  0,  0,  2,  1],
        [ 1,  1,  0,  0,  0,  6,  0,  0,  0,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]])
@@ -40,7 +40,7 @@ def grid_2_floors(grid, TILE_SIZE):
         for j in range(grid.shape[1]):
             if(grid[i,j]==0):
                 walls.add(Floor((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
-            if(grid[i,j]>=5):
+            if(grid[i,j]>=4):
                 walls.add(Floor((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
     return(walls)
 
@@ -69,8 +69,6 @@ def grid_2_gates(grid, TILE_SIZE):
     gates = pygame.sprite.Group()
     for i in range(grid.shape[0]):
         for j in range(grid.shape[1]):
-            if(grid[i,j]==5):
-                gates.add(Gate('H', (i*TILE_SIZE, j*TILE_SIZE)))
-            if(grid[i,j]==6):
-                gates.add(Gate('X', (i*TILE_SIZE, j*TILE_SIZE)))
+            if grid[i,j] in gates_ids_inv.keys():
+                gates.add(Gate(gates_ids_inv[grid[i,j]], (i*TILE_SIZE, j*TILE_SIZE)))
     return(gates)
