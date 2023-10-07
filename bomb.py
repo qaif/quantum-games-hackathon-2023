@@ -3,8 +3,8 @@ import pygame
 
 class Bomb():
     def __init__(self):
-        self.max_time = 200
-        self.time = 200
+        self.max_time = 180
+        self.time = 180
         self.quantum_state = np.array([1,0])
 
     def decrease_timer(self):
@@ -16,8 +16,12 @@ class Bomb():
     def update_state(self, matrix):
         self.quantum_state = np.dot(matrix,self.quantum_state)
         rho = np.angle(self.quantum_state[0])
+        # check !!
+        rho = rho % np.pi
+        # check !!
         if rho != 0:
             self.quantum_state*=np.exp(-rho*1j)
+            print(self.quantum_state)
         self.quantum_state = np.real_if_close(self.quantum_state)
 
     def measurement(self):

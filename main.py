@@ -7,7 +7,7 @@ import io
 import numpy as np
 
 from wall import Wall
-from grid import generate_grid, grid_2_walls, generate_lvl1, grid_2_exit, grid_2_player, grid_2_gates, grid_2_floors, grid_2_start
+from grid import generate_grid, grid_2_walls, grid_2_exit, grid_2_player, grid_2_gates, grid_2_floors, grid_2_start, generate_lvl1, generate_lvl2, generate_lvl3, generate_lvl4, generate_lvl5, generate_lvl6
 from player import Player
 from bomb import Bomb, Timer, GUI_timer
 from qubit import Qubit
@@ -16,8 +16,8 @@ from gui import Envelope
 
 pygame.init()
 
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 700
 
 TILE_SIZE = 100
 NUMBER_OF_TILES_X = int(np.floor(SCREEN_HEIGHT/TILE_SIZE))
@@ -36,7 +36,7 @@ class Explosion(pygame.sprite.Sprite):
 class Win(pygame.sprite.Sprite):
     def __init__(self):
         super(Win, self).__init__()
-        self.surf = pygame.image.load('imgs/win.png').convert()
+        self.surf = pygame.image.load('imgs/win.png').convert().convert_alpha()
         self.rect = self.surf.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
 
 
@@ -53,9 +53,28 @@ def state_to_coords(state):
     return [theta, phi]
 
 
-def game_main_loop():
+#def paused():
+#    paused=True
+#    while paused:
+#        for event in pygame.event.get():
+#            if event.key == K_ESCAPE:
+#                    paused = False
+#    pygame.display.update()
 
-    grid = generate_lvl1()
+def game_main_loop(lvl=1):
+
+    if(lvl==1):
+        grid = generate_lvl1()
+    if(lvl==2):
+        grid = generate_lvl2()
+    if(lvl==3):
+        grid = generate_lvl3()
+    if(lvl==4):
+        grid = generate_lvl4()
+    if(lvl==5):
+        grid = generate_lvl5()
+    if(lvl==6):
+        grid = generate_lvl6()
     #grid = generate_grid(NUMBER_OF_TILES_X=NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y=NUMBER_OF_TILES_Y)
     start = grid_2_start(grid, TILE_SIZE=TILE_SIZE)
     walls = grid_2_walls(grid, TILE_SIZE=TILE_SIZE)
@@ -103,8 +122,7 @@ def game_main_loop():
     clock = pygame.time.Clock()
 
     running = True
-    timeout = False
-    # win = False
+    key_pressed = False
 
     exploded = False
     winner = False
@@ -116,6 +134,7 @@ def game_main_loop():
                 running = False
 
             elif event.type == KEYDOWN:
+                key_pressed = True
                 if event.key == K_ESCAPE:
                     running = False
 
@@ -142,8 +161,9 @@ def game_main_loop():
         #---------------
         
         #---------------
-        bomb.decrease_timer()
-        timer.update(bomb.get_time_ratio())
+        if(key_pressed): 
+            bomb.decrease_timer()
+            timer.update(bomb.get_time_ratio())
         #---------------
         
         screen.fill((0,0,0))
@@ -158,6 +178,7 @@ def game_main_loop():
                     bomb.quantum_state = np.array([1,0])
                 else:
                     bomb.quantum_state = np.array([0,1])
+                    bomb.time = bomb.max_time
             else:
                 bomb.update_state(gate_pass.matrix)
 
@@ -179,11 +200,14 @@ def game_main_loop():
            
         #-------------
         if exploded:
+            screen.fill((0,0,0))
             screen.blit(explosion.surf, explosion.rect)
         if winner:
             screen.blit(win.surf, win.rect)
+            
+            #paused()
         if(bomb.time == 0):
-            screen.blit(timeout_obj.surf, timeout_obj.rect)
+            #screen.blit(timeout_obj.surf, timeout_obj.rect)
             if bomb.measurement():
                 exploded = True
                 bomb.quantum_state = np.array([1,0])
@@ -207,11 +231,30 @@ def game_main_loop():
 
         pygame.display.flip()
 
+        if(winner):
+            pygame.time.wait(2000)
+            running = False
+        if exploded:
+            pygame.time.wait(2000)
+            running = False
+
         clock.tick(50)
+
+def level_selection():
+    lvl_menu = pygame_menu.Menu('Welcome',1000, 500, theme=pygame_menu.themes.THEME_BLUE)
+    lvl_menu.add.button('Level 1', lambda: game_main_loop(1))
+    lvl_menu.add.button('Level 2', lambda: game_main_loop(2))
+    lvl_menu.add.button('Level 3', lambda: game_main_loop(3))
+    lvl_menu.add.button('Level 4', lambda: game_main_loop(4))
+    lvl_menu.add.button('Level 5', lambda: game_main_loop(5))
+    lvl_menu.add.button('Level 6', lambda: game_main_loop(6))
+    lvl_menu.add.button('Quit', pygame_menu.events.EXIT)
+    lvl_menu.mainloop(screen)
 
 menu = pygame_menu.Menu('Welcome',1000, 500, theme=pygame_menu.themes.THEME_BLUE)
 
-menu.add.button('Play', game_main_loop)
+#menu.add.button('Play', game_main_loop)
+menu.add.button('Play', level_selection)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
 menu.mainloop(screen)
