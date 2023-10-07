@@ -36,7 +36,7 @@ Follow these steps to get QuantumShooter up and running on your local machine:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/YourUsername/QuantumShooter.git
+   git clone git@github.com:Matio7k/QuantumShooter.git
 
 2. Open the project directory:
 
