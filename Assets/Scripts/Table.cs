@@ -115,6 +115,7 @@ public class Table : MonoBehaviour
         // Show robots results
         for (int i = 0; i < 3; i++)
         {
+            // TODO: proper handling for lower number of players
             if (robotPlayers[i].currentMoney <= 0)
             {
                 // Do not show
@@ -154,8 +155,11 @@ public class Table : MonoBehaviour
             return;
         }
 
+        state.moneyToSpend += humanPlayer.currentMoney;
+
         if (robotPlayers.Where(player => player.gameObject.activeSelf).Count() == 0)
         {
+            winMenu.GetComponent<WinMenu>().Init(levels[currentLevel].gatesToBuy);
             winMenu.SetActive(true);
             return;
         }
@@ -181,6 +185,7 @@ public class Table : MonoBehaviour
 
     void Start()
     {
+        state.Reset();
         ResetLevel();
         StartNewRound();
     }

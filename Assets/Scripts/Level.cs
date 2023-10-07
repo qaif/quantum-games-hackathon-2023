@@ -1,6 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public class GateToBuy
+{
+    public GateType gateType;
+    public int price;
+}
 
 
 [CreateAssetMenu]
@@ -10,6 +18,8 @@ public class Level : ScriptableObject
     public int humanMoney;
 
     public bool isBossLevel = false;
+
+    public GateToBuy[] gatesToBuy;
 
     public void Initialize(Table table)
     {

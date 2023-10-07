@@ -15,3 +15,12 @@ MonoBehaviour:
   oponentMoney: b0040000b0040000b0040000
   humanMoney: 1000
   isBossLevel: 0
+  gatesToBuy:
+  - gateType: 0
+    price: 3000
+  - gateType: 1
+    price: 1000
+  - gateType: 3
+    price: 1000
+  - gateType: 2
+    price: 1000

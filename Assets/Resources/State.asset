@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390682c167f4c2746be0877bef55f924, type: 3}
   m_Name: State
   m_EditorClassIdentifier: 
-  moneyToSpend: 0
-  gates:
+  initialMoneyToSpend: 0
+  initialGatesLimit: 8
+  initialGates:
   - type: 0
     count: 4
   - type: 1
     count: 4
   - type: 2
-    count: 1
-  - type: 3
-    count: 1
+    count: 0
+  moneyToSpend: 0
+  gatesLimit: 0
+  gates: []
