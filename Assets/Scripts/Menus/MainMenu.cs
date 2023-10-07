@@ -8,7 +8,13 @@ public class MainMenu : MonoBehaviour
     public PersistentState state;
 
     public string gameplayScene = "Table";
+
     public GameObject playSelect;
+    public GameObject helpSelect;
+
+    public GameObject pokerRulesHelp;
+    public GameObject cardHelp;
+    public GameObject quantumHelp;
 
     public void Start()
     {
@@ -30,6 +36,34 @@ public class MainMenu : MonoBehaviour
     {
         state.mode = Mode.Challenging;
         SceneManager.LoadScene(gameplayScene);
+    }
+
+    public void HelpSelect()
+    {
+        helpSelect.SetActive(true);
+    }
+
+    public void CardHelp()
+    {
+        cardHelp.SetActive(true);
+    }
+
+    public void PokerHelp()
+    {
+        pokerRulesHelp.SetActive(true);
+    }
+
+    public void QuantumHelp()
+    {
+        quantumHelp.SetActive(true);
+    }
+
+    public void CloseHelp()
+    {
+        helpSelect.SetActive(false);
+        pokerRulesHelp.SetActive(false);
+        cardHelp.SetActive(false);
+        quantumHelp.SetActive(false);
     }
 
     public void Exit()
