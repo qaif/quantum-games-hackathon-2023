@@ -43,8 +43,8 @@ class Win(pygame.sprite.Sprite):
 class TimeOut(pygame.sprite.Sprite):
     def __init__(self):
         super(TimeOut, self).__init__()
-        self.surf = pygame.image.load('imgs/clock.png').convert()
-        self.rect = self.surf.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
+        self.surf = pygame.image.load('imgs/clock_small.png').convert()
+        self.rect = self.surf.get_rect(center=(300, SCREEN_HEIGHT//2))
 
 
 def state_to_coords(state):
@@ -144,7 +144,6 @@ def game_main_loop():
         #---------------
         bomb.decrease_timer()
         timer.update(bomb.get_time_ratio())
-        if(bomb.time == 0): timeout = True # The condition to loose the game
         #---------------
         
         screen.fill((0,0,0))
@@ -183,8 +182,18 @@ def game_main_loop():
             screen.blit(explosion.surf, explosion.rect)
         if winner:
             screen.blit(win.surf, win.rect)
-        if timeout:
+        if(bomb.time == 0):
             screen.blit(timeout_obj.surf, timeout_obj.rect)
+            if bomb.measurement():
+                exploded = True
+                bomb.quantum_state = np.array([1,0])
+            else:
+                bomb.quantum_state = np.array([0,1])
+                bomb.time = bomb.max_time
+           
+            qubit.coords = state_to_coords(bomb.quantum_state)
+            qubit.reLoadImage()
+           
 
 
         #---------------
