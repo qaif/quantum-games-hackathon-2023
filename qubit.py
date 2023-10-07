@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import RLEACCEL
 from qiskit.visualization import plot_bloch_vector
 import matplotlib.pyplot as plt
 import io
@@ -17,10 +18,11 @@ class Qubit(pygame.sprite.Sprite):
     def reLoadImage(self):
         buffer = io.BytesIO()
         plot_bloch_vector([1]+self.coords, coord_type='spherical', figsize=(1.8,1.8))
-        plt.savefig(buffer, format="png", transparent=True)
+        plt.savefig(buffer, format="png")
         plt.close()
         buffer.seek(0)
-        self.surf = pygame.image.load(buffer).convert().convert_alpha()
+        self.surf = pygame.image.load(buffer).convert()
+        self.surf.set_colorkey((255,255,255), RLEACCEL)
         self.rect = self.surf.get_rect(topright=self.topright)
 
 gates_ids = {'H':5, 'X':6, 'RY3':7, 'RY4':8, 'RZ2':9}
