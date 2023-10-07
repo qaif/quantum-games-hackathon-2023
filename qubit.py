@@ -5,8 +5,9 @@ import io
 import numpy as np
 
 class Qubit(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, topright):
         super(Qubit, self).__init__()
+        self.topright = topright
         self.coords = [0,0]
         self.last_update = 0
         self.surf = None
@@ -15,12 +16,12 @@ class Qubit(pygame.sprite.Sprite):
 
     def reLoadImage(self):
         buffer = io.BytesIO()
-        plot_bloch_vector([1]+self.coords, coord_type='spherical', figsize=(2,2))
-        plt.savefig(buffer, format="png")
+        plot_bloch_vector([1]+self.coords, coord_type='spherical', figsize=(1.8,1.8))
+        plt.savefig(buffer, format="png", transparent=True)
         plt.close()
         buffer.seek(0)
-        self.surf = pygame.image.load(buffer).convert()
-        self.rect = self.surf.get_rect(topright=(500,0))
+        self.surf = pygame.image.load(buffer).convert().convert_alpha()
+        self.rect = self.surf.get_rect(topright=self.topright)
 
 gates_ids = {'H':5, 'X':6, 'RY3':7, 'RY4':8, 'RZ2':9}
 gates_matrices = {

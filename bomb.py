@@ -32,12 +32,14 @@ class Timer(pygame.sprite.Sprite):
         super(Timer, self).__init__()
         self.TILE_SIZE = TILE_SIZE
         self.topleft = topleft
-        self.surf = pygame.Surface((2*TILE_SIZE,25))
+        self.width = 2*TILE_SIZE-35
+        self.height = 10
+        self.surf = pygame.Surface((self.width,self.height))
         self.surf.fill((255,0,0))
         self.rect = self.surf.get_rect(topleft=topleft)
     
     def update(self, ratio):
-        self.surf = pygame.Surface((ratio*2*self.TILE_SIZE,25))
+        self.surf = pygame.Surface((ratio*self.width,self.height))
         self.surf.fill((255,0,0))
         self.rect = self.surf.get_rect(topleft=self.topleft)
 
