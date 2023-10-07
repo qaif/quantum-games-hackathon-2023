@@ -163,10 +163,9 @@ public class Table : MonoBehaviour
             return;
         }
 
-        state.moneyToSpend += humanPlayer.currentMoney;
-
         if (robotPlayers.Where(player => player.gameObject.activeSelf).Count() == 0)
         {
+            state.moneyToSpend += humanPlayer.currentMoney;
             winMenu.GetComponent<WinMenu>().Init(levels[currentLevel].gatesToBuy);
             winMenu.SetActive(true);
             return;
