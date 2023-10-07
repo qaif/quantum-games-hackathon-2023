@@ -22,3 +22,5 @@ func spawn_cosmic_ray():
 	var random_y = randf_range(-100, 0)  # Generate a random Y coordinate
 	instance.position = Vector2(random_x, random_y)  # Set the position of the CosmicRay
 	add_child(instance)  # Add the CosmicRay to the scene tree
+
+	

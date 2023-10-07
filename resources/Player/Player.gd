@@ -4,6 +4,8 @@ extends CharacterBody2D
 var max_jumps = 2  # allow for double jump
 var jump_count = 0  # track number of jumps
 
+var statePlayer = "0" # quantum state player
+var player_pass_gate = true # if player pass gthe gate or no 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
@@ -47,7 +49,9 @@ func _physics_process(delta):
 	if velocity.y > 0:
 		anim.play("JumpDown")
 
-	move_and_slide()
 
+	move_and_slide()
+	
 func get_hit(damage : float):
 	$"../CanvasLayer/thermometer".increase_degree(damage)
+	
