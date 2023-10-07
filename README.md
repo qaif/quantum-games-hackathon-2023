@@ -4,7 +4,12 @@ Point and Left mouse click to move to anywhere on the scene.
 Point and Right Mouse Click to pick up equipment and attack enemies.  
 Kill All 3 enemies to clear the level.  
 The orb above your head is your qubit state.  
-The enemies are state-1 detectors. Basically, the probability of their attacking you is the square of the magnitude of your state-1 coefficient.   ​
+The enemies are state-1 detectors. Basically, the probability of their attacking you is the square of the magnitude of your state-1 coefficient.
+Green flame is NOT gate, and Yellow flame is Hadamard gate.
+Press i for inventory.
+The sword of doom is probabilistic. It has a 70% chance of dealing 20 damage and a 30% chance of actually healing the enemies by 10hp.
+Use the mouse scroll wheel UP and Down to zoom in and out the camera.
+Use A to rotate the camera left and D to rotate the camera right.   ​
   
 # Installation Instructions  
 
@@ -34,4 +39,5 @@ Link: https://drive.google.com/file/d/1jd5lavOP2v6A3nefs-r-rxpvE7WFuHtS/view?usp
   
 ![Screenshot (1021)](https://github.com/Yash-Agarwal1708/Quantum-RPG/assets/103818600/c3c4f5e0-8058-4f20-bdba-224d87428b5c)   
   
-
+# credits
+@brackeys
