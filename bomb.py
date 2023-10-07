@@ -3,8 +3,8 @@ import pygame
 
 class Bomb():
     def __init__(self):
-        self.max_time = 1000
-        self.time = 1000
+        self.max_time = 200
+        self.time = 200
         self.quantum_state = np.array([1,0])
 
     def decrease_timer(self):
