@@ -13,7 +13,7 @@ public class AIPlayer : MonoBehaviour
     public TMP_Text betDisplay;
 
     Game enteredGame;
-    int playerIndex;
+    public int playerIndex;
 
     public void EnterGame(Game game, int playerIndex)
     {

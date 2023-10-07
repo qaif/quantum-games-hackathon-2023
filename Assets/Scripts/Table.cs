@@ -122,7 +122,7 @@ public class Table : MonoBehaviour
                 continue;
             }
 
-            var seat = currentGame.players[i + 1];
+            var seat = currentGame.players[robotPlayers[i].playerIndex];
 
             if (seat.folded)
             {
