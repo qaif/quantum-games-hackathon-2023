@@ -25,6 +25,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip gameplay;
     public AudioClip boss;
 
+    public void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     public void Money()
     {
         soundEffectsSource.PlayOneShot(money);
@@ -87,4 +92,5 @@ public class SoundManager : MonoBehaviour
     {
         PlayMusic(boss);
     }
+
 }
