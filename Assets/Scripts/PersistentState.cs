@@ -15,5 +15,7 @@ public class PersistentState : ScriptableObject
 {
     public int moneyToSpend = 0;
 
+    public int gatesLimit = 2;
+
     public GateCount[] gates;
 }

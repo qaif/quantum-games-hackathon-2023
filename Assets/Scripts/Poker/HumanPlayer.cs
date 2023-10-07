@@ -113,6 +113,8 @@ public class HumanPlayer : MonoBehaviour
     [Header("Transform")]
     int currentlyModifiedCard;
 
+    public TransformView transformView;
+
     public GameObject transformWindow;
     public GameObject gatesContainer;
 
@@ -380,14 +382,18 @@ public class HumanPlayer : MonoBehaviour
 
         // Right card - after modifications
         List<DraggableGate> gates = FindObjectsOfType<DraggableGate>().OrderBy(gate => gate.transform.position.x).ToList();
+        int newlyAppliedGates = 0;
         foreach (var gate in gates)
         {
             int i = gate.FindOverlapingLine();
             if (i == -1) continue;
 
             card.quantumCard.Apply(gate.type, i);
+
+            if (gate.interactable) newlyAppliedGates++;
         }
         transformedCardResult.UpdateCard(card.quantumCard);
+        transformView.UpdateRemainingGates(newlyAppliedGates);
     }
 
     public IEnumerator DelayedUpdateTransformView()
