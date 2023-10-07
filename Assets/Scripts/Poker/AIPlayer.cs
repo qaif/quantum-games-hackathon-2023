@@ -22,6 +22,11 @@ public class AIPlayer : MonoBehaviour
         enteredGame.betFromPlayerRequested += Bet;
     }
 
+    public bool IsPlayingInTheGame()
+    {
+        return enteredGame != null;
+    }
+
     public void ExitGame(Game game)
     {
         if (enteredGame != null) enteredGame.betFromPlayerRequested -= Bet;

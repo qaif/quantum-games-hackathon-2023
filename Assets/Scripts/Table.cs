@@ -79,12 +79,12 @@ public class Table : MonoBehaviour
 
     bool IsWinner(int index)
     {
-        return currentGame.GetWinningPlayers().Select(player => player.index).Contains(index);
+        return currentGame.GetWinningPlayersForPot(currentGame.currentMaxBet).Select(player => player.index).Contains(index);
     }
 
     void SetTitle()
     {
-        var winners = currentGame.GetWinningPlayers();
+        var winners = currentGame.GetWinningPlayersForPot(currentGame.currentMaxBet);
         if (!IsWinner(0))
         {
             title.text = "You lost the round!";
@@ -116,14 +116,22 @@ public class Table : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             // TODO: proper handling for lower number of players
-            if (robotPlayers[i].currentMoney <= 0)
+            if (!robotPlayers[i].IsPlayingInTheGame())
             {
-                // Do not show
                 oponentResults[i].SetActive(false);
                 continue;
             }
 
             var seat = currentGame.players[i + 1];
+
+            if (seat.folded)
+            {
+                oponentResults[i].SetActive(false);
+                continue;
+            }
+
+            oponentResults[i].SetActive(true);
+
             var moneyDelta = seat.currentMoney - robotPlayers[i].currentMoney;
 
             Figure f = Figures.DetectBestFigure(currentGame.cardsOnTable.ToArray(), seat.cards.ToArray());

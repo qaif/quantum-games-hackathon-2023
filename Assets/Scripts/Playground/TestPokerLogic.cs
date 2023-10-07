@@ -11,52 +11,52 @@ public class TestPokerLogic : MonoBehaviour
     public HumanPlayer humanPlayer;
     List<AIPlayer> players = new List<AIPlayer>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        var initialMoney = new int[4] { 1000, 1000, 1000, 1000 };
-        game = new Game(new RandomDeck(), initialMoney, 0);
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     var initialMoney = new int[4] { 1000, 1000, 1000, 1000 };
+    //     game = new Game(new RandomDeck(), initialMoney, 0);
 
-        for (int i = 0; i < 3; i++)
-        {
-            var player = new AIPlayer();
-            player.EnterGame(game, i);
-            players.Add(player);
-        }
+    //     for (int i = 0; i < 3; i++)
+    //     {
+    //         var player = new AIPlayer();
+    //         player.EnterGame(game, i);
+    //         players.Add(player);
+    //     }
 
-        humanPlayer.EnterGame(game, 3);
+    //     humanPlayer.EnterGame(game, 3);
 
-        game.newCardsOnBoard += UpdateCardsDisplay;
-        game.gameFinished += GameFinished;
+    //     game.newCardsOnBoard += UpdateCardsDisplay;
+    //     game.gameFinished += GameFinished;
 
-        game.Start();
-    }
+    //     game.Start();
+    // }
 
-    void GameFinished()
-    {
-        Debug.Log($"Game finished");
-        var winners = game.GetWinningPlayers();
-        foreach (var winner in winners)
-        {
-            Debug.Log($"Winner: {winner.index}");
-        }
-        Debug.Log("Money after the round:");
-        foreach (var player in game.players)
-        {
-            Debug.Log($"Player {player.index}: {player.currentMoney}");
-        }
+    // void GameFinished()
+    // {
+    //     Debug.Log($"Game finished");
+    //     var winners = game.GetWinningPlayers();
+    //     foreach (var winner in winners)
+    //     {
+    //         Debug.Log($"Winner: {winner.index}");
+    //     }
+    //     Debug.Log("Money after the round:");
+    //     foreach (var player in game.players)
+    //     {
+    //         Debug.Log($"Player {player.index}: {player.currentMoney}");
+    //     }
 
-        players.ForEach(player => player.ExitGame(game));
-        humanPlayer.ExitGame(game);
-    }
+    //     players.ForEach(player => player.ExitGame(game));
+    //     humanPlayer.ExitGame(game);
+    // }
 
-    void UpdateCardsDisplay()
-    {
-        int i = 0;
-        foreach (var card in game.cardsOnTable)
-        {
-            card.Display(cardDisplays[i]);
-            i++;
-        }
-    }
+    // void UpdateCardsDisplay()
+    // {
+    //     int i = 0;
+    //     foreach (var card in game.cardsOnTable)
+    //     {
+    //         card.Display(cardDisplays[i]);
+    //         i++;
+    //     }
+    // }
 }

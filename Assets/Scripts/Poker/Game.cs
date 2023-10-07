@@ -13,6 +13,13 @@ enum GamePhase
     River,
 }
 
+public enum GameState
+{
+    Initialised,
+    AwaitingBets,
+    GameFinished,
+}
+
 public class Seat
 {
     public int index;
@@ -57,29 +64,38 @@ public class Game
         {
             player.alreadyBetThisRound = false;
         }
+        lastRaisingPlayer = -1;
 
         betFromPlayerRequested?.Invoke(players[currentlyBettingPlayer], currentMaxBet);
     }
 
     void ProgressBetting()
     {
-        int activePlayers = players.Where(seat => (!seat.folded && seat.currentMoney > 0)).Count();
-        if (activePlayers <= 1)
+        var activePlayers = players.Where(seat => (!seat.folded && seat.currentMoney > 0));
+        if (activePlayers.Count() <= 1)
         {
             Debug.Log("Only one remaining player");
             EndBettingRound();
             return;
         }
 
+        // There are at least two players who didn't fold and have no zero money 
         while (true)
         {
             currentlyBettingPlayer = (currentlyBettingPlayer + 1) % players.Length;
             if (!players[currentlyBettingPlayer].folded && (players[currentlyBettingPlayer].currentMoney > 0)) break;
         }
 
-        if ((currentlyBettingPlayer == lastRaisingPlayer) && (players.All(player => (player.folded || player.alreadyBetThisRound))))
+        if (currentlyBettingPlayer == lastRaisingPlayer)
         {
-            Debug.Log("Whole betting round went around");
+            Debug.Log("Whole betting round went around after a raise");
+            EndBettingRound();
+            return;
+        }
+
+        if (activePlayers.All(player => (player.alreadyBetThisRound && (player.currentBet == currentMaxBet))))
+        {
+            Debug.Log("All active players already bet in this round");
             EndBettingRound();
             return;
         }
@@ -113,9 +129,10 @@ public class Game
         return;
     }
 
-    public Seat[] GetWinningPlayers()
+    public Seat[] GetWinningPlayersForPot(int betSize)
     {
-        var activePlayers = players.Where(player => !player.folded);
+        var activePlayers = players.Where(player => !player.folded).Where(player => player.currentBet >= betSize);
+
         var handStrengths = activePlayers.Select(seat => Tuple.Create(seat, Figures.DetectBestFigure(cardsOnTable.ToArray(), seat.cards.ToArray())));
 
         var orderedHandStrengths = handStrengths.OrderByDescending(tup => tup.Item2.Strength());
@@ -133,13 +150,25 @@ public class Game
             DealCard();
         }
 
-        // TODO: check for multiple pots
-        var winningPlayers = GetWinningPlayers();
-        var potPerPlayer = currentPot / winningPlayers.Count();
+        var betSizes = players.Where(player => !player.folded).Select(player => player.currentBet).Distinct().OrderBy(bet => bet);
 
-        foreach (var player in winningPlayers)
+        int previousBetSize = 0;
+        foreach (int betSize in betSizes)
         {
-            player.currentMoney += potPerPlayer;
+            var winners = GetWinningPlayersForPot(betSize);
+            var pot = players.Where(player => player.currentBet > previousBetSize).Sum(player => Math.Min(player.currentBet, betSize) - previousBetSize);
+            var potPerPlayer = pot / winners.Count();
+
+            var winnersList = winners.Select(player => player.index.ToString()).Aggregate("", (current, next) => current + ", " + next);
+            var betsList = players.Select(player => player.currentBet.ToString()).Aggregate("", (current, next) => current + ", " + next);
+
+            Debug.Log($"Distributing victories for bet size {betSize} to winners: {winnersList}, pot per player: {potPerPlayer}, all bets: {betsList}");
+
+            previousBetSize = betSize;
+            foreach (var player in winners)
+            {
+                player.currentMoney += potPerPlayer;
+            }
         }
 
         gameFinished?.Invoke();
@@ -165,8 +194,8 @@ public class Game
         ProcessBet(players[(startingPlayer + 1) % players.Length], smallBlind);
         ProcessBet(players[(startingPlayer + 2) % players.Length], bigBlind);
 
-        currentlyBettingPlayer = 3 % players.Length; // Starting from player one away from big blind
-        lastRaisingPlayer = currentlyBettingPlayer;
+        lastRaisingPlayer = -1;
+        currentlyBettingPlayer = (startingPlayer + 3) % players.Length; // Starting from player one away from big blind
 
         StartBettingRound();
     }
@@ -215,6 +244,7 @@ public class Game
         if (player.currentBet > currentMaxBet)
         {
             currentMaxBet = player.currentBet;
+            lastRaisingPlayer = player.index;
         }
     }
 
@@ -268,11 +298,6 @@ public class Game
         }
 
         ProcessBet(seat, raiseAmount);
-
-        if (bet > currentMaxBet)
-        {
-            lastRaisingPlayer = playerIndex;
-        }
 
         ProgressBetting();
 

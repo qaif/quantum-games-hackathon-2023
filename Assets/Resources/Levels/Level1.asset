@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d524a353d0d1b40b109bfe425c3424, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  oponentMoney: 580200005802000058020000
+  oponentMoney: c80000009001000058020000
   humanMoney: 1000
   isBossLevel: 0
   gatesToBuy:
