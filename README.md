@@ -23,7 +23,7 @@ QuantumShooter is an exciting space shooter game with a quantum twist. Pilot you
 
 ## Screenshots
 
-<img src="Assets/Images/screenshot1.png" style="max-width: 100px;">
+<img src="Assets/Images/screenshot1.png" style="max-width: 400px;">
 ![Screenshot 1](Assets/Images/screenshot1.png)
 ![Screenshot 2](Assets/Images/screenshot2.png)
 ![Screenshot 3](Assets/Images/screenshot3.png)
