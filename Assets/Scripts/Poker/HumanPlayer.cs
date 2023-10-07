@@ -388,7 +388,7 @@ public class HumanPlayer : MonoBehaviour
         // Left card - pre modifications
         var card = (currentlyModifiedCard == 0) ? left : right;
         card.quantumCard.InitCircuit();
-        transformedCardSource.UpdateCard(card.quantumCard);
+        transformedCardSource.UpdateCard(card.quantumCard, true);
 
         // Right card - after modifications
         List<DraggableGate> gates = FindObjectsOfType<DraggableGate>().OrderBy(gate => gate.transform.position.x).ToList();
@@ -402,7 +402,7 @@ public class HumanPlayer : MonoBehaviour
 
             if (gate.interactable) newlyAppliedGates++;
         }
-        transformedCardResult.UpdateCard(card.quantumCard);
+        transformedCardResult.UpdateCard(card.quantumCard, state.mode == Mode.Educational);
         transformView.UpdateRemainingGates(newlyAppliedGates);
     }
 

@@ -47,4 +47,10 @@ public class Bit : MonoBehaviour
         alphaDisplay.text = RepresentComplexNumber(alpha);
         betaDisplay.text = RepresentComplexNumber(beta);
     }
+
+    public void SetUnknownAmplitudes()
+    {
+        alphaDisplay.text = "?";
+        betaDisplay.text = "?";
+    }
 }

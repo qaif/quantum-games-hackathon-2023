@@ -10,6 +10,12 @@ public class GateCount
     public int count;
 }
 
+public enum Mode
+{
+    Educational,
+    Challenging
+}
+
 [CreateAssetMenu]
 public class PersistentState : ScriptableObject
 {
@@ -17,9 +23,11 @@ public class PersistentState : ScriptableObject
     public int initialGatesLimit = 2;
     public List<GateCount> initialGates;
 
-    public int moneyToSpend;
-    public int gatesLimit;
-    public List<GateCount> gates;
+    [HideInInspector] public int moneyToSpend;
+    [HideInInspector] public int gatesLimit;
+    [HideInInspector] public List<GateCount> gates;
+
+    [HideInInspector] public Mode mode = Mode.Educational;
 
     internal void Reset()
     {
