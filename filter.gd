@@ -25,7 +25,7 @@ func deny_passage() -> void:
 
 
 func _on_area_2d_body_entered(body):
-	if get_node("../Player").quantum_state == state_filter:
+	if get_node("../../Player").quantum_state == state_filter:
 		allow_passage()
 	else:
 		deny_passage()

@@ -12,6 +12,10 @@ func _process(delta):
 	$Inventory/X_label.text = str(inventory.paulix) + " / 5"
 	$Inventory/Y_label.text = str(inventory.pauliy) + " / 5"
 	$Inventory/Z_label.text = str(inventory.pauliz) + " / 5"
+	$Inventory/P_label.text = str(inventory.p) + " / 5"
+	$Inventory/CX_label.text = str(inventory.cnot) + " / 5"
+	$Inventory/CZ_label.text = str(inventory.cz) + " / 5"
+	$Inventory/SW_label.text = str(inventory.swap) + " / 5"
 	if Input.is_action_just_pressed("ui_filedialog_show_hidden"):
 		if (!$Inventory.visible):
 			$Inventory.show()

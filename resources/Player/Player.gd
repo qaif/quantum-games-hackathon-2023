@@ -56,56 +56,41 @@ func _physics_process(delta):
 func change_state(gate):
 	match gate:
 		"X":
-			if quantum_state == '0':
-				quantum_state = '1'
-			elif quantum_state == '1':
-				quantum_state = '0'
-			elif quantum_state == 'i':
-				quantum_state = '-i'
-			elif quantum_state == '-i':
-				quantum_state = 'i'
+			match quantum_state:
+				'0': quantum_state = '1'
+				'1': quantum_state = '0'
+				'i': quantum_state = '-i'
+				'-i': quantum_state = 'i'
 		
 		"Y":
-			if quantum_state == '0':
-				quantum_state = '1'
-			elif quantum_state == '1':
-				quantum_state = '0'
-			elif quantum_state == '+':
-				quantum_state = '-'
-			elif quantum_state == '-':
-				quantum_state = '+'
-			elif quantum_state == 'i':
-				quantum_state = 'i'
-			elif quantum_state == '-i':
-				quantum_state = '-i'
+			match quantum_state:
+				'0': quantum_state = '1'
+				'1': quantum_state = '0'
+				'+': quantum_state = '-'
+				'-': quantum_state = '+'
 				
 		"Z":
-			if quantum_state == '1':
-				quantum_state = '1'
-			elif quantum_state == '+':
-				quantum_state = '-'
-			elif quantum_state == '-':
-				quantum_state = '+'
-			elif quantum_state == 'i':
-				quantum_state = '-i'
-			elif quantum_state == '-i':
-				quantum_state = 'i'
-			elif quantum_state == '0':
-				quantum_state = '0'
+			match quantum_state:
+				'+': quantum_state = '-'
+				'-': quantum_state = '+'
+				'i': quantum_state = '-i'
+				'-i': quantum_state = 'i'
 				
 		"H":
-			if quantum_state == '0':
-				quantum_state = '+'
-			elif quantum_state == '1':
-				quantum_state = '-'
-			elif quantum_state == '+':
-				quantum_state = '0'
-			elif quantum_state == '-':
-				quantum_state = '1'
-			elif quantum_state == 'i':
-				quantum_state = '-i'
-			elif quantum_state == 'i':
-				quantum_state = '-i'
+			match quantum_state:
+				'0': quantum_state = '+'
+				'1': quantum_state = '-'
+				'+': quantum_state = '0'
+				'-': quantum_state = '1'
+				'i': quantum_state = '-i'
+				'-i': quantum_state = 'i'
+				
+		"P":
+			match quantum_state:
+				'+': quantum_state = 'i'
+				'i': quantum_state = '-'
+				'-': quantum_state = '-i'
+				'-i': quantum_state = '+'
 				
 		_:
 			print("Invalid gate")
