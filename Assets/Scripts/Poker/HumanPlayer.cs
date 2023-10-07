@@ -81,19 +81,20 @@ public class HumanPlayer : MonoBehaviour
     public Events events;
 
     int playerIndex;
-    int currentlyModifiedCard;
 
-    public int startingMoney = 1000;
-    public int currentMoney;
+    [HideInInspector] public int currentMoney;
 
+    [Header("Actions")]
     public Button foldButton;
     public Button checkButton;
     public Button callButton;
     public Button raiseButton;
 
+    [Header("Stats")]
     public TMP_Text moneyDisplay;
     public TMP_Text betDisplay;
 
+    [Header("Cards")]
     public Image card1;
     public Image card2;
 
@@ -110,6 +111,8 @@ public class HumanPlayer : MonoBehaviour
     public GameObject transformRightButton;
 
     [Header("Transform")]
+    int currentlyModifiedCard;
+
     public GameObject transformWindow;
     public GameObject gatesContainer;
 
@@ -131,11 +134,6 @@ public class HumanPlayer : MonoBehaviour
     void OnDisable()
     {
         events.transformViewUpdated -= UpdateTransformView;
-    }
-
-    public void Start()
-    {
-        currentMoney = startingMoney;
     }
 
     public void EnterGame(Game game, int playerIndex)

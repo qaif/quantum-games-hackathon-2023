@@ -5,6 +5,7 @@ using Qiskit;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -26,6 +27,14 @@ public class Table : MonoBehaviour
 
     public GameObject[] oponentResults;
     public GameObject playerResults;
+
+    [Header("After level screen")]
+    public GameObject loseMenu;
+    public GameObject winMenu;
+
+    [Header("Levels")]
+    public Level[] levels;
+    int currentLevel = 0;
 
     Game currentGame;
     int startingPlayer = -1;
@@ -78,7 +87,7 @@ public class Table : MonoBehaviour
         var winners = currentGame.GetWinningPlayers();
         if (!IsWinner(0))
         {
-            title.text = "You lost!";
+            title.text = "You lost the round!";
             return;
         }
 
@@ -88,7 +97,7 @@ public class Table : MonoBehaviour
             return;
         }
 
-        title.text = "You won!";
+        title.text = "You won the round!";
     }
 
     void GameFinished()
@@ -96,7 +105,6 @@ public class Table : MonoBehaviour
         SetTitle();
 
         // Show player's results
-
         var playerSeat = currentGame.players[0];
         var playerMoneyDelta = playerSeat.currentMoney - humanPlayer.currentMoney;
         Figure playerFigure = Figures.DetectBestFigure(currentGame.cardsOnTable.ToArray(), playerSeat.cards.ToArray());
@@ -105,7 +113,6 @@ public class Table : MonoBehaviour
         ShowResults(playerResults, playerMoneyDelta, playerFigure.Cards());
 
         // Show robots results
-        // TODO : fix in case of lower number of active players
         for (int i = 0; i < 3; i++)
         {
             if (robotPlayers[i].currentMoney <= 0)
@@ -129,7 +136,6 @@ public class Table : MonoBehaviour
 
     public void GoToNextGame()
     {
-        // TODO: finishing the level
         foreach (var player in robotPlayers)
         {
             player.ExitGame(currentGame);
@@ -139,19 +145,21 @@ public class Table : MonoBehaviour
             }
         }
 
+        humanPlayer.ExitGame(currentGame);
+        gameFinishedWindow.SetActive(false);
+
         if (humanPlayer.currentMoney < 200)
         {
-            Debug.Log("You lose");
+            loseMenu.SetActive(true);
+            return;
         }
 
         if (robotPlayers.Where(player => player.gameObject.activeSelf).Count() == 0)
         {
-            Debug.Log("You win");
+            winMenu.SetActive(true);
+            return;
         }
 
-        humanPlayer.ExitGame(currentGame);
-
-        gameFinishedWindow.SetActive(false);
         StartNewRound();
     }
 
@@ -173,6 +181,21 @@ public class Table : MonoBehaviour
 
     void Start()
     {
+        ResetLevel();
+        StartNewRound();
+    }
+
+    public void ResetLevel()
+    {
+        levels[currentLevel].Initialize(this);
+        StartNewRound();
+    }
+
+    public void GoToNextLevel()
+    {
+        currentLevel += 1;
+        if (currentLevel > 4) currentLevel = 4;
+        levels[currentLevel].Initialize(this);
         StartNewRound();
     }
 }

@@ -67,7 +67,7 @@ public class Game
         if (activePlayers <= 1)
         {
             Debug.Log("Only one remaining player");
-            EndGame();
+            EndBettingRound();
             return;
         }
 

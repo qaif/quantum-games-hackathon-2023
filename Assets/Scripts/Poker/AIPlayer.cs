@@ -7,19 +7,13 @@ using UnityEngine.UI;
 
 public class AIPlayer : MonoBehaviour
 {
-    public int startingMoney = 1000;
-    public int currentMoney;
+    [HideInInspector] public int currentMoney;
 
     public TMP_Text moneyDisplay;
     public TMP_Text betDisplay;
 
     Game enteredGame;
     int playerIndex;
-
-    public void Start()
-    {
-        currentMoney = startingMoney;
-    }
 
     public void EnterGame(Game game, int playerIndex)
     {
