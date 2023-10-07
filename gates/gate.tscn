@@ -21,6 +21,7 @@ modulate = Color(0, 0, 0, 1)
 offset_right = 62.0
 offset_bottom = 63.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1etfl")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
@@ -35,3 +36,4 @@ theme_override_font_sizes/font_size = 50
 text = "H"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

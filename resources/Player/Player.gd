@@ -10,6 +10,9 @@ const JUMP_VELOCITY = -400.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# Player quantum state
+var quantum_state = '0'
+
 @onready var anim = get_node("AnimationPlayer")
 
 func _physics_process(delta):
@@ -48,6 +51,67 @@ func _physics_process(delta):
 		anim.play("JumpDown")
 
 	move_and_slide()
+
+
+func change_state(gate):
+	match gate:
+		"X":
+			if quantum_state == '0':
+				quantum_state = '1'
+			elif quantum_state == '1':
+				quantum_state = '0'
+			elif quantum_state == 'i':
+				quantum_state = '-i'
+			elif quantum_state == '-i':
+				quantum_state = 'i'
+		
+		"Y":
+			if quantum_state == '0':
+				quantum_state = '1'
+			elif quantum_state == '1':
+				quantum_state = '0'
+			elif quantum_state == '+':
+				quantum_state = '-'
+			elif quantum_state == '-':
+				quantum_state = '+'
+			elif quantum_state == 'i':
+				quantum_state = 'i'
+			elif quantum_state == '-i':
+				quantum_state = '-i'
+				
+		"Z":
+			if quantum_state == '1':
+				quantum_state = '1'
+			elif quantum_state == '+':
+				quantum_state = '-'
+			elif quantum_state == '-':
+				quantum_state = '+'
+			elif quantum_state == 'i':
+				quantum_state = '-i'
+			elif quantum_state == '-i':
+				quantum_state = 'i'
+			elif quantum_state == '0':
+				quantum_state = '0'
+				
+		"H":
+			if quantum_state == '0':
+				quantum_state = '+'
+			elif quantum_state == '1':
+				quantum_state = '-'
+			elif quantum_state == '+':
+				quantum_state = '0'
+			elif quantum_state == '-':
+				quantum_state = '1'
+			elif quantum_state == 'i':
+				quantum_state = '-i'
+			elif quantum_state == 'i':
+				quantum_state = '-i'
+				
+		_:
+			print("Invalid gate")
+	$"../CanvasLayer/PlayerStateSphere".set_state(quantum_state)
+	return quantum_state
+
 
 func get_hit(damage : float):
 	$"../CanvasLayer/thermometer".increase_degree(damage)

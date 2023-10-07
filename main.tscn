@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bdx2xjbgyy4y7"]
+[gd_scene load_steps=21 format=3 uid="uid://bdx2xjbgyy4y7"]
 
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="Script" path="res://main.gd" id="1_cwba0"]
@@ -10,15 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://srs5g3jtfsl8" path="res://shower.tscn" id="8_mb3xl"]
 [ext_resource type="PackedScene" uid="uid://cn2swtijcu4fj" path="res://world/world_tileset.tscn" id="9_pyhvs"]
 [ext_resource type="PackedScene" uid="uid://d4ga88lcnniqg" path="res://gates/single_gate_power.tscn" id="10_eyjr0"]
-[ext_resource type="Texture2D" uid="uid://dtrlqr1ngctwp" path="res://gates/gate1.png" id="11_hdlh6"]
 [ext_resource type="Texture2D" uid="uid://wja8ut5t84y" path="res://gates/gateSuperposition.png" id="12_uqwoh"]
-[ext_resource type="Texture2D" uid="uid://555wgvvi7bx0" path="res://gates/gate0.png" id="13_77dv5"]
 [ext_resource type="PackedScene" uid="uid://dbpcayspsbsmv" path="res://circuit.tscn" id="14_bobax"]
 [ext_resource type="Texture2D" uid="uid://lvkec88sqecb" path="res://resources/Tiles/png/128x128/Dirt.png" id="15_at8nl"]
 [ext_resource type="PackedScene" uid="uid://bmsq0wxwvfajg" path="res://gate_circuit/gate_h_circuit.tscn" id="16_cqf6v"]
 [ext_resource type="PackedScene" uid="uid://bg8yaiei0o7nj" path="res://gate_circuit/gate_cnot_circuit.tscn" id="17_oddl6"]
 [ext_resource type="PackedScene" uid="uid://6pdoiavbk1sh" path="res://gate_circuit/gate_z_circuit.tscn" id="18_u7mtw"]
 [ext_resource type="PackedScene" uid="uid://cffpk4y320pu4" path="res://gate_circuit/gate_x_circuit.tscn" id="19_ephfe"]
+[ext_resource type="PackedScene" uid="uid://deoine2mdbiww" path="res://filter.tscn" id="20_dnmnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)
@@ -55,6 +54,8 @@ texture = ExtResource("1_6etl1")
 
 [node name="Player" parent="." instance=ExtResource("2_qjiqm")]
 position = Vector2(537, 207)
+collision_layer = 21
+collision_mask = 17
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(1, 0)
@@ -134,37 +135,12 @@ letter = "Y"
 text_color = Color(0.270588, 0, 0.368627, 1)
 bg_color = Color(0.690196, 0.776471, 1, 1)
 
-[node name="Gate1" type="Sprite2D" parent="."]
-position = Vector2(3124, 93)
-scale = Vector2(1, 1.37037)
-texture = ExtResource("11_hdlh6")
-
-[node name="Gate3" type="Sprite2D" parent="."]
-position = Vector2(1685, 239)
-scale = Vector2(1, 1.37037)
-texture = ExtResource("11_hdlh6")
-
-[node name="Gate2" type="Sprite2D" parent="."]
-position = Vector2(659, 347)
-scale = Vector2(1, 1.37037)
-texture = ExtResource("11_hdlh6")
-
 [node name="GateSuperposition" type="Sprite2D" parent="."]
 position = Vector2(1307, 337)
 texture = ExtResource("12_uqwoh")
 
 [node name="GateSuperposition3" type="Sprite2D" parent="."]
 position = Vector2(1307, 337)
-texture = ExtResource("12_uqwoh")
-
-[node name="Gate0" type="Sprite2D" parent="."]
-position = Vector2(2117, 356)
-scale = Vector2(1, 1.07407)
-texture = ExtResource("13_77dv5")
-
-[node name="GateSuperposition2" type="Sprite2D" parent="."]
-position = Vector2(3557, 347.5)
-scale = Vector2(1, 1.38889)
 texture = ExtResource("12_uqwoh")
 
 [node name="Dirt" type="Sprite2D" parent="."]
@@ -190,3 +166,23 @@ position = Vector2(1369, 359)
 
 [node name="gate_h_circuit2" parent="." instance=ExtResource("16_cqf6v")]
 position = Vector2(3181, 99)
+
+[node name="Filter3" parent="." instance=ExtResource("20_dnmnl")]
+position = Vector2(637, 314)
+state_filter = "1"
+
+[node name="Filter2" parent="." instance=ExtResource("20_dnmnl")]
+position = Vector2(1654, 205)
+state_filter = "i"
+
+[node name="Filter4" parent="." instance=ExtResource("20_dnmnl")]
+position = Vector2(2127, 318)
+state_filter = "-"
+
+[node name="Filter5" parent="." instance=ExtResource("20_dnmnl")]
+position = Vector2(3096, 62)
+state_filter = "+"
+
+[node name="Filter6" parent="." instance=ExtResource("20_dnmnl")]
+position = Vector2(3527, 315)
+state_filter = "-i"
