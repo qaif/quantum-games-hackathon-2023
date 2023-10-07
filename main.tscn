@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdx2xjbgyy4y7"]
+[gd_scene load_steps=22 format=3 uid="uid://bdx2xjbgyy4y7"]
 
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="Script" path="res://main.gd" id="1_cwba0"]
@@ -15,10 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://lvkec88sqecb" path="res://resources/Tiles/png/128x128/Dirt.png" id="15_at8nl"]
 [ext_resource type="PackedScene" uid="uid://bmsq0wxwvfajg" path="res://gate_circuit/gate_h_circuit.tscn" id="16_cqf6v"]
 [ext_resource type="PackedScene" uid="uid://bg8yaiei0o7nj" path="res://gate_circuit/gate_cnot_circuit.tscn" id="17_oddl6"]
-[ext_resource type="PackedScene" uid="uid://djiom6h23cfuo" path="res://gate_1.tscn" id="18_f6o5u"]
+[ext_resource type="PackedScene" uid="uid://bqph7i3x2pu2x" path="res://gate_1.tscn" id="18_f6o5u"]
 [ext_resource type="PackedScene" uid="uid://6pdoiavbk1sh" path="res://gate_circuit/gate_z_circuit.tscn" id="18_u7mtw"]
 [ext_resource type="PackedScene" uid="uid://cffpk4y320pu4" path="res://gate_circuit/gate_x_circuit.tscn" id="19_ephfe"]
-[ext_resource type="PackedScene" uid="uid://deoine2mdbiww" path="res://filter.tscn" id="20_dnmnl"]
+[ext_resource type="PackedScene" path="res://filter.tscn" id="20_dnmnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)
@@ -129,6 +129,12 @@ position = Vector2(3181, 99)
 
 [node name="power" type="Node" parent="."]
 
+[node name="single_gate_power11" parent="power" instance=ExtResource("10_eyjr0")]
+position = Vector2(2274, 153)
+letter = "P"
+text_color = Color(0.270588, 0, 0.368627, 1)
+bg_color = Color(0.690196, 0.776471, 1, 1)
+
 [node name="single_gate_power2" parent="power" instance=ExtResource("10_eyjr0")]
 position = Vector2(1263, 54)
 text_color = Color(0.270588, 0, 0.368627, 1)
@@ -174,15 +180,16 @@ letter = "Y"
 text_color = Color(0.270588, 0, 0.368627, 1)
 bg_color = Color(0.690196, 0.776471, 1, 1)
 
-[node name="GateSuperposition2" type="Sprite2D" parent="."]
-position = Vector2(3557, 347.5)
-scale = Vector2(1, 1.38889)
-texture = ExtResource("12_uqwoh")
 [node name="single_gate_power10" parent="power" instance=ExtResource("10_eyjr0")]
 position = Vector2(1847, 346)
 letter = "P"
 text_color = Color(0.270588, 0, 0.368627, 1)
 bg_color = Color(0.690196, 0.776471, 1, 1)
+
+[node name="GateSuperposition2" type="Sprite2D" parent="."]
+position = Vector2(3557, 347.5)
+scale = Vector2(1, 1.38889)
+texture = ExtResource("12_uqwoh")
 
 [node name="filter" type="Node" parent="."]
 
@@ -206,25 +213,20 @@ state_filter = "+"
 position = Vector2(3527, 315)
 state_filter = "-i"
 
-[node name="gate_cnot_circuit" parent="." instance=ExtResource("17_oddl6")]
+[node name="gate_cnot_circuit3" parent="." instance=ExtResource("17_oddl6")]
 position = Vector2(1620, 242)
 
-[node name="gate_cnot_circuit2" parent="." instance=ExtResource("17_oddl6")]
+[node name="gate_cnot_circuit4" parent="." instance=ExtResource("17_oddl6")]
 position = Vector2(3631, 347)
 
-[node name="gate_z_circuit" parent="." instance=ExtResource("18_u7mtw")]
+[node name="gate_z_circuit2" parent="." instance=ExtResource("18_u7mtw")]
 position = Vector2(2063, 359)
 
-[node name="gate_x_circuit" parent="." instance=ExtResource("19_ephfe")]
+[node name="gate_x_circuit2" parent="." instance=ExtResource("19_ephfe")]
 position = Vector2(1369, 359)
 
-[node name="gate_h_circuit2" parent="." instance=ExtResource("16_cqf6v")]
+[node name="gate_h_circuit3" parent="." instance=ExtResource("16_cqf6v")]
 position = Vector2(3181, 99)
 
 [node name="Gate1" parent="." instance=ExtResource("18_f6o5u")]
 position = Vector2(1034, 313)
-[node name="single_gate_power10" parent="." instance=ExtResource("10_eyjr0")]
-position = Vector2(2274, 153)
-letter = "P"
-text_color = Color(0.270588, 0, 0.368627, 1)
-bg_color = Color(0.690196, 0.776471, 1, 1)
