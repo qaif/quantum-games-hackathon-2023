@@ -15,11 +15,11 @@ QuantumShooter is an exciting space shooter game with a quantum twist. Pilot you
 
 ## Features
 
--🚀 Fast-paced space shooter gameplay.
--⚛️ Quantum power-ups and abilities.
--👾 Quantum entangled enemies.
--🏆 Challenging boss battles.
--🎮 Pixel art graphics and retro sound effects.
+- 🚀 Fast-paced space shooter gameplay.
+- ⚛️ Quantum power-ups and abilities.
+- 👾 Quantum entangled enemies.
+- 🏆 Challenging boss battles.
+- 🎮 Pixel art graphics and retro sound effects.
 
 ## Screenshots
 
