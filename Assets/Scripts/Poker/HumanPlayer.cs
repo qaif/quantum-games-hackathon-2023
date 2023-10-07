@@ -34,6 +34,7 @@ public class CardInHand
 
     public Card Measure()
     {
+        SoundManager.Instance.Measure();
         measured = true;
         quantumCard.InitCircuit();
 
@@ -227,18 +228,21 @@ public class HumanPlayer : MonoBehaviour
 
     public void Fold()
     {
+        SoundManager.Instance.Click();
         DisableBettingControls();
         enteredGame.SubmitBet(this.playerIndex, -1);
     }
 
     public void Check()
     {
+        SoundManager.Instance.Click();
         DisableBettingControls();
         enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet);
     }
 
     public void Call()
     {
+        SoundManager.Instance.Call();
         DisableBettingControls();
         var mySeat = enteredGame.players[playerIndex];
         var callAmount = Math.Min(enteredGame.currentMaxBet, mySeat.currentMoney + mySeat.currentBet);
@@ -247,6 +251,7 @@ public class HumanPlayer : MonoBehaviour
 
     public void Raise()
     {
+        SoundManager.Instance.Call();
         DisableBettingControls();
         var raiseAmount = Math.Min(200, enteredGame.players[playerIndex].currentMoney);
         enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet + raiseAmount);

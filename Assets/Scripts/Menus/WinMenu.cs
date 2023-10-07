@@ -29,6 +29,7 @@ public class WinMenu : MonoBehaviour
             gatesList.First().count += 1;
         }
 
+        SoundManager.Instance.Money();
         UpdateMoney();
 
         DisableTooExpensiveGates();

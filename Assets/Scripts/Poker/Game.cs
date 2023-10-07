@@ -178,15 +178,18 @@ public class Game
     {
         cardsOnTable.Add(deck.NextCard());
         newCardsOnBoard?.Invoke();
+        SoundManager.Instance.Card();
     }
 
     void PreFlop()
     {
         for (int i = 0; i < players.Length; i++)
         {
+            SoundManager.Instance.Card();
             var card = deck.NextCard();
             players[i].cards.Add(card);
 
+            SoundManager.Instance.Card();
             card = deck.NextCard();
             players[i].cards.Add(card);
         }

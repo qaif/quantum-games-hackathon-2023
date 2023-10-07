@@ -41,6 +41,7 @@ public class Level : ScriptableObject
 
     void InitializeBoss()
     {
+        SoundManager.Instance.Boss();
         // TODO: boss
     }
 }

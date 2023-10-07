@@ -159,6 +159,7 @@ public class Table : MonoBehaviour
 
         if (humanPlayer.currentMoney < 200)
         {
+            SoundManager.Instance.Lose();
             loseMenu.SetActive(true);
             return;
         }
@@ -166,6 +167,7 @@ public class Table : MonoBehaviour
         if (robotPlayers.Where(player => player.gameObject.activeSelf).Count() == 0)
         {
             state.moneyToSpend += humanPlayer.currentMoney;
+            SoundManager.Instance.Win();
             winMenu.GetComponent<WinMenu>().Init(levels[currentLevel].gatesToBuy);
             winMenu.SetActive(true);
             return;
@@ -192,6 +194,7 @@ public class Table : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.Level();
         state.Reset();
         ResetLevel();
         StartNewRound();

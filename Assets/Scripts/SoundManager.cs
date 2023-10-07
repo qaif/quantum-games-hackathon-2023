@@ -5,12 +5,13 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     static SoundManager instance_ = null;
-    public SoundManager Instance => instance_ ?? (instance_ = FindObjectOfType<SoundManager>());
+    public static SoundManager Instance => instance_ ?? (instance_ = FindObjectOfType<SoundManager>());
 
-    public AudioSource audioSource;
+    public AudioSource musicSource;
+    public AudioSource soundEffectsSource;
 
     [Header("Sound effects")]
-    public AudioClip bet;
+    public AudioClip money;
     public AudioClip call;
     public AudioClip card;
     public AudioClip click;
@@ -24,43 +25,66 @@ public class SoundManager : MonoBehaviour
     public AudioClip gameplay;
     public AudioClip boss;
 
-    public void Bet()
+    public void Money()
     {
-        audioSource.PlayOneShot(bet);
+        soundEffectsSource.PlayOneShot(money);
     }
 
     public void Call()
     {
-        audioSource.PlayOneShot(call);
+        soundEffectsSource.PlayOneShot(call);
     }
 
     public void Card()
     {
-        audioSource.PlayOneShot(card);
+        soundEffectsSource.PlayOneShot(card);
     }
 
     public void Click()
     {
-        audioSource.PlayOneShot(click);
+        soundEffectsSource.PlayOneShot(click);
     }
 
     public void Gate()
     {
-        audioSource.PlayOneShot(gate);
+        soundEffectsSource.PlayOneShot(gate);
     }
 
     public void Lose()
     {
-        audioSource.PlayOneShot(lose);
+        soundEffectsSource.PlayOneShot(lose);
     }
 
     public void Measure()
     {
-        audioSource.PlayOneShot(measure);
+        soundEffectsSource.PlayOneShot(measure);
     }
 
     public void Win()
     {
-        audioSource.PlayOneShot(win);
+        soundEffectsSource.PlayOneShot(win);
+    }
+
+    // Music
+    void PlayMusic(AudioClip clip)
+    {
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
+
+    public void Menu()
+    {
+        PlayMusic(menu);
+    }
+
+    public void Level()
+    {
+        PlayMusic(gameplay);
+    }
+
+    public void Boss()
+    {
+        PlayMusic(boss);
     }
 }

@@ -85,6 +85,7 @@ public class DraggableGate : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             this.transform.position = new Vector3(this.transform.position.x, lines[overlappingLine].transform.position.y, this.transform.position.z);
             events.TransformViewUpdated();
             this.GetComponent<LayoutElement>().ignoreLayout = true;
+            SoundManager.Instance.Gate();
             return;
         }
 
@@ -95,6 +96,7 @@ public class DraggableGate : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             this.GetComponent<LayoutElement>().ignoreLayout = false;
             initialGatesPanel.GetComponent<HorizontalLayoutGroup>().enabled = false;
             initialGatesPanel.GetComponent<HorizontalLayoutGroup>().enabled = true;
+            SoundManager.Instance.Gate();
             return;
         }
 

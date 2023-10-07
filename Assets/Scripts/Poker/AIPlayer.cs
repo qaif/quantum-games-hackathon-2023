@@ -35,6 +35,7 @@ public class AIPlayer : MonoBehaviour
 
     void Bet(Seat player, int currentBet)
     {
+        SoundManager.Instance.Call();
         if (player.index != playerIndex) return;
         var callAmount = Math.Min(currentBet, player.currentMoney + player.currentBet);
 
