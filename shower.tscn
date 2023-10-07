@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://srs5g3jtfsl8"]
+[gd_scene load_steps=6 format=3 uid="uid://srs5g3jtfsl8"]
 
 [ext_resource type="Texture2D" uid="uid://bu6fyuc08xakk" path="res://resources/shower1.png" id="1_76ito"]
 [ext_resource type="Script" path="res://shower.gd" id="1_arscv"]
@@ -20,8 +20,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuq04"]
 size = Vector2(50, 89)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k3x5d"]
 
 [node name="shower" type="Node2D"]
 script = ExtResource("1_arscv")
@@ -45,21 +43,6 @@ metadata/_edit_lock_ = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
-
-[node name="Panel" type="Panel" parent="."]
-offset_left = -34.0
-offset_top = -1.0
-offset_right = 17.0
-offset_bottom = 129.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_k3x5d")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -23.0
-offset_top = 44.0
-offset_right = 10.0
-offset_bottom = 79.0
-theme_override_font_sizes/font_size = 23
-text = "He"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

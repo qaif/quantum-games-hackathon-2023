@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckd405sesybep"]
+[gd_scene load_steps=9 format=3 uid="uid://ckd405sesybep"]
 
 [ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="1_aufxf"]
 [ext_resource type="Texture2D" uid="uid://b3vt51et53qil" path="res://resources/background/png/Clouds/128x128/Cloud_2.png" id="2_jyqdi"]
@@ -7,10 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://b72sjjamxcteg" path="res://resources/background/png/Clouds/256x256/Cloud_2.png" id="5_tmhhf"]
 [ext_resource type="Texture2D" uid="uid://dgpevkhnaavm" path="res://resources/background/png/1920x1080/All/Hills_2.png" id="6_6gso0"]
 [ext_resource type="Texture2D" uid="uid://bfupfvpjp3fot" path="res://resources/background/png/1920x1080/All/Hills_1.png" id="7_n8xyu"]
+[ext_resource type="Texture2D" uid="uid://diq1fg56r4dky" path="res://resources/background_white.png" id="8_wmd82"]
 
 [node name="bg" type="ParallaxBackground"]
 
 [node name="ParallaxSky" type="ParallaxLayer" parent="."]
+position = Vector2(-9, -218)
 
 [node name="Sky" type="Sprite2D" parent="ParallaxSky"]
 position = Vector2(869, 406)
@@ -53,7 +55,7 @@ position = Vector2(3193, 92)
 texture = ExtResource("2_jyqdi")
 
 [node name="ParallaxRearHills" type="ParallaxLayer" parent="."]
-position = Vector2(559, -127)
+position = Vector2(550, -345)
 
 [node name="Hills2" type="Sprite2D" parent="ParallaxRearHills"]
 position = Vector2(-223, 419)
@@ -71,7 +73,7 @@ scale = Vector2(0.838032, 0.838032)
 texture = ExtResource("6_6gso0")
 
 [node name="ParallaxFrontHills" type="ParallaxLayer" parent="."]
-position = Vector2(559, -127)
+position = Vector2(550, -345)
 
 [node name="Hills1" type="Sprite2D" parent="ParallaxFrontHills"]
 position = Vector2(15.1109, 462.5)
@@ -91,4 +93,9 @@ texture = ExtResource("7_n8xyu")
 [node name="Hills4" type="Sprite2D" parent="ParallaxFrontHills"]
 position = Vector2(3465, 463)
 scale = Vector2(0.599074, 0.599074)
-texture = ExtResource("7_n8xyu")
+texture = ExtResource("8_wmd82")
+
+[node name="white_bg" type="Sprite2D" parent="."]
+position = Vector2(1834.75, 605.5)
+scale = Vector2(19.9, 5.95313)
+texture = ExtResource("8_wmd82")
