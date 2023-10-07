@@ -23,8 +23,6 @@ public class Table : MonoBehaviour
     [Header("After game screen")]
     public GameObject gameFinishedWindow;
 
-    public TMP_Text title;
-
     public GameObject[] oponentResults;
     public GameObject playerResults;
 
@@ -82,28 +80,8 @@ public class Table : MonoBehaviour
         return currentGame.GetWinningPlayersForPot(currentGame.currentMaxBet).Select(player => player.index).Contains(index);
     }
 
-    void SetTitle()
-    {
-        var winners = currentGame.GetWinningPlayersForPot(currentGame.currentMaxBet);
-        if (!IsWinner(0))
-        {
-            title.text = "You lost the round!";
-            return;
-        }
-
-        if (winners.Length > 1)
-        {
-            title.text = "A draw!";
-            return;
-        }
-
-        title.text = "You won the round!";
-    }
-
     void GameFinished()
     {
-        SetTitle();
-
         // Show player's results
         var playerSeat = currentGame.players[0];
         var playerMoneyDelta = playerSeat.currentMoney - humanPlayer.currentMoney;
