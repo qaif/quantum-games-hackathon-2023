@@ -27,7 +27,7 @@ QuantumShooter is an exciting space shooter game with a quantum twist. Pilot you
 
 ## Gameplay
 
-Watch the [QuantumShooter Gameplay]([https://yourusername.github.io/QuantumShooter](https://youtu.be/1gs45d7wLZU)).
+Watch the [QuantumShooter Gameplay](https://youtu.be/1gs45d7wLZU).
 
 ## Getting Started
 
