@@ -1,4 +1,4 @@
-name: QuantumShooter2
+name: QuantumShooter
 channels:
   - defaults
 dependencies:
@@ -21,4 +21,4 @@ dependencies:
   - zlib=1.2.13=h5a0b063_0
   - pip:
       - pygame==2.5.2
-prefix: /Users/matio/anaconda3/envs/QuantumShooter2
+prefix: /Users/matio/anaconda3/envs/QuantumShooter
