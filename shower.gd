@@ -1,28 +1,31 @@
 extends Node2D
 
 var thermometer_reference
-var shower = false
+var shower
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	shower = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	shower = false
+	pass
 
 
 
 func _on_area_2d_body_entered(body):
+	print("entered with shower")
 	shower = true
 
 	
 func _on_area_2d_body_exited(body):
+	print("exited with shower")
 	shower = false
 	get_node("../CanvasLayer/thermometer").in_shower = false
 
 
 func _on_timer_timeout():
 		if shower:
+			#print("shower active")
 			get_node("../CanvasLayer/thermometer").in_shower = true
 			get_node("../CanvasLayer/thermometer").decrease_degree(0.10)

@@ -80,10 +80,10 @@ position = Vector2(202, -7)
 position = Vector2(547, 546)
 
 [node name="shower" parent="." instance=ExtResource("8_mb3xl")]
-position = Vector2(321, 256)
+position = Vector2(191, 255)
 
 [node name="shower2" parent="." instance=ExtResource("8_mb3xl")]
-position = Vector2(1560, 40)
+position = Vector2(1566, 38)
 
 [node name="TileMap" parent="." instance=ExtResource("9_pyhvs")]
 position = Vector2(92, -158)
