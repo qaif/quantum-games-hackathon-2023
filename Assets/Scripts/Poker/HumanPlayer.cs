@@ -98,15 +98,17 @@ public class HumanPlayer : MonoBehaviour
     public Image card1;
     public Image card2;
 
-    [Header("Measure")]
     CardInHand left = new CardInHand();
     CardInHand right = new CardInHand();
 
+    [Header("Measure")]
     public Sprite smallCardSprite;
 
+    public GameObject leftSymbol;
     public GameObject measureLeftButton;
     public GameObject transformLeftButton;
 
+    public GameObject rightSymbol;
     public GameObject measureRightButton;
     public GameObject transformRightButton;
 
@@ -258,8 +260,11 @@ public class HumanPlayer : MonoBehaviour
 
     void ToggleButtonsVisibility()
     {
+        leftSymbol.SetActive(!left.measured);
         measureLeftButton.SetActive(!left.measured);
         transformLeftButton.SetActive(!left.measured);
+
+        rightSymbol.SetActive(!right.measured);
         measureRightButton.SetActive(!right.measured);
         transformRightButton.SetActive(!right.measured);
     }
@@ -408,6 +413,7 @@ public class HumanPlayer : MonoBehaviour
         currentlyModifiedCard = cardIndex;
         FillAvailableGates();
         FillUsedGates();
+        transformView.SetCardSymbol(currentlyModifiedCard);
         StartCoroutine(DelayedUpdateTransformView());
     }
 

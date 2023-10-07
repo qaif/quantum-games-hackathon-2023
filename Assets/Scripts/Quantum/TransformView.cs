@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TransformView : MonoBehaviour
 {
     public TMP_Text remainingGates;
     public PersistentState state;
+
+    public Image cardSymbolDisplay;
+
+    public Sprite leftCardSymbol;
+    public Sprite rightCardSymbol;
 
     public void UpdateRemainingGates(int usedGates)
     {
@@ -36,4 +42,8 @@ public class TransformView : MonoBehaviour
         }
     }
 
+    public void SetCardSymbol(int modfiedCard)
+    {
+        cardSymbolDisplay.sprite = (modfiedCard == 0) ? leftCardSymbol : rightCardSymbol;
+    }
 }
