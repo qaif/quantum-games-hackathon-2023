@@ -34,6 +34,10 @@ texture = ExtResource("4_m2aqb")
 position = Vector2(2789, 406)
 texture = ExtResource("1_aufxf")
 
+[node name="Sky3" type="Sprite2D" parent="ParallaxSky"]
+position = Vector2(4705, 406)
+texture = ExtResource("1_aufxf")
+
 [node name="Cloud4" type="Sprite2D" parent="ParallaxSky"]
 position = Vector2(1671, 114)
 texture = ExtResource("2_jyqdi")
@@ -90,10 +94,15 @@ position = Vector2(2315, 462)
 scale = Vector2(0.599074, 0.599074)
 texture = ExtResource("7_n8xyu")
 
-[node name="Hills4" type="Sprite2D" parent="ParallaxFrontHills"]
-position = Vector2(3465, 463)
+[node name="Hills3" type="Sprite2D" parent="ParallaxFrontHills/Hills3"]
+position = Vector2(1275.3, 171.932)
 scale = Vector2(0.599074, 0.599074)
-texture = ExtResource("8_wmd82")
+texture = ExtResource("7_n8xyu")
+
+[node name="Hills3" type="Sprite2D" parent="ParallaxFrontHills/Hills3/Hills3"]
+position = Vector2(1267.8, 217.337)
+scale = Vector2(0.599074, 0.599074)
+texture = ExtResource("7_n8xyu")
 
 [node name="white_bg" type="Sprite2D" parent="."]
 position = Vector2(1834.75, 605.5)
