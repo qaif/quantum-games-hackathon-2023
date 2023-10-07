@@ -1,4 +1,4 @@
-name: quantum_shooter_env
+name: QuantumShooter
 channels:
   - defaults
 dependencies:
@@ -21,4 +21,4 @@ dependencies:
       - wheel==0.37.1=pyhd3eb1b0_0
       - xz==5.4.2=h80987f9_0
       - zlib==1.2.13=h5a0b063_0
-prefix: /Users/matio/anaconda3/envs/quantum_shooter_env
+prefix: /Users/matio/anaconda3/envs/QuantumShooter
