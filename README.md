@@ -42,18 +42,22 @@ Follow these steps to get QuantumShooter up and running on your local machine:
 
 2. Open the project directory:
 
+   ```bash
    cd QuantumShooter
 
 3. Create a Conda environment based on the provided environment configuration:
 
+   ```bash
    conda env create -f ./environment.yaml
 
 4. Activate the Conda environment:
 
+   ```bash
    conda activate QuantumShooter
 
 5. Now, you're ready to run QuantumShooter! Launch the game using Python:
 
+   ```bash
    python game.py
 
 ## License
