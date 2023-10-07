@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://deoine2mdbiww"]
+
+[ext_resource type="Script" path="res://filter.gd" id="1_3kpi4"]
+[ext_resource type="Texture2D" uid="uid://555wgvvi7bx0" path="res://gates/gate0.png" id="2_bouux"]
+[ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://player_state_sphere.tscn" id="3_3db5s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65uij"]
+size = Vector2(39, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47vol"]
+size = Vector2(37, 65)
+
+[node name="Filter" type="Node2D"]
+script = ExtResource("1_3kpi4")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(18.5, 32.5)
+shape = SubResource("RectangleShape2D_65uij")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+disable_mode = 1
+collision_layer = 16
+collision_mask = 16
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(18.5, 32.5)
+shape = SubResource("RectangleShape2D_47vol")
+
+[node name="FilterSprite" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(18.5, 32.5)
+scale = Vector2(2.05556, 1.2037)
+texture = ExtResource("2_bouux")
+
+[node name="PlayerStateSphere" parent="." instance=ExtResource("3_3db5s")]
+position = Vector2(-6, 7)
+scale = Vector2(0.4, 0.4)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

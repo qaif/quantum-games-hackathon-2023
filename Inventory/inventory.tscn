@@ -81,6 +81,13 @@ layout_mode = 2
 [node name="Panel10" parent="Inventory/GridContainer" instance=ExtResource("2_2xxkt")]
 layout_mode = 2
 
+[node name="Y_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
+position = Vector2(36, 164)
+scale = Vector2(1.00862, 1)
+letter = "Y"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
 [node name="H_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
 position = Vector2(37, 39)
 text_color = Color(0, 0, 0, 1)
@@ -100,12 +107,33 @@ letter = "Z"
 text_color = Color(0, 0, 0, 1)
 bg_color = Color(0.682353, 0, 0.309804, 1)
 
-[node name="Y_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
-position = Vector2(36, 164)
+[node name="P_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
+position = Vector2(37, 289)
 scale = Vector2(1.00862, 1)
-letter = "Y"
+letter = "P"
 text_color = Color(0, 0, 0, 1)
-bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+bg_color = Color(0.980392, 0.658824, 0.627451, 1)
+
+[node name="CX_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
+position = Vector2(163, 288)
+scale = Vector2(1.00862, 1)
+letter = "CX"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.760784, 0.619608, 0, 1)
+
+[node name="CZ_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
+position = Vector2(36, 413)
+scale = Vector2(1.00862, 1)
+letter = "CZ"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.533333, 0.803922, 0.745098, 1)
+
+[node name="SW_Gate" parent="Inventory" instance=ExtResource("3_v3m6r")]
+position = Vector2(162, 413)
+scale = Vector2(1.00862, 1)
+letter = "SW"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0.729412, 0.854902, 1)
 
 [node name="H_label" type="Label" parent="Inventory"]
 layout_mode = 0
@@ -137,6 +165,38 @@ offset_left = 176.0
 offset_top = 10.0
 offset_right = 216.0
 offset_bottom = 36.0
+text = "0 / 5"
+
+[node name="P_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 254.0
+offset_right = 89.0
+offset_bottom = 280.0
+text = "0 / 5"
+
+[node name="CX_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 253.0
+offset_right = 215.0
+offset_bottom = 279.0
+text = "0 / 5"
+
+[node name="CZ_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 378.0
+offset_right = 88.0
+offset_bottom = 404.0
+text = "0 / 5"
+
+[node name="SW_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 378.0
+offset_right = 214.0
+offset_bottom = 404.0
 text = "0 / 5"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inventory"]

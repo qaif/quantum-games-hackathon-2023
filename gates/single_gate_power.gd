@@ -30,4 +30,13 @@ func _on_area_2d_body_entered(body):
 		inventory.pauliy += 1
 	if letter == "Z":
 		inventory.pauliz += 1
+	if letter == "P":
+		inventory.p += 1
+	if letter == "SW":
+		inventory.swap += 1
+	if letter == "CX":
+		inventory.cnot += 1
+	if letter == "CZ":
+		inventory.cz += 1
+	$"../../Player".change_state(letter)
 	queue_free()

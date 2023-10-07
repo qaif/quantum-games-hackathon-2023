@@ -12,6 +12,9 @@ const JUMP_VELOCITY = -400.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# Player quantum state
+var quantum_state = '0'
+
 @onready var anim = get_node("AnimationPlayer")
 
 func _physics_process(delta):
@@ -52,6 +55,52 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+
+func change_state(gate):
+	match gate:
+		"X":
+			match quantum_state:
+				'0': quantum_state = '1'
+				'1': quantum_state = '0'
+				'i': quantum_state = '-i'
+				'-i': quantum_state = 'i'
+		
+		"Y":
+			match quantum_state:
+				'0': quantum_state = '1'
+				'1': quantum_state = '0'
+				'+': quantum_state = '-'
+				'-': quantum_state = '+'
+				
+		"Z":
+			match quantum_state:
+				'+': quantum_state = '-'
+				'-': quantum_state = '+'
+				'i': quantum_state = '-i'
+				'-i': quantum_state = 'i'
+				
+		"H":
+			match quantum_state:
+				'0': quantum_state = '+'
+				'1': quantum_state = '-'
+				'+': quantum_state = '0'
+				'-': quantum_state = '1'
+				'i': quantum_state = '-i'
+				'-i': quantum_state = 'i'
+				
+		"P":
+			match quantum_state:
+				'+': quantum_state = 'i'
+				'i': quantum_state = '-'
+				'-': quantum_state = '-i'
+				'-i': quantum_state = '+'
+				
+		_:
+			print("Invalid gate")
+	$"../CanvasLayer/PlayerStateSphere".set_state(quantum_state)
+	return quantum_state
+
+
 func get_hit(damage : float):
 	$"../CanvasLayer/thermometer".increase_degree(damage)
 	
