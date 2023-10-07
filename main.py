@@ -6,11 +6,12 @@ import io
 import numpy as np
 
 from wall import Wall
-from grid import generate_grid, grid_2_walls, generate_lvl1, grid_2_exit, grid_2_player, grid_2_gates
+from grid import generate_grid, grid_2_walls, generate_lvl1, grid_2_exit, grid_2_player, grid_2_gates, grid_2_floors, grid_2_start
 from player import Player
 from bomb import Bomb, Timer, GUI_timer
 from qubit import Qubit
 from gate import Gate
+from floor import Floor
 
 pygame.init()
 
@@ -35,10 +36,12 @@ qubit = Qubit()
 
 grid = generate_lvl1()
 #grid = generate_grid(NUMBER_OF_TILES_X=NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y=NUMBER_OF_TILES_Y)
+start = grid_2_start(grid, TILE_SIZE=TILE_SIZE)
 walls = grid_2_walls(grid, TILE_SIZE=TILE_SIZE)
 player = grid_2_player(grid, TILE_SIZE=TILE_SIZE)
 exit = grid_2_exit(grid, TILE_SIZE=TILE_SIZE)
 gates = grid_2_gates(grid, TILE_SIZE=TILE_SIZE)
+floors = grid_2_floors(grid, TILE_SIZE=TILE_SIZE)
 
 #H = Gate('H', (400,200))
 #X = Gate('X',(350,200))
@@ -54,7 +57,9 @@ timer = Timer(timer_pos, TILE_SIZE)
 
 # All sprites
 all_sprites = pygame.sprite.Group()
-all_sprites.add(player)
+all_sprites.add(start)
+for f in floors:
+    all_sprites.add(f)
 for w in walls:
     all_sprites.add(w)
 all_sprites.add(qubit)
@@ -63,6 +68,7 @@ all_sprites.add(gui_timer)
 all_sprites.add(timer)
 for g in gates:
     all_sprites.add(g)
+all_sprites.add(player)
 # /All sprites
 
 

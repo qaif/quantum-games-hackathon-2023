@@ -2,9 +2,10 @@ import pygame
 
 import numpy as np
 from wall import Wall
-from exit import Exit
+from exit import Exit, Start
 from player import Player
 from gate import Gate
+from floor import Floor
 
 def generate_grid(NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y):
     grid = np.zeros((NUMBER_OF_TILES_Y,NUMBER_OF_TILES_X), dtype=int)
@@ -33,12 +34,29 @@ def grid_2_walls(grid, TILE_SIZE):
                 walls.add(Wall((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
     return(walls)
 
+def grid_2_floors(grid, TILE_SIZE):
+    walls = pygame.sprite.Group()
+    for i in range(grid.shape[0]):
+        for j in range(grid.shape[1]):
+            if(grid[i,j]==0):
+                walls.add(Floor((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
+            if(grid[i,j]>=5):
+                walls.add(Floor((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
+    return(walls)
+
 def grid_2_exit(grid, TILE_SIZE):
     for i in range(grid.shape[0]):
         for j in range(grid.shape[1]):
             if(grid[i,j]==2):
                 exit = Exit((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE=TILE_SIZE)
     return(exit)
+
+def grid_2_start(grid, TILE_SIZE):
+    for i in range(grid.shape[0]):
+        for j in range(grid.shape[1]):
+            if(grid[i,j]==-1):
+                player = Start((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE=TILE_SIZE)
+    return(player)
 
 def grid_2_player(grid, TILE_SIZE):
     for i in range(grid.shape[0]):
