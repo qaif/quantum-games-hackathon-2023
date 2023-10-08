@@ -1,6 +1,6 @@
 # QBomb
 
-<img src="./imgs/instruction/Screenshot.png" alt="drawing" width="800"/>
+[![](./imgs/instruction/Screenshot.png)](https://youtu.be/sRcrjSNwUf8)
 
 The game which teaches two fundamental topics in quantum computing: 1-qubit Bloch sphere and measurement process.
 
@@ -45,14 +45,6 @@ python3 main.py
 | movement | arrows |
 | confirm  | enter  |
 | go back  | escape |
-
-| GATES |        |
-|----------|--------|
-| ![](./imgs/gates/H.png) | Hadamard |
-| ![](./imgs/gates/X.png)  | Not  |
-| ![](./imgs/gates/RZ2.png)  | Rotation (Z axis, $\pi/2$ angle) |
-| ![](./imgs/gates/RY4.png)  | Rotation (Y axis, $\pi/4$ angle) |
-| ![](./imgs/gates/M.png)  | instantaneous measurement |
 
 ---
 All 2D assets were generated with Stable Diffusion XL and then modified with Gimp 2.10.
