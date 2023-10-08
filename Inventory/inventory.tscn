@@ -30,7 +30,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1wpv5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1fad7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_kd7sm")
 theme_override_styles/focus = SubResource("StyleBoxFlat_h74nc")
-text = "Inventory"
+text = "Inventory (i)"
 script = ExtResource("2_4jf3k")
 
 [node name="Inventory" type="NinePatchRect" parent="."]
