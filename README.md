@@ -1,5 +1,7 @@
 # QBomb
 
+<img src="./imgs/instruction/Screenshot.png" alt="drawing" width="800"/>
+
 The game which teaches two fundamental topics in quantum computing: 1-qubit Bloch sphere and measurement process.
 
 You are an unfortunate hero, which carries a bomb which is going to explode in couple of next seconds!
@@ -36,6 +38,7 @@ In order to beat the levels of the game you will need both understanding of basi
 | GATES |        |
 |----------|--------|
 | ![](./imgs/gates/H.png) | Hadamard |
+| <img src="./imgs/gates/H.png" alt="drawing"/> | Hadamard |
 | ![](./imgs/gates/X.png)  | Not  |
 | ![](./imgs/gates/RZ2.png)  | Rotation (Z axis, $\pi/2$ angle) |
 | ![](./imgs/gates/RY4.png)  | Rotation (Y axis, $\pi/4$ angle) |
