@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwutrdlonp0jd" path="res://resources/background/png/Clouds/512x512/Cloud_1.png" id="5_btruu"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="6_o8opw"]
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="7_ap3pb"]
-[ext_resource type="AudioStream" uid="uid://djti6ouri8buq" path="res://resources/Sounds/mixkit-game-level-music-689.mp3" id="8_8itqe"]
+[ext_resource type="AudioStream" uid="uid://mqxg52obl6ox" path="res://resources/Sounds/happy-14585.mp3" id="8_doi5o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lx0h"]
 bg_color = Color(0.972549, 0.6, 0.258824, 1)
@@ -60,20 +60,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+[node name="Level1" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_6lx0h")
-text = "Play"
+text = "Level 1 : Get out of Qubitropolis"
 
-[node name="OptionButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+[node name="Level2" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_j76mn")
-text = "Levels
-"
+text = "Level 2 : The oracle of Qubit Peaks"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
 layout_mode = 2
@@ -117,9 +116,9 @@ scale = Vector2(1.60938, 0.31543)
 texture = ExtResource("7_ap3pb")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_8itqe")
+stream = ExtResource("8_doi5o")
 autoplay = true
 
-[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/Level1" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/Level2" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/QuitButton" to="." method="_on_quit_button_pressed"]

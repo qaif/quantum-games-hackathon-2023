@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://3soj1vnrpt7o"]
+
+[ext_resource type="Script" path="res://menus/winning_screen.gd" id="1_tsnss"]
+[ext_resource type="Texture2D" uid="uid://cnlnko3soa1e6" path="res://resources/background/png/1920x1080/Background/Background.png" id="2_m6drx"]
+[ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="3_hw8tn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lj8h"]
+bg_color = Color(0.972549, 0.6, 0.258824, 1)
+
+[node name="backstory" type="Node2D"]
+script = ExtResource("1_tsnss")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(564, 484)
+scale = Vector2(0.733333, 0.733333)
+texture = ExtResource("2_m6drx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 649.0
+theme_override_constants/separation = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Header" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="LeftMargin" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MiddleBox" type="VBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "You did it ! "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Quantum teleportation enables you to return home!"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6lj8h")
+text = "Menu"
+
+[node name="RightMargin" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_lock_ = true
+
+[node name="Footer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(544, -440)
+rotation = 3.14159
+texture = ExtResource("3_hw8tn")
+
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/BackButton" to="." method="_on_back_button_pressed"]

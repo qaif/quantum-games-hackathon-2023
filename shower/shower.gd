@@ -21,11 +21,11 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	print("exited with shower")
 	shower = false
-	get_node("../CanvasLayer/thermometer").in_shower = false
+	get_node("../../CanvasLayer/thermometer").in_shower = false
 
 
 func _on_timer_timeout():
 		if shower:
 			#print("shower active")
-			get_node("../CanvasLayer/thermometer").in_shower = true
-			get_node("../CanvasLayer/thermometer").decrease_degree(0.10)
+			get_node("../../CanvasLayer/thermometer").in_shower = true
+			get_node("../../CanvasLayer/thermometer").decrease_degree(0.10)
