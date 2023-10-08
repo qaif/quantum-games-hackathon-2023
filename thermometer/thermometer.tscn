@@ -18,7 +18,6 @@ offset = Vector2(0, -7)
 position = Vector2(914.5, 64)
 scale = Vector2(0.202, 0.2)
 texture = ExtResource("1_xgspa")
-metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 942.0

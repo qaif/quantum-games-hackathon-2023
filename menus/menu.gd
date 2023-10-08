@@ -11,8 +11,12 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/level1.tscn")
+	get_tree().change_scene_to_file("res://menus/level1_backstory.tscn")
 
 
 func _on_option_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/level2.tscn")
+	get_tree().change_scene_to_file("res://menus/level2_backstory.tscn")
+
+
+func _on_instruction_pressed():
+	get_tree().change_scene_to_file("res://menus/game_instruction.tscn")

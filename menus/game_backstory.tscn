@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://7len0uve3xly"]
+
+[ext_resource type="Script" path="res://menus/game_backstory.gd" id="1_y28nv"]
+[ext_resource type="Texture2D" uid="uid://cnlnko3soa1e6" path="res://resources/background/png/1920x1080/Background/Background.png" id="2_ssv30"]
+[ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="3_le6bf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lj8h"]
+bg_color = Color(0.972549, 0.6, 0.258824, 1)
+
+[node name="game_backstory" type="Node2D"]
+script = ExtResource("1_y28nv")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(564, 484)
+scale = Vector2(0.733333, 0.733333)
+texture = ExtResource("2_ssv30")
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(544, -440)
+rotation = 3.14159
+texture = ExtResource("3_le6bf")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 788.0
+offset_top = 547.0
+offset_right = 1101.0
+offset_bottom = 604.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6lj8h")
+text = "Start the Quest !"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 250.0
+offset_top = 137.0
+offset_right = 874.0
+offset_bottom = 477.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 24.0
+offset_right = 614.0
+offset_bottom = 331.0
+text = "In the heart of Qubitropolis, where quantum mechanics governs not just particles but possibilities, Ella, a gifted quantum programmer, has inadvertently activated the Quantum Nexus. Pulled into a fragmented quantum dimension, she now finds herself stranded amidst the Qubit Peaks and the Superposition Plains. 
+
+
+With the Quantum Nexus in disarray, the only way back home is to navigate through quantum challenges, assembling scattered components and unlocking cryptic algorithms. Prepare to embark on a quantum quest, where reality is fluid and the only constant is change."
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

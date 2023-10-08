@@ -74,6 +74,13 @@ size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_j76mn")
 text = "Level 2 : The oracle of Qubit Peaks"
 
+[node name="Instruction" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_j76mn")
+text = "Instruction"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -117,8 +124,10 @@ texture = ExtResource("7_ap3pb")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_doi5o")
+volume_db = -14.0
 autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/Level1" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/Level2" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/Instruction" to="." method="_on_instruction_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/QuitButton" to="." method="_on_quit_button_pressed"]
