@@ -11,7 +11,7 @@ var spawn_timer = 0  # Timer to control spawning
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	spawn_timer += delta  # Increment the timer by the elapsed time
-	if spawn_timer >= 0.05:  # Check if 0.1 second has passed
+	if spawn_timer >= 0.15:  # Check if 0.1 second has passed
 		spawn_timer = 0  # Reset the timer
 		spawn_cosmic_ray()  # Spawn a new CosmicRay
 
