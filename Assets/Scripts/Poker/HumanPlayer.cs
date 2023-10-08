@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class UsedGate
 {
     public GateType type;
+    public float thetaValue;
 }
 
 public class CardInHand
@@ -43,7 +44,7 @@ public class CardInHand
 
         for (int i = 0; i < 6; i++)
         {
-            usedGates[i].ForEach(gate => quantumCard.Apply(gate.type, i));
+            usedGates[i].ForEach(gate => quantumCard.Apply(gate.type, i, gate.thetaValue));
 
             var probs = quantumCard.SimulateProbability(i);
             var value = rs.GetRandomElementIndex(probs);
@@ -125,11 +126,16 @@ public class HumanPlayer : MonoBehaviour
     public GameObject zGatePrefab;
     public GameObject yGatePrefab;
     public GameObject hGatePrefab;
+    public GameObject sGatePrefab;
+    public GameObject tGatePrefab;
+    public GameObject ryGatePrefab;
+    public GameObject rxGatePrefab;
 
     public QuantumCardDisplay transformedCardSource;
     public QuantumCardDisplay transformedCardResult;
 
     Game enteredGame;
+    float thetaThisGame;
 
     void OnEnable()
     {
@@ -143,6 +149,7 @@ public class HumanPlayer : MonoBehaviour
 
     public void EnterGame(Game game, int playerIndex)
     {
+        thetaThisGame = UnityEngine.Random.Range(1, 6) * 30;
         left.Reset();
         right.Reset();
         UpdateCards();
@@ -322,6 +329,14 @@ public class HumanPlayer : MonoBehaviour
                 return yGatePrefab;
             case GateType.Z:
                 return zGatePrefab;
+            case GateType.S:
+                return sGatePrefab;
+            case GateType.T:
+                return tGatePrefab;
+            case GateType.RX:
+                return rxGatePrefab;
+            case GateType.RY:
+                return ryGatePrefab;
         }
         return null;
     }
@@ -378,7 +393,10 @@ public class HumanPlayer : MonoBehaviour
             for (int i = 0; i < gate.Value; i++)
             {
                 var gateObject = Instantiate(prefab, gatesContainer.transform);
-                gateObject.GetComponent<DraggableGate>().initialGatesPanel = gatesContainer.GetComponent<RectTransform>();
+                var dg = gateObject.GetComponent<DraggableGate>();
+                dg.initialGatesPanel = gatesContainer.GetComponent<RectTransform>();
+                dg.thetaValue = thetaThisGame;
+                if (dg.theta != null) dg.theta.text = dg.thetaValue.ToString();
             }
         }
     }
@@ -398,7 +416,7 @@ public class HumanPlayer : MonoBehaviour
             int i = gate.FindOverlapingLine();
             if (i == -1) continue;
 
-            card.quantumCard.Apply(gate.type, i);
+            card.quantumCard.Apply(gate.type, i, gate.thetaValue);
 
             if (gate.interactable) newlyAppliedGates++;
         }
@@ -434,7 +452,7 @@ public class HumanPlayer : MonoBehaviour
 
             var usedGates = (currentlyModifiedCard == 0) ? left.usedGates : right.usedGates;
 
-            usedGates[i].Add(new UsedGate { type = gate.type });
+            usedGates[i].Add(new UsedGate { type = gate.type, thetaValue = thetaThisGame });
         }
     }
 

@@ -24,3 +24,7 @@ MonoBehaviour:
     price: 1000
   - gateType: 2
     price: 1000
+  - gateType: 4
+    price: 2000
+  - gateType: 5
+    price: 2000

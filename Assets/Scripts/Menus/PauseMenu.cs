@@ -7,14 +7,21 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject menuWindow;
 
-    public void Show()
+    public void Toggle()
     {
-        menuWindow.SetActive(true);
+        if (menuWindow.activeSelf)
+        {
+            menuWindow.SetActive(false);
+        }
+        else
+        {
+            menuWindow.SetActive(true);
+        }
     }
 
     public void Continue()
     {
-        menuWindow.SetActive(false);
+        Toggle();
     }
 
     public void Menu()
@@ -31,7 +38,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            Show();
+            Toggle();
         }
     }
 }

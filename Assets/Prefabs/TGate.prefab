@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5281074034191681167
+--- !u!1001 &8775670448525726943
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4030163862867632723, guid: 477ce05152a7f3543ac37be12a934a9d, type: 3}
       propertyPath: type
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4121126727313308789, guid: 477ce05152a7f3543ac37be12a934a9d, type: 3}
       propertyPath: m_Pivot.x
@@ -98,11 +98,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7208422992681696363, guid: 477ce05152a7f3543ac37be12a934a9d, type: 3}
       propertyPath: m_Name
-      value: RX Variant
+      value: TGate
       objectReference: {fileID: 0}
     - target: {fileID: 8876167721573527778, guid: 477ce05152a7f3543ac37be12a934a9d, type: 3}
       propertyPath: m_text
-      value: RX
+      value: T
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

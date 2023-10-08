@@ -16,11 +16,22 @@ MonoBehaviour:
   initialGatesLimit: 8
   initialGates:
   - type: 0
-    count: 4
+    count: 2
   - type: 1
-    count: 4
+    count: 2
   - type: 2
     count: 0
+  - type: 4
+    count: 2
   moneyToSpend: 0
-  gatesLimit: 0
-  gates: []
+  gatesLimit: 8
+  gates:
+  - type: 0
+    count: 2
+  - type: 1
+    count: 2
+  - type: 2
+    count: 0
+  - type: 4
+    count: 2
+  mode: 0

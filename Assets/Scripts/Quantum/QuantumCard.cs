@@ -33,8 +33,9 @@ public class QuantumCard
         }
     }
 
-    public void Apply(GateType type, int i)
+    public void Apply(GateType type, int i, float theta)
     {
+        float randomAngle = theta * Mathf.PI / 180;
         switch (type)
         {
             case GateType.H:
@@ -50,8 +51,16 @@ public class QuantumCard
                 this.qcs[i].Z(0);
                 break;
             case GateType.RY:
-                float randomAngle = 2 * Mathf.PI * UnityEngine.Random.value;
                 this.qcs[i].RY(0, randomAngle);
+                break;
+            case GateType.RX:
+                this.qcs[i].RX(0, randomAngle);
+                break;
+            case GateType.S:
+                this.qcs[i].RZ(0, Mathf.PI / 2);
+                break;
+            case GateType.T:
+                this.qcs[i].RZ(0, Mathf.PI / 4);
                 break;
         }
     }

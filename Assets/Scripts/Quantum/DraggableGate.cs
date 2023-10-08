@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 public enum GateType
 {
-    H, X, Y, Z, RY
+    H, X, Y, Z, RY, RX, S, T
 }
 
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
@@ -16,6 +17,9 @@ public class DraggableGate : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 {
     public Events events;
     public RectTransform initialGatesPanel;
+
+    public TMP_Text theta;
+    public float thetaValue;
 
     Canvas canvas;
     CanvasGroup canvasGroup;
