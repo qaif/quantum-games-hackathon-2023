@@ -1,7 +1,7 @@
 import pygame
 
 import numpy as np
-from wall import Wall
+from wall import Wall, BlankWall
 from exit import Exit, Start
 from player import Player
 from gate import Gate, gates_ids_inv
@@ -15,7 +15,7 @@ def generate_grid(NUMBER_OF_TILES_X, NUMBER_OF_TILES_Y):
                 grid[i,j] = 1
     return(grid)
 
-def generate_lvl1():
+""" def generate_lvl1():
     grid = np.array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
@@ -23,6 +23,16 @@ def generate_lvl1():
        [ 1,  1,  1,  0,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  0,  6,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]])
+    return(grid.T) """
+
+def generate_lvl1():
+    grid = np.array([[ -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2],
+       [ -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2],
+       [ -2,  1,  1,  1,  1,  1,  1,  1,  1,  1,  -2,  -2],
+       [ -2,  1,  -1,  0,  0,  0,  0,  0,  2,  1,  -2,  -2],
+       [ -2,  1,  1,  0,  1,  1,  1,  1,  1,  1,  -2,  -2],
+       [ -2,  -2,  1,  0,  6,  1,  -2,  -2,  -2,  -2,  -2,  -2],
+       [ -2,  -2,  1,  1, 1,  1,  -2,  -2,  -2,  -2,  -2,  -2]])
     return(grid.T)
 
 def generate_lvl2():
@@ -38,8 +48,8 @@ def generate_lvl2():
 def generate_lvl3():
     grid = np.array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1,  1,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1],
-       [ 1, -1,  0,  0,  1,  1,  1,  1,  0,  0,  6,  2],
+       [ 1, -1,  0,  1,  0,  0,  0,  0,  0,  1,  1,  1],
+       [ 1,  1,  0,  1,  1,  1,  1,  1,  0,  0,  6,  2],
        [ 1,  1,  0,  0,  6,  0,  0,  6,  0,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
        [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]])
@@ -76,13 +86,13 @@ def generate_lvlX():
     return(grid.T)
 
 def generate_lvl6():
-    grid = np.array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1, -1,  0,  0,  0,  0,  0,  2,  1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]])
+    grid = np.array([[ -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2],
+       [-2,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, -2],
+       [ 1,  1,  0,  7,  6,  4,  9,  6,  5,  2,  1, -2],
+       [ 1, -1,  0,  7,  7,  4,  9,  8,  8,  1,  1, -2],
+       [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1, -2, -2],
+       [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2],
+       [ -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2,  -2]])
     return(grid.T)
 
 def generate_lvlXX():
@@ -101,6 +111,8 @@ def grid_2_walls(grid, TILE_SIZE):
         for j in range(grid.shape[1]):
             if(grid[i,j]==1):
                 walls.add(Wall((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
+            if(grid[i,j]==-2):
+                walls.add(BlankWall((i*TILE_SIZE, j*TILE_SIZE), TILE_SIZE))
     return(walls)
 
 def grid_2_floors(grid, TILE_SIZE):

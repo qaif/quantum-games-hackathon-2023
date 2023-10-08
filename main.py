@@ -211,23 +211,14 @@ def game_main_loop(lvl=1):
             if bomb.measurement():
                 exploded = True
                 bomb.quantum_state = np.array([1,0])
+                screen.fill((0,0,0))
+                screen.blit(explosion.surf, explosion.rect)
             else:
                 bomb.quantum_state = np.array([0,1])
                 bomb.time = bomb.max_time
            
             qubit.coords = state_to_coords(bomb.quantum_state)
             qubit.reLoadImage()
-           
-
-
-        #---------------
-        # if(win): 
-        #     print('You won the game')
-        #     #running = False
-        # if(timeout): 
-        #     print('You lost the game')
-        #     #running = False
-        #---------------
 
         pygame.display.flip()
 
@@ -241,7 +232,7 @@ def game_main_loop(lvl=1):
         clock.tick(50)
 
 def level_selection():
-    lvl_menu = pygame_menu.Menu('Welcome',1000, 500, theme=pygame_menu.themes.THEME_BLUE)
+    lvl_menu = pygame_menu.Menu('Welcome',SCREEN_WIDTH, SCREEN_HEIGHT, theme=pygame_menu.themes.THEME_BLUE)
     lvl_menu.add.button('Level 1', lambda: game_main_loop(1))
     lvl_menu.add.button('Level 2', lambda: game_main_loop(2))
     lvl_menu.add.button('Level 3', lambda: game_main_loop(3))
@@ -251,7 +242,7 @@ def level_selection():
     lvl_menu.add.button('Quit', pygame_menu.events.EXIT)
     lvl_menu.mainloop(screen)
 
-menu = pygame_menu.Menu('Welcome',1000, 500, theme=pygame_menu.themes.THEME_BLUE)
+menu = pygame_menu.Menu('Welcome',SCREEN_WIDTH, SCREEN_HEIGHT, theme=pygame_menu.themes.THEME_BLUE)
 
 #menu.add.button('Play', game_main_loop)
 menu.add.button('Play', level_selection)
