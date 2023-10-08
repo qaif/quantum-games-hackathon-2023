@@ -21,7 +21,7 @@ func increase_degree(degree : float):
 			temperature += degree
 			$degree.scale.y = (scale_max - scale_min) * (temperature - min_temperature)/(max_temperature-min_temperature) + scale_min
 		else : 
-			get_tree().change_scene_to_file("res://lose_menu.tscn")
+			get_tree().change_scene_to_file("res://menus/lose_menu.tscn")
 	
 func decrease_degree(degree : float):	
 	if temperature > min_temperature :

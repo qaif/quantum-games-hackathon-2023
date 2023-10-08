@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://c6gv76xy7l7p6"]
 
-[ext_resource type="Script" path="res://Choose_level.gd" id="1_0g6hc"]
+[ext_resource type="Script" path="res://menus/Choose_level.gd" id="1_0g6hc"]
 [ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="2_u0ton"]
 [ext_resource type="Texture2D" uid="uid://bfupfvpjp3fot" path="res://resources/background/png/1920x1080/All/Hills_1.png" id="3_kd0xf"]
 [ext_resource type="Texture2D" uid="uid://biairwunmhjdr" path="res://resources/quantumbanner.png" id="4_wqqrs"]

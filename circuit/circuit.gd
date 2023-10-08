@@ -17,6 +17,6 @@ func nextFrame(gate):
 		circuitIndex += 1
 		$AnimatedSprite2D.frame = circuitIndex
 	else: 
-		get_tree().change_scene_to_file("res://lose_menu.tscn")
+		get_tree().change_scene_to_file("res://menus/lose_menu.tscn")
 	if circuitIndex == circuitOrder.size(): 
-		get_tree().change_scene_to_file("res://winning_screen.tscn")
+		get_tree().change_scene_to_file("res://menus/winning_screen.tscn")
