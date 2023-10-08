@@ -1,14 +1,18 @@
 extends Node2D
 
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var singleton = get_node("/root/inv")
+	$VBoxContainer/ButtonContainer/MiddleBox/Level2.disabled = !singleton.level1
+		
+
 
 func _on_quit_button_pressed():
 	get_tree().quit()
 
-
 func _on_play_button_pressed():
-	if(GlobalVar.level_selected == 1):
-		get_tree().change_scene_to_file("res://scenes/level1.tscn")
+	get_tree().change_scene_to_file("res://scenes/level1.tscn")
 
 
 func _on_option_button_pressed():
-	get_tree().change_scene_to_file("res://menus/choose_level.tscn")
+	get_tree().change_scene_to_file("res://scenes/level2.tscn")
