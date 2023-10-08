@@ -31,6 +31,12 @@ In order to beat the levels of the game you will need both understanding of basi
 ---
 ## Installation
 
+git clone https://github.com/gczelusta/QBomb.git
+cd QBomb
+conda env create --file enviroment.yml
+conda activate QBombEnv
+python3 main.py
+
 ---
 | CONTROLS |        |
 |----------|--------|
