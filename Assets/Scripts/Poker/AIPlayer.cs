@@ -23,6 +23,18 @@ public class AIPlayer : MonoBehaviour
         enteredGame.betFromPlayerRequested += Bet;
     }
 
+    bool HasGoodHand()
+    {
+        var card1 = enteredGame.players[playerIndex].cards[0];
+        var card2 = enteredGame.players[playerIndex].cards[1];
+
+        if (card1.rank == card2.rank) return true;
+
+        if (Math.Max(card1.rankInt, card2.rankInt) >= 11) return true;
+
+        return false;
+    }
+
     public bool IsPlayingInTheGame()
     {
         return enteredGame != null;
@@ -45,6 +57,13 @@ public class AIPlayer : MonoBehaviour
         if (player.index != playerIndex) return;
         var callAmount = Math.Min(currentBet, player.currentMoney + player.currentBet);
 
+        if ((enteredGame.phase == GamePhase.PreFlop) && !HasGoodHand() && (player.currentBet == 0))
+        {
+            Debug.Log($"Player {playerIndex}, my cards are: {enteredGame.players[playerIndex].cards[0]}, {enteredGame.players[playerIndex].cards[1]}, folding");
+            StartCoroutine(DelayedBid(-1));
+            return;
+        }
+
         if (callAmount > player.currentBet)
         {
             SoundManager.Instance.Call();
@@ -57,6 +76,7 @@ public class AIPlayer : MonoBehaviour
 
         // Always check for now
         StartCoroutine(DelayedBid(callAmount));
+        return;
     }
 
     public void UpdateMoney()

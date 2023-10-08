@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-enum GamePhase
+public enum GamePhase
 {
     PreFlop,
     Flop,
@@ -53,7 +53,7 @@ public class Game
     public UnityAction newCardsOnBoard;
 
     Deck deck;
-    GamePhase phase = GamePhase.PreFlop;
+    public GamePhase phase = GamePhase.PreFlop;
 
     int startingPlayer;
     int currentlyBettingPlayer;
