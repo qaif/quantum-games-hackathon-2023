@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://resources/Inventory/inventory_background.png"
+source_file="res://resources/inventory/inventory_background.png"
 dest_files=["res://.godot/imported/inventory_background.png-a556ae7558cb15647b1ed1e281d1b8c0.ctex"]
 
 [params]
