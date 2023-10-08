@@ -26,4 +26,4 @@ func _on_level_2_pressed():
 
 
 func _on_back_pressed():
-		get_tree().change_scene_to_file("res://menu.tscn")
+		get_tree().change_scene_to_file("res://menus/menu.tscn")
