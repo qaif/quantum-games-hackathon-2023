@@ -64,6 +64,7 @@ public class MainMenu : MonoBehaviour
         pokerRulesHelp.SetActive(false);
         cardHelp.SetActive(false);
         quantumHelp.SetActive(false);
+        Debug.Log("Called close");
     }
 
     public void Exit()
