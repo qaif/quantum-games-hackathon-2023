@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg66a1qv4k4w5"]
+[gd_scene load_steps=13 format=3 uid="uid://dg66a1qv4k4w5"]
 
 [ext_resource type="Script" path="res://menus/menu.gd" id="1_f0tcb"]
 [ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="2_qgsuy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwutrdlonp0jd" path="res://resources/background/png/Clouds/512x512/Cloud_1.png" id="5_btruu"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="6_o8opw"]
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="7_ap3pb"]
+[ext_resource type="AudioStream" uid="uid://djti6ouri8buq" path="res://resources/Sounds/mixkit-game-level-music-689.mp3" id="8_8itqe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lx0h"]
 bg_color = Color(0.972549, 0.6, 0.258824, 1)
@@ -114,6 +115,10 @@ shape = SubResource("RectangleShape2D_wmq1d")
 position = Vector2(-411, -234)
 scale = Vector2(1.60938, 0.31543)
 texture = ExtResource("7_ap3pb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_8itqe")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/OptionButton" to="." method="_on_option_button_pressed"]

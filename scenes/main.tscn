@@ -3,20 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://0kk8n2bu6nss" path="res://resources/Tiles/png/128x128/Grass.png" id="1_6etl1"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_cwba0"]
 [ext_resource type="PackedScene" uid="uid://bdspqpvxhy1ju" path="res://resources/Player/Player.tscn" id="2_qjiqm"]
-[ext_resource type="PackedScene" uid="uid://ckd405sesybep" path="res://bg.tscn" id="3_3s41w"]
+[ext_resource type="PackedScene" uid="uid://ckd405sesybep" path="res://scenes/bg.tscn" id="3_3s41w"]
 [ext_resource type="PackedScene" uid="uid://drbxusgja43ao" path="res://thermometer/thermometer.tscn" id="4_hcp8l"]
-[ext_resource type="PackedScene" uid="uid://bja6cx3mtxaqv" path="res://inventory/inventory.tscn" id="4_nam8y"]
+[ext_resource type="PackedScene" uid="uid://co226dku7h41x" path="res://Inventory/inventory.tscn" id="4_nam8y"]
 [ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://bloch_sphere/player_state_sphere.tscn" id="7_qubm8"]
 [ext_resource type="PackedScene" uid="uid://srs5g3jtfsl8" path="res://shower/shower.tscn" id="8_mb3xl"]
 [ext_resource type="PackedScene" uid="uid://cn2swtijcu4fj" path="res://world/world_tileset.tscn" id="9_pyhvs"]
 [ext_resource type="PackedScene" uid="uid://d4ga88lcnniqg" path="res://gates/single_gate_power.tscn" id="10_eyjr0"]
-[ext_resource type="PackedScene" uid="uid://dbpcayspsbsmv" path="res://circuit.tscn" id="14_bobax"]
+[ext_resource type="PackedScene" uid="uid://dbpcayspsbsmv" path="res://circuit/circuit.tscn" id="14_bobax"]
 [ext_resource type="Texture2D" uid="uid://lvkec88sqecb" path="res://resources/Tiles/png/128x128/Dirt.png" id="15_at8nl"]
 [ext_resource type="PackedScene" uid="uid://bmsq0wxwvfajg" path="res://gate_circuit/gate_h_circuit.tscn" id="16_cqf6v"]
 [ext_resource type="PackedScene" uid="uid://bg8yaiei0o7nj" path="res://gate_circuit/gate_cnot_circuit.tscn" id="17_oddl6"]
 [ext_resource type="PackedScene" uid="uid://6pdoiavbk1sh" path="res://gate_circuit/gate_z_circuit.tscn" id="18_u7mtw"]
 [ext_resource type="PackedScene" uid="uid://cffpk4y320pu4" path="res://gate_circuit/gate_x_circuit.tscn" id="19_ephfe"]
-[ext_resource type="PackedScene" uid="uid://deoine2mdbiww" path="res://filter.tscn" id="20_dnmnl"]
+[ext_resource type="PackedScene" uid="uid://deoine2mdbiww" path="res://filter/filter.tscn" id="20_dnmnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_no3nw"]
 size = Vector2(1140, 104)
@@ -245,3 +245,5 @@ position = Vector2(1369, 359)
 
 [node name="gate_h_circuit3" parent="." instance=ExtResource("16_cqf6v")]
 position = Vector2(3181, 99)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
