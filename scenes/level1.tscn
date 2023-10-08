@@ -221,9 +221,6 @@ position = Vector2(710, 350)
 [node name="gate_cnot_circuit" parent="gate" instance=ExtResource("13_km35e")]
 position = Vector2(1620, 242)
 
-[node name="gate_cnot_circuit2" parent="gate" instance=ExtResource("13_km35e")]
-position = Vector2(3631, 347)
-
 [node name="gate_z_circuit" parent="gate" instance=ExtResource("14_l24gf")]
 position = Vector2(2063, 359)
 
@@ -235,12 +232,3 @@ position = Vector2(3181, 99)
 
 [node name="gate_cnot_circuit4" parent="gate" instance=ExtResource("13_km35e")]
 position = Vector2(3631, 347)
-
-[node name="gate_z_circuit2" parent="gate" instance=ExtResource("14_l24gf")]
-position = Vector2(2063, 359)
-
-[node name="gate_x_circuit2" parent="gate" instance=ExtResource("15_bog7v")]
-position = Vector2(1369, 359)
-
-[node name="gate_h_circuit3" parent="gate" instance=ExtResource("12_m4jrh")]
-position = Vector2(3181, 99)
