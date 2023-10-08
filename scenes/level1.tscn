@@ -80,6 +80,11 @@ position = Vector2(537, 207)
 collision_layer = 21
 collision_mask = 17
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-537, -207)
+stream = ExtResource("18_cd1sr")
+autoplay = true
+
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(1, 0)
 limit_left = 3
@@ -102,10 +107,6 @@ position = Vector2(202, -7)
 
 [node name="Circuit" parent="CanvasLayer" instance=ExtResource("8_b1py4")]
 position = Vector2(547, 546)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer"]
-stream = ExtResource("18_cd1sr")
-autoplay = true
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 offset_left = 881.0

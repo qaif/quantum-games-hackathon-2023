@@ -86,6 +86,10 @@ limit_top = 0
 limit_right = 3998
 limit_bottom = 100
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-537, -207)
+stream = ExtResource("18_fuvgi")
+
 [node name="bg" parent="." instance=ExtResource("4_bpf6s")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -300,8 +304,5 @@ position = Vector2(2989, 252)
 
 [node name="shower4" parent="shower" instance=ExtResource("9_w7mvt")]
 position = Vector2(3368, 254)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("18_fuvgi")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
