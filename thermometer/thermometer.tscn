@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cb5s3pxrogiyh" path="res://resources/degree_thermometer.png" id="1_nekub"]
 [ext_resource type="Script" path="res://thermometer/thermometer.gd" id="1_tnqw2"]
 [ext_resource type="Texture2D" uid="uid://bcf6ar7jeseq1" path="res://resources/thermometer.png" id="1_xgspa"]
-[ext_resource type="Script" path="res://Label.gd" id="4_xjp5v"]
+[ext_resource type="Script" path="res://thermometer/Label.gd" id="4_xjp5v"]
 
 [node name="thermometer" type="Node2D"]
 script = ExtResource("1_tnqw2")
