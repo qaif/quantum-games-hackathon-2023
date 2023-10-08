@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://deoine2mdbiww"]
 
 [ext_resource type="Script" path="res://filter.gd" id="1_3kpi4"]
-[ext_resource type="Texture2D" uid="uid://555wgvvi7bx0" path="res://gates/gate0.png" id="2_bouux"]
+[ext_resource type="Texture2D" uid="uid://dtrlqr1ngctwp" path="res://gates/gate1.png" id="2_r8c0c"]
 [ext_resource type="PackedScene" uid="uid://covvpjbes123b" path="res://player_state_sphere.tscn" id="3_3db5s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65uij"]
@@ -35,7 +35,7 @@ shape = SubResource("RectangleShape2D_47vol")
 [node name="FilterSprite" type="Sprite2D" parent="RigidBody2D"]
 position = Vector2(18.5, 32.5)
 scale = Vector2(2.05556, 1.2037)
-texture = ExtResource("2_bouux")
+texture = ExtResource("2_r8c0c")
 
 [node name="PlayerStateSphere" parent="." instance=ExtResource("3_3db5s")]
 position = Vector2(-6, 7)
