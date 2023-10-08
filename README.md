@@ -1,5 +1,5 @@
 # The Entangled Explorer
-This project was developed for the Quantum Games Hackathon 2023 organised by the Quantum AI Foundation.
+This project was developed for the Quantum Games Hackathon 2023 organised by the Quantum AI Foundation. The main goal of the game is to learn how to manipulate quantum gates and circuits in a fun and interactive way.
 
 ## Backstory
 In the not-so-distant future, a brilliant young quantum programmer named Max finds himself at the epicenter of a failed experiment that forever alters the course of his life. In his research laboratory, Max and his team of physicists were on the brink of unlocking new potentials in quantum computing. Unfortunately, their ambitious experiment took an unexpected turn.
@@ -13,6 +13,8 @@ With each level presenting a new quantum challenge, can the Entangled Explorer r
 Use the arrow keys ↑, ← & → to move the character across platforms to collect logic gates. The goal is to collect all the gates necessary to complete the displayed circuit, all the while keeping the character’s temperature under control through the helium gas showers. 
 
 You can try the game online at https://simonr99.itch.io/entangledexplorer
+
+![Screenshot](resources/level2_screenshot.png)
 
 ## How to run it locally
 
@@ -28,9 +30,7 @@ Then you can go to localhost:8000 in your favorite browser to play the game.
 
 ## How to develop
 
-Install godot 4 from https://godotengine.org/download, then clone the repository and open the project in godot 4.
-
-
+Install godot 4.1.1 from https://godotengine.org/download, then clone the repository and open the project in godot 4.1.1
 
 ## Presentation video 
 
