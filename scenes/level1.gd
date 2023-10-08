@@ -24,3 +24,8 @@ func spawn_cosmic_ray():
 	add_child(instance)  # Add the CosmicRay to the scene tree
 
 	
+
+
+func _on_button_pressed():
+	# Load the current scene again
+	get_tree().change_scene_to_file("res://scenes/level1.tscn")

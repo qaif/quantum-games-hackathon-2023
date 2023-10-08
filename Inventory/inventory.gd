@@ -24,4 +24,4 @@ func _process(delta):
 
 
 func _on_open_inventory_button_pressed():
-	$Inventory.show()
+	pass
