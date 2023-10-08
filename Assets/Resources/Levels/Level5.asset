@@ -15,15 +15,7 @@ MonoBehaviour:
   oponentMoney: e8030000d0070000e8030000
   humanMoney: 1000
   isBossLevel: 1
-  gatesToBuy:
-  - gateType: 0
-    price: 3000
-  - gateType: 1
-    price: 1000
-  - gateType: 3
-    price: 1000
-  - gateType: 2
-    price: 1000
+  gatesToBuy: []
   dialogText: Doctor Kittenberg, we finally meet... I'm afraid I cannot give you
     back your precious quantum gates. I need them to keep those mindless puppies
     under my thumb. As a matter of fact I will use the gates right now to scramble

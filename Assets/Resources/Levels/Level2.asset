@@ -17,7 +17,7 @@ MonoBehaviour:
   isBossLevel: 0
   gatesToBuy:
   - gateType: 0
-    price: 3000
+    price: 2500
   - gateType: 1
     price: 1000
   - gateType: 3

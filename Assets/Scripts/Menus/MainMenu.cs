@@ -38,6 +38,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(gameplayScene);
     }
 
+    public void Cheat()
+    {
+        state.mode = Mode.Cheat;
+        SceneManager.LoadScene(gameplayScene);
+    }
+
     public void HelpSelect()
     {
         helpSelect.SetActive(true);

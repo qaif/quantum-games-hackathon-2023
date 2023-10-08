@@ -13,7 +13,8 @@ public class GateCount
 public enum Mode
 {
     Educational,
-    Challenging
+    Challenging,
+    Cheat
 }
 
 [CreateAssetMenu]
@@ -33,6 +34,10 @@ public class PersistentState : ScriptableObject
     {
         moneyToSpend = initialMoneyToSpend;
         gatesLimit = initialGatesLimit;
-        gates = new List<GateCount>(initialGates);
+        gates = new List<GateCount>();
+        foreach (var gc in initialGates)
+        {
+            gates.Add(new GateCount() { type = gc.type, count = gc.count });
+        }
     }
 }

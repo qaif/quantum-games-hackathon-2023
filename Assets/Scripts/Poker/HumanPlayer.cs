@@ -424,7 +424,7 @@ public class HumanPlayer : MonoBehaviour
 
             if (gate.interactable) newlyAppliedGates++;
         }
-        transformedCardResult.UpdateCard(card.quantumCard, state.mode == Mode.Educational);
+        transformedCardResult.UpdateCard(card.quantumCard, state.mode != Mode.Challenging);
         transformView.UpdateRemainingGates(newlyAppliedGates);
     }
 

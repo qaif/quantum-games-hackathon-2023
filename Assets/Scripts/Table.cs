@@ -19,6 +19,7 @@ public class Table : MonoBehaviour
     public AIPlayer[] robotPlayers;
 
     public Sprite cardBack;
+    public GameObject congratsWindow;
 
     [Header("Dialog")]
     public GameObject dialogWindow;
@@ -191,6 +192,16 @@ public class Table : MonoBehaviour
     {
         SoundManager.Instance.Level();
         state.Reset();
+        if (state.mode == Mode.Cheat)
+        {
+            state.gatesLimit = 12;
+            state.gates.Where(gate => gate.type == GateType.H).First().count += 5;
+            state.gates.Where(gate => gate.type == GateType.X).First().count += 3;
+            state.gates.Add(new GateCount { type = GateType.Y, count = 2 });
+            state.gates.Add(new GateCount { type = GateType.RY, count = 2 });
+            state.gates.Add(new GateCount { type = GateType.T, count = 2 });
+            state.gates.Add(new GateCount { type = GateType.S, count = 2 });
+        }
         levels[currentLevel].Initialize(this);
         ShowDialog();
     }
@@ -217,11 +228,9 @@ public class Table : MonoBehaviour
     public void GoToNextLevel()
     {
         currentLevel += 1;
-        if (currentLevel > 4)
+        if (currentLevel > 3)
         {
-            currentLevel = 4;
-            levels[currentLevel].Initialize(this);
-            StartNewRound();
+            congratsWindow.SetActive(true);
             return;
         }
         else
