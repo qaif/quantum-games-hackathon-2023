@@ -71,7 +71,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_j76mn")
-text = "Option
+text = "Levels
 "
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
@@ -116,4 +116,5 @@ scale = Vector2(1.60938, 0.31543)
 texture = ExtResource("7_ap3pb")
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/QuitButton" to="." method="_on_quit_button_pressed"]
