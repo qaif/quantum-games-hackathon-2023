@@ -32,3 +32,4 @@ MonoBehaviour:
     price: 3000
   - gateType: 7
     price: 3000
+  dialogText: Placeholder4

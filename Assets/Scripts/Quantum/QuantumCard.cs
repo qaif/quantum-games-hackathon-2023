@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,8 @@ using UnityEngine;
 public class QuantumCard
 {
     Qiskit.QuantumCircuit[] qcs;
+    double[] randomThetas = new double[6];
     Qiskit.MicroQiskitSimulator simulator = new Qiskit.MicroQiskitSimulator();
-
-    public QuantumCard()
-    {
-        InitCircuit();
-    }
 
     public Qiskit.ComplexNumber[] Simulate(int bitIndex)
     {
@@ -22,14 +19,31 @@ public class QuantumCard
         return simulator.GetProbabilities(qcs[bitIndex]);
     }
 
-    public void InitCircuit()
+    public void InitRound()
+    {
+
+        for (int i = 0; i < 6; i++)
+        {
+            randomThetas[i] = UnityEngine.Random.Range(0f, 1f) * Math.PI;
+        }
+    }
+
+    public void InitCircuit(bool isBossLevel)
     {
         qcs = new Qiskit.QuantumCircuit[6];
 
         for (int i = 0; i < 6; i++)
         {
             qcs[i] = new Qiskit.QuantumCircuit(1, 1, false);
-            qcs[i].H(0);
+
+            if (!isBossLevel)
+            {
+                qcs[i].H(0);
+            }
+            else
+            {
+                qcs[i].RX(0, randomThetas[i]);
+            }
         }
     }
 

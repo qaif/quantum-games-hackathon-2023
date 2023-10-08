@@ -33,11 +33,11 @@ public class CardInHand
         }
     }
 
-    public Card Measure()
+    public Card Measure(bool isBossLevel)
     {
         SoundManager.Instance.Measure();
         measured = true;
-        quantumCard.InitCircuit();
+        quantumCard.InitCircuit(isBossLevel);
 
         int suiteIndex = 0;
         int rankIndex = 0;
@@ -82,6 +82,7 @@ public class HumanPlayer : MonoBehaviour
     public PersistentState state;
     public Events events;
 
+    public bool isBossLevel = false;
     int playerIndex;
 
     [HideInInspector] public int currentMoney;
@@ -152,6 +153,8 @@ public class HumanPlayer : MonoBehaviour
         thetaThisGame = UnityEngine.Random.Range(1, 6) * 30;
         left.Reset();
         right.Reset();
+        left.quantumCard.InitRound();
+        right.quantumCard.InitRound();
         UpdateCards();
         this.playerIndex = playerIndex;
         enteredGame = game;
@@ -302,11 +305,11 @@ public class HumanPlayer : MonoBehaviour
     {
         if (cardIndex == 0)
         {
-            enteredGame.players[playerIndex].cards[0] = left.Measure();
+            enteredGame.players[playerIndex].cards[0] = left.Measure(isBossLevel);
         }
         else if (cardIndex == 1)
         {
-            enteredGame.players[playerIndex].cards[1] = right.Measure();
+            enteredGame.players[playerIndex].cards[1] = right.Measure(isBossLevel);
         }
         else
         {
@@ -405,7 +408,7 @@ public class HumanPlayer : MonoBehaviour
     {
         // Left card - pre modifications
         var card = (currentlyModifiedCard == 0) ? left : right;
-        card.quantumCard.InitCircuit();
+        card.quantumCard.InitCircuit(isBossLevel);
         transformedCardSource.UpdateCard(card.quantumCard, true);
 
         // Right card - after modifications

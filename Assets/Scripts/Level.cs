@@ -21,6 +21,10 @@ public class Level : ScriptableObject
 
     public GateToBuy[] gatesToBuy;
 
+    public string dialogText;
+
+    public Sprite bossSprite;
+
     public void Initialize(Table table)
     {
         table.humanPlayer.currentMoney = humanMoney;
@@ -33,15 +37,18 @@ public class Level : ScriptableObject
             i++;
         }
 
+        table.humanPlayer.isBossLevel = false;
         if (isBossLevel)
         {
-            InitializeBoss();
+            InitializeBoss(table);
         }
     }
 
-    void InitializeBoss()
+    void InitializeBoss(Table table)
     {
+        table.humanPlayer.isBossLevel = true;
         SoundManager.Instance.Boss();
-        // TODO: boss
+        table.bossDialog.SetActive(true);
+        table.robotPlayers[1].picture.sprite = bossSprite;
     }
 }

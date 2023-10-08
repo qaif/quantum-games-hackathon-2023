@@ -11,6 +11,7 @@ public class AIPlayer : MonoBehaviour
 
     public TMP_Text moneyDisplay;
     public TMP_Text betDisplay;
+    public Image picture;
 
     Game enteredGame;
     public int playerIndex;

@@ -434,10 +434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759fb31bf9039a94793dd0b9fc951b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 1000
   currentMoney: 1000
   moneyDisplay: {fileID: 1456447688453403317}
   betDisplay: {fileID: 5883916642541891413}
+  picture: {fileID: 61351949794656989}
+  playerIndex: 0
 --- !u!1 &5355100814531169878
 GameObject:
   m_ObjectHideFlags: 0

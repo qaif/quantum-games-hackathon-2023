@@ -20,6 +20,11 @@ public class Table : MonoBehaviour
 
     public Sprite cardBack;
 
+    [Header("Dialog")]
+    public GameObject dialogWindow;
+    public TMP_Text dialogText;
+    public GameObject bossDialog;
+
     [Header("After game screen")]
     public GameObject gameFinishedWindow;
 
@@ -170,12 +175,24 @@ public class Table : MonoBehaviour
         }
     }
 
+    void ShowDialog()
+    {
+        dialogText.text = levels[currentLevel].dialogText;
+        dialogWindow.SetActive(true);
+    }
+
+    void HideDialog()
+    {
+        dialogWindow.SetActive(false);
+
+    }
+
     void Start()
     {
         SoundManager.Instance.Level();
         state.Reset();
         ResetLevel();
-        StartNewRound();
+        ShowDialog();
     }
 
     public void ResetLevel()
@@ -184,11 +201,33 @@ public class Table : MonoBehaviour
         StartNewRound();
     }
 
+    public void ContinueFromDialog()
+    {
+        HideDialog();
+        StartNewRound();
+    }
+
     public void GoToNextLevel()
     {
         currentLevel += 1;
-        if (currentLevel > 4) currentLevel = 4;
-        levels[currentLevel].Initialize(this);
-        StartNewRound();
+        if (currentLevel > 4)
+        {
+            currentLevel = 4;
+            levels[currentLevel].Initialize(this);
+            StartNewRound();
+            return;
+        }
+        else
+        {
+            levels[currentLevel].Initialize(this);
+            if (levels[currentLevel].dialogText != "")
+            {
+                ShowDialog();
+            }
+            else
+            {
+                StartNewRound();
+            }
+        }
     }
 }
