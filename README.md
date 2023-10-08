@@ -2,6 +2,8 @@
 
 [![](./imgs/instruction/Screenshot.png)](https://youtu.be/sRcrjSNwUf8)
 
+Click image above to see video.
+
 The game which teaches two fundamental topics in quantum computing: 1-qubit Bloch sphere and measurement process.
 
 You are an unfortunate hero, which carries a bomb which is going to explode in couple of next seconds!
