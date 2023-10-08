@@ -172,7 +172,8 @@ public class HumanPlayer : MonoBehaviour
         ActivateButtons();
         UpdateCards();
 
-        if (player.currentMoney + player.currentBet > currentMaxBet)
+        // Player has some money + there are some oponents to raise against
+        if ((player.currentMoney + player.currentBet > currentMaxBet) && (enteredGame.players.Select(player => (player.currentMoney + player.currentBet > currentMaxBet)).Count() > 1))
         {
             raiseButton.interactable = true;
         }
@@ -245,7 +246,7 @@ public class HumanPlayer : MonoBehaviour
 
     public void Check()
     {
-        SoundManager.Instance.Click();
+        SoundManager.Instance.Check();
         DisableBettingControls();
         enteredGame.SubmitBet(this.playerIndex, enteredGame.currentMaxBet);
     }

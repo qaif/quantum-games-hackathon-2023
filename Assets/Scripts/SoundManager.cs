@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip money;
     public AudioClip call;
     public AudioClip card;
+    public AudioClip check;
     public AudioClip click;
     public AudioClip gate;
     public AudioClip lose;
@@ -43,6 +44,11 @@ public class SoundManager : MonoBehaviour
     public void Card()
     {
         soundEffectsSource.PlayOneShot(card);
+    }
+
+    public void Check()
+    {
+        soundEffectsSource.PlayOneShot(check);
     }
 
     public void Click()

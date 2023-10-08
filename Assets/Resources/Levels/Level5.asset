@@ -27,5 +27,5 @@ MonoBehaviour:
   dialogText: Doctor Kittenberg, we finally meet... I'm afraid I cannot give you
     back your precious quantum gates. I need them to keep those mindless puppies
     under my thumb. As a matter of fact I will use the gates right now to scramble
-    the quibts on your cards, muahahaha!
+    the qubits on your cards, muahahaha!
   bossSprite: {fileID: 21300000, guid: d16971cff891ce74a810222e45f690aa, type: 3}

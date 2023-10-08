@@ -3054,7 +3054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &707717573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8421,6 +8421,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2577470886786744038, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577470886786744038, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577470886786744038, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577470886786744038, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4874083226284725009, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 497
@@ -8480,6 +8496,22 @@ PrefabInstance:
     - target: {fileID: 5326630840164544773, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
       propertyPath: m_Name
       value: OponentCenter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620500637912708803, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620500637912708803, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620500637912708803, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620500637912708803, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8481290957210002513, guid: 6ec0a51479f5e694eb6c62bac0c2fcdf, type: 3}
       propertyPath: m_AnchorMax.y

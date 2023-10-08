@@ -24,6 +24,8 @@ MonoBehaviour:
     price: 1000
   - gateType: 2
     price: 1000
-  dialogText: Doctor Kittenberg! Something terrible happened when you were away.
-    Thugs from the bulldogs mafia broke in and stole all of our quantum gates! You
-    will have to go to their hideout and try to but them back from them.
+  dialogText: Doctor Kittenberg! Something terrible has occurred during your absence.
+    Thugs from the Bulldog Mafia infiltrated our premises and absconded with all
+    of our quantum gates! You will need to venture to their hideout and get them
+    back.
+  bossSprite: {fileID: 0}

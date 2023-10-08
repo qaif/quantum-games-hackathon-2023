@@ -13,25 +13,21 @@ MonoBehaviour:
   m_Name: State
   m_EditorClassIdentifier: 
   initialMoneyToSpend: 0
-  initialGatesLimit: 8
+  initialGatesLimit: 4
   initialGates:
   - type: 0
-    count: 2
+    count: 3
   - type: 1
-    count: 2
-  - type: 2
-    count: 0
-  - type: 4
-    count: 2
-  moneyToSpend: 0
-  gatesLimit: 8
+    count: 1
+  moneyToSpend: 200
+  gatesLimit: 4
   gates:
   - type: 0
-    count: 2
+    count: 3
   - type: 1
-    count: 2
+    count: 3
   - type: 2
-    count: 0
-  - type: 4
-    count: 2
+    count: 1
+  - type: 3
+    count: 1
   mode: 0

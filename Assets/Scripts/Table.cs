@@ -63,7 +63,7 @@ public class Table : MonoBehaviour
         currentGame.newCardsOnBoard += UpdateCardsDisplay;
         currentGame.gameFinished += GameFinished;
 
-        currentGame.Start();
+        StartCoroutine(currentGame.Start());
     }
 
     void ShowResults(GameObject results, int moneyChange, Card[] cards)
@@ -191,8 +191,15 @@ public class Table : MonoBehaviour
     {
         SoundManager.Instance.Level();
         state.Reset();
-        ResetLevel();
+        levels[currentLevel].Initialize(this);
         ShowDialog();
+    }
+
+    void Update()
+    {
+        if (currentGame == null) return;
+
+        if (currentGame.nextPhaseReady) StartCoroutine(currentGame.GoToNextPhase());
     }
 
     public void ResetLevel()

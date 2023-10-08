@@ -39,6 +39,9 @@ public class Game
     const int smallBlind = 100;
     const int bigBlind = 200;
 
+    public bool nextPhaseReady = false;
+    const float dealCardDelay = 0.5f;
+
     // PokerEvents pokerEvents;
     public List<Card> cardsOnTable = new List<Card>();
     public Seat[] players;
@@ -72,14 +75,14 @@ public class Game
     void ProgressBetting()
     {
         var activePlayers = players.Where(seat => (!seat.folded && seat.currentMoney > 0));
-        if (activePlayers.Count() <= 1)
+        if (activePlayers.Count() <= 0)
         {
-            Debug.Log("Only one remaining player");
+            Debug.Log("No remaining players");
             EndBettingRound();
             return;
         }
 
-        // There are at least two players who didn't fold and have no zero money 
+        // There is at least one player who didn't fold and have no zero money 
         while (true)
         {
             currentlyBettingPlayer = (currentlyBettingPlayer + 1) % players.Length;
@@ -106,27 +109,27 @@ public class Game
     void EndBettingRound()
     {
         acceptingBets = false;
-        GoToNextPhase();
+        nextPhaseReady = true;
     }
 
-    private void GoToNextPhase()
+    public IEnumerator GoToNextPhase()
     {
+        nextPhaseReady = false;
         switch (phase)
         {
             case GamePhase.PreFlop:
-                Flop();
-                return;
+                yield return Flop();
+                break;
             case GamePhase.Flop:
-                Turn();
-                return;
+                yield return Turn();
+                break;
             case GamePhase.Turn:
-                River();
-                return;
+                yield return River();
+                break;
             case GamePhase.River:
-                EndGame();
-                return;
+                yield return EndGame();
+                break;
         }
-        return;
     }
 
     public Seat[] GetWinningPlayersForPot(int betSize)
@@ -143,11 +146,11 @@ public class Game
         return bestHands.Select(hs => players[hs]).ToArray();
     }
 
-    private void EndGame()
+    private IEnumerator EndGame()
     {
         while (cardsOnTable.Count() < 5)
         {
-            DealCard();
+            yield return DealCard();
         }
 
         var betSizes = players.Where(player => !player.folded).Select(player => player.currentBet).Distinct().OrderBy(bet => bet);
@@ -174,24 +177,28 @@ public class Game
         gameFinished?.Invoke();
     }
 
-    void DealCard()
+    IEnumerator DealCard()
     {
         cardsOnTable.Add(deck.NextCard());
         newCardsOnBoard?.Invoke();
         SoundManager.Instance.Card();
+        yield return new WaitForSeconds(dealCardDelay);
     }
 
-    void PreFlop()
+    IEnumerator PreFlop()
     {
         for (int i = 0; i < players.Length; i++)
         {
             SoundManager.Instance.Card();
             var card = deck.NextCard();
             players[i].cards.Add(card);
+            yield return new WaitForSeconds(0.2f);
+
 
             SoundManager.Instance.Card();
             card = deck.NextCard();
             players[i].cards.Add(card);
+            yield return new WaitForSeconds(0.2f);
         }
 
         ProcessBet(players[(startingPlayer + 1) % players.Length], smallBlind);
@@ -203,12 +210,12 @@ public class Game
         StartBettingRound();
     }
 
-    public void Flop()
+    public IEnumerator Flop()
     {
         phase = GamePhase.Flop;
         for (int i = 0; i < 3; i++)
         {
-            DealCard();
+            yield return DealCard();
         }
 
         // Finding first player who didn't fold, starting from small blind
@@ -225,17 +232,17 @@ public class Game
         StartBettingRound();
     }
 
-    public void Turn()
+    public IEnumerator Turn()
     {
         phase = GamePhase.Turn;
-        DealCard();
+        yield return DealCard();
         StartBettingRound();
     }
 
-    public void River()
+    public IEnumerator River()
     {
         phase = GamePhase.River;
-        DealCard();
+        yield return DealCard();
         StartBettingRound();
     }
 
@@ -307,9 +314,9 @@ public class Game
         return;
     }
 
-    public void Start()
+    public IEnumerator Start()
     {
-        PreFlop();
+        return PreFlop();
     }
 
     public Game(Deck deck, int[] playersMoney, int startingPlayer)

@@ -825,7 +825,14 @@ MonoBehaviour:
     6. You lose if you lose all of
     your money.
 
-    7. Raise value is always exactly one big blind.'
+    7. Raise value is always exactly one big blind.
+
+    8. If you
+    want to make use of your quantum card, you need to measure them before the end
+    of the game
+
+    9. You can only apply set number of gates in a single transform
+    move, but you can do multiple moves (one per turn)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -888,7 +895,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -100.00867, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2294,8 +2301,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484666804250441485, guid: bf99deb2ef3af02489a35378b46bdebc, type: 3}
       propertyPath: m_Volume
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 548534636726079784, guid: bf99deb2ef3af02489a35378b46bdebc, type: 3}
+      propertyPath: check
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ac40a48eea19854da30d1bbf1bf1b47, type: 3}
     - target: {fileID: 1472133587956121816, guid: bf99deb2ef3af02489a35378b46bdebc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2338,7 +2349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7892877456175936083, guid: bf99deb2ef3af02489a35378b46bdebc, type: 3}
       propertyPath: m_Volume
-      value: 0.05
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

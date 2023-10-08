@@ -30,4 +30,5 @@ MonoBehaviour:
     price: 2000
   - gateType: 6
     price: 3000
-  dialogText: Placeholder3
+  dialogText: 
+  bossSprite: {fileID: 0}

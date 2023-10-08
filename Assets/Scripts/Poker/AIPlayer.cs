@@ -34,14 +34,29 @@ public class AIPlayer : MonoBehaviour
         enteredGame = null;
     }
 
+    IEnumerator DelayedBid(int callAmount)
+    {
+        yield return new WaitForSeconds(1);
+        enteredGame.SubmitBet(playerIndex, callAmount);
+    }
+
     void Bet(Seat player, int currentBet)
     {
-        SoundManager.Instance.Call();
         if (player.index != playerIndex) return;
         var callAmount = Math.Min(currentBet, player.currentMoney + player.currentBet);
 
+        if (callAmount > player.currentBet)
+        {
+            SoundManager.Instance.Call();
+        }
+        else
+        {
+            // Not raising
+            SoundManager.Instance.Check();
+        }
+
         // Always check for now
-        enteredGame.SubmitBet(playerIndex, callAmount);
+        StartCoroutine(DelayedBid(callAmount));
     }
 
     public void UpdateMoney()
