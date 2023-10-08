@@ -12,5 +12,5 @@ var swap = 0
 
 
 # Level completion
-var level1 = false
+var level1 = true
 var level2 = false

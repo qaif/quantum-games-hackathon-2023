@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct0tvlr7mfb7v"]
+
+[ext_resource type="Script" path="res://menus/level2_backstory.gd" id="1_11a6j"]
+[ext_resource type="Texture2D" uid="uid://cnlnko3soa1e6" path="res://resources/background/png/1920x1080/Background/Background.png" id="2_f7pgv"]
+[ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="3_iaxal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lj8h"]
+bg_color = Color(0.972549, 0.6, 0.258824, 1)
+
+[node name="level2_backstory" type="Node2D"]
+script = ExtResource("1_11a6j")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(564, 484)
+scale = Vector2(0.733333, 0.733333)
+texture = ExtResource("2_f7pgv")
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(544, -440)
+rotation = 3.14159
+texture = ExtResource("3_iaxal")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 804.0
+offset_top = 562.0
+offset_right = 1117.0
+offset_bottom = 619.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6lj8h")
+text = "Start"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 249.0
+offset_top = 147.0
+offset_right = 908.0
+offset_bottom = 493.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 19.0
+offset_right = 645.0
+offset_bottom = 317.0
+text = "As you step into a vast maze, the pulsating pathways beneath hint at the mysterious nature of the Deutsch-Josza Algorithm. The floating oracles above each path beckon you closer, their cryptic demeanor a challenge in itself.
+
+Here, you must harness the DJ Algorithm to discern between constant and balanced quantum functions swiftly. The familiar shimmer of Quantum Gates appears as markers. Aligning with their resonance will reveal clues to aid your journey through this quantum puzzle.
+
+The deeper you venture, the clearer the power and potential of the DJ Algorithm becomes. Will you master its secrets and move one step closer to reassembling the Quantum Nexus?"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
