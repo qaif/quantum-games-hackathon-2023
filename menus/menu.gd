@@ -16,3 +16,7 @@ func _on_play_button_pressed():
 
 func _on_option_button_pressed():
 	get_tree().change_scene_to_file("res://menus/level2_backstory.tscn")
+
+
+func _on_instruction_pressed():
+	get_tree().change_scene_to_file("res://menus/game_instruction.tscn")
