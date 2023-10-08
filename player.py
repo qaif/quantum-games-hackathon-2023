@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
         super(Player, self).__init__()
         #self.surf = pygame.Surface((75,25))
         #self.surf.fill((255,255,255))
-        self.surf = pygame.image.load('imgs/hero/hero_big.png')
+        self.surf = pygame.image.load('imgs/hero/hero_new.png')
         self.rect = self.surf.get_rect(topleft = topleft)
 
         
