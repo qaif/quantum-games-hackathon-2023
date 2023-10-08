@@ -14,6 +14,8 @@ public class TransformView : MonoBehaviour
     public Sprite leftCardSymbol;
     public Sprite rightCardSymbol;
 
+    public GameObject cardHelp;
+
     public void UpdateRemainingGates(int usedGates)
     {
         var gatesToUse = state.gatesLimit - usedGates;
@@ -45,5 +47,15 @@ public class TransformView : MonoBehaviour
     public void SetCardSymbol(int modfiedCard)
     {
         cardSymbolDisplay.sprite = (modfiedCard == 0) ? leftCardSymbol : rightCardSymbol;
+    }
+
+    public void DisplayHelp()
+    {
+        cardHelp.SetActive(true);
+    }
+
+    public void CloseHelp()
+    {
+        cardHelp.SetActive(false);
     }
 }
