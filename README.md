@@ -1,4 +1,5 @@
 # Quantum-RPG  
+Play the Game at: https://game-owl1708.itch.io/quantum-rpg
 # Playing Instructions:  
 Point and Left mouse click to move to anywhere on the scene.  
 Point and Right Mouse Click to pick up equipment and attack enemies.  
