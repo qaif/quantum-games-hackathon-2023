@@ -34,7 +34,6 @@ func get_temperature():
 
 
 func _on_timer_timeout():
-	print("temperature increased")
 	increase_degree(0.1)
 		
 		
