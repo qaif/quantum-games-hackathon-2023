@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=3 uid="uid://btyu83jepg6my"]
+
+[ext_resource type="Script" path="res://circuit2/circuit2.gd" id="1_s5dpo"]
+[ext_resource type="Texture2D" uid="uid://dwvnguqaguqr" path="res://circuit2/empty_circuit.png" id="2_8nncx"]
+[ext_resource type="Texture2D" uid="uid://c2x83s5pryn3" path="res://circuit2/state_one_circuit.png" id="3_shch7"]
+[ext_resource type="Texture2D" uid="uid://d14w8qykgqyny" path="res://circuit2/state_two_circuit.png" id="4_pwk12"]
+[ext_resource type="Texture2D" uid="uid://bsdoe1gjmvnah" path="res://circuit2/state_three_circuit.png" id="5_u12fr"]
+[ext_resource type="Texture2D" uid="uid://cx2h7s6umbmsw" path="res://circuit2/state_four_circuit.png" id="6_sejrw"]
+[ext_resource type="Texture2D" uid="uid://b3n300kw430il" path="res://circuit2/state_five_circuit.png" id="7_4mklt"]
+[ext_resource type="Texture2D" uid="uid://diss7tdu06vtn" path="res://circuit2/state_six_circuit.png" id="8_xk0ai"]
+[ext_resource type="Texture2D" uid="uid://6tgt6rub384s" path="res://circuit2/state_seven_circuit.png" id="9_6jprp"]
+[ext_resource type="Texture2D" uid="uid://m0ewdkyjrnq8" path="res://circuit2/final_circuit.png" id="10_mxmka"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nj107"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8nncx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_shch7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pwk12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u12fr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sejrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4mklt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xk0ai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6jprp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mxmka")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Circuit" type="Node2D"]
+script = ExtResource("1_s5dpo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 2)
+scale = Vector2(0.72449, 0.72449)
+sprite_frames = SubResource("SpriteFrames_nj107")
+frame_progress = 0.411046
+speed_scale = 0.0
