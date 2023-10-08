@@ -16,6 +16,8 @@ You can try the game online at https://simonr99.itch.io/entangledexplorer
 
 ![Screenshot](resources/level2_screenshot.png)
 
+You can watch a video of a team member playing here : https://www.youtube.com/watch?v=ki_t9ciqDEw
+
 ## How to run it locally
 
 ```bash
