@@ -16,8 +16,6 @@ You can try the game online at https://simonr99.itch.io/entangledexplorer
 
 ![Screenshot](resources/level2_screenshot.png)
 
-You can watch a video of a team member playing here : https://www.youtube.com/watch?v=ki_t9ciqDEw
-
 ## How to run it locally
 
 ```bash
@@ -35,6 +33,8 @@ Then you can go to localhost:8000 in your favorite browser to play the game.
 Install godot 4.1.1 from https://godotengine.org/download, then clone the repository and open the project in godot 4.1.1
 
 ## Presentation video 
+
+You can watch a video of a team member playing here : https://www.youtube.com/watch?v=ki_t9ciqDEw
 
 ## Copyright
 This program is under the MIT license. 
