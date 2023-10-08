@@ -12,3 +12,10 @@ Available on youtube: https://youtu.be/iuW8B7IYHGs
 
 ## Screenshots
 
+Playing poker:
+![Poker game](/Screens/poker1.png "Poker")
+
+Applying quantum gates:
+![Quantum gates](/Screens/poker2.png "Quantum")
+
+
