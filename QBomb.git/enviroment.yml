@@ -1,0 +1,12 @@
+# run: conda env create --file environment.yml
+name: QBombEnv
+dependencies:
+- python=3.11.5
+- pip
+- matplotlib=3
+- numpy=1.26.0
+- pip:
+  - pygame==2.5.2
+  - pygame-menu==4.4.3
+  - qiskit==0.44.2
+  - qiskit-terra==0.25.2.1
