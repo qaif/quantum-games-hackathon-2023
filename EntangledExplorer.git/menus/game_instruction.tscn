@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://br7imvnwkkwlf"]
+
+[ext_resource type="Script" path="res://menus/game_instruction.gd" id="1_uw47c"]
+[ext_resource type="Texture2D" uid="uid://cnlnko3soa1e6" path="res://resources/background/png/1920x1080/Background/Background.png" id="2_u4xng"]
+[ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="3_7jtfq"]
+[ext_resource type="Texture2D" uid="uid://dpdaausto1q2c" path="res://resources/rules.png" id="4_17ibf"]
+[ext_resource type="Texture2D" uid="uid://eryy3po3yi5j" path="res://resources/rulesTitle.png" id="4_hf0o8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lj8h"]
+bg_color = Color(0.972549, 0.6, 0.258824, 1)
+
+[node name="instruction" type="Node2D"]
+script = ExtResource("1_uw47c")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(564, 484)
+scale = Vector2(0.733333, 0.733333)
+texture = ExtResource("2_u4xng")
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(544, -440)
+rotation = 3.14159
+texture = ExtResource("3_7jtfq")
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 804.0
+offset_top = 562.0
+offset_right = 1117.0
+offset_bottom = 619.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6lj8h")
+text = "Menu"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 214.0
+offset_top = 39.0
+offset_right = 947.0
+offset_bottom = 548.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="Panel"]
+position = Vector2(376, 348)
+scale = Vector2(0.664815, 0.664815)
+texture = ExtResource("4_hf0o8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(395, 270)
+scale = Vector2(0.491667, 0.491667)
+texture = ExtResource("4_17ibf")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,212 @@
+[gd_scene load_steps=10 format=3 uid="uid://co226dku7h41x"]
+
+[ext_resource type="Script" path="res://Inventory/inventory.gd" id="1_ycnyn"]
+[ext_resource type="Script" path="res://Inventory/OpenInventoryButton.gd" id="2_4jf3k"]
+[ext_resource type="Texture2D" uid="uid://btqs5u2t02v3u" path="res://resources/inventory/InventoryRect.png" id="3_qd7x6"]
+[ext_resource type="PackedScene" uid="uid://couwlhu5eblf" path="res://Inventory/slot.tscn" id="4_owi2y"]
+[ext_resource type="PackedScene" uid="uid://d10x2s5pjbgwd" path="res://gates/gate.tscn" id="5_8lbx6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wpv5"]
+bg_color = Color(0.8, 0.396078, 0, 1)
+corner_radius_bottom_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fad7"]
+corner_radius_bottom_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd7sm"]
+corner_radius_bottom_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h74nc"]
+bg_color = Color(0.8, 0.396078, 0, 1)
+corner_radius_bottom_right = 20
+
+[node name="InventoryGui" type="Node2D"]
+script = ExtResource("1_ycnyn")
+
+[node name="OpenInventoryButton" type="Button" parent="."]
+offset_right = 170.0
+offset_bottom = 32.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_1wpv5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1fad7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kd7sm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_h74nc")
+text = "Inventory (i)"
+script = ExtResource("2_4jf3k")
+
+[node name="Inventory" type="NinePatchRect" parent="."]
+visible = false
+offset_right = 263.0
+offset_bottom = 648.0
+texture = ExtResource("3_qd7x6")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="GridContainer" type="GridContainer" parent="Inventory"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 321.0
+offset_bottom = 270.0
+columns = 2
+
+[node name="Panel" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel2" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel3" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel4" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel5" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel6" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel7" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel8" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel9" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Panel10" parent="Inventory/GridContainer" instance=ExtResource("4_owi2y")]
+layout_mode = 2
+
+[node name="Y_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(36, 164)
+scale = Vector2(1.00862, 1)
+letter = "Y"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.254902, 0.368627, 0.568627, 1)
+
+[node name="H_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(37, 39)
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0.933333, 0.941176, 1)
+
+[node name="X_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(163, 38)
+scale = Vector2(1.00862, 1)
+letter = "X"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.764706, 0.572549, 1, 1)
+
+[node name="Z_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(161, 163)
+scale = Vector2(1.00862, 1)
+letter = "Z"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.682353, 0, 0.309804, 1)
+
+[node name="P_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(37, 289)
+scale = Vector2(1.00862, 1)
+letter = "P"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.980392, 0.658824, 0.627451, 1)
+
+[node name="CX_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(163, 288)
+scale = Vector2(1.00862, 1)
+letter = "CX"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.760784, 0.619608, 0, 1)
+
+[node name="CZ_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(36, 413)
+scale = Vector2(1.00862, 1)
+letter = "CZ"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0.533333, 0.803922, 0.745098, 1)
+
+[node name="SW_Gate" parent="Inventory" instance=ExtResource("5_8lbx6")]
+position = Vector2(162, 413)
+scale = Vector2(1.00862, 1)
+letter = "SW"
+text_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0.729412, 0.854902, 1)
+
+[node name="H_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 10.0
+offset_right = 87.0
+offset_bottom = 36.0
+text = "0 / 5"
+
+[node name="Y_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 134.0
+offset_right = 88.0
+offset_bottom = 160.0
+text = "0 / 5"
+
+[node name="Z_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 133.0
+offset_right = 214.0
+offset_bottom = 159.0
+text = "0 / 5"
+
+[node name="X_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 10.0
+offset_right = 216.0
+offset_bottom = 36.0
+text = "0 / 5"
+
+[node name="P_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 254.0
+offset_right = 89.0
+offset_bottom = 280.0
+text = "0 / 5"
+
+[node name="CX_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 253.0
+offset_right = 215.0
+offset_bottom = 279.0
+text = "0 / 5"
+
+[node name="CZ_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 378.0
+offset_right = 88.0
+offset_bottom = 404.0
+text = "0 / 5"
+
+[node name="SW_label" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 378.0
+offset_right = 214.0
+offset_bottom = 404.0
+text = "0 / 5"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inventory"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 616.0
+offset_right = 255.0
+offset_bottom = 645.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Press I to close the inventory"
+
+[connection signal="pressed" from="OpenInventoryButton" to="." method="_on_open_inventory_button_pressed"]

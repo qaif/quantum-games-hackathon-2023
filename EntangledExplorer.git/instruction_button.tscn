@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://de5xhmyo2yase"]
+
+[ext_resource type="Script" path="res://instruction_button.gd" id="1_llqlp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yrgc"]
+bg_color = Color(0.94902, 0.74902, 0.545098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.427451, 0.266667, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxddn"]
+bg_color = Color(0.439216, 0.278431, 0.258824, 1)
+
+[sub_resource type="FontFile" id="FontFile_2ufy4"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/16/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/16/0/glyphs/0/size = Vector2(0, 0)
+cache/0/16/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/16/0/glyphs/0/texture_idx = -1
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[node name="InstructionButton" type="MenuButton"]
+anchors_preset = -1
+anchor_left = 0.968
+anchor_top = 0.946
+anchor_right = 0.968
+anchor_bottom = 0.946
+offset_left = -0.136108
+offset_top = -0.00799561
+offset_right = 24.8639
+offset_bottom = 24.992
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.345098, 0.188235, 0.203922, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_6yrgc")
+toggle_mode = false
+action_mode = 1
+text = "?"
+flat = false
+script = ExtResource("1_llqlp")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -26.56
+anchor_top = -17.32
+anchor_right = -26.56
+anchor_bottom = -17.32
+offset_left = 6.10352e-05
+offset_top = 3.05176e-05
+offset_right = 205.0
+offset_bottom = 277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gxddn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 25.0
+offset_top = 18.0
+offset_right = 181.0
+offset_bottom = 253.0
+theme_override_fonts/normal_font = SubResource("FontFile_2ufy4")
+text = "Use the arrow keys ↑, ↓, ← & → to move the character across platforms to collect logic gates.
+
+Complete the circuit without exceeding the maximum temperature! 
+
+Stop at the helium gas  showers to cool you down."
+fit_content = true
+tab_size = 3
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

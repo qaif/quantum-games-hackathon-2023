@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://3soj1vnrpt7o"]
+
+[ext_resource type="Script" path="res://menus/level1_backstory.gd" id="1_d2u5k"]
+[ext_resource type="Texture2D" uid="uid://cnlnko3soa1e6" path="res://resources/background/png/1920x1080/Background/Background.png" id="2_m6drx"]
+[ext_resource type="Texture2D" uid="uid://butlwk7s6ceod" path="res://resources/background/png/1920x1080/All/Sky.png" id="3_hw8tn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lj8h"]
+bg_color = Color(0.972549, 0.6, 0.258824, 1)
+
+[node name="level1_backstory" type="Node2D"]
+script = ExtResource("1_d2u5k")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(564, 484)
+scale = Vector2(0.733333, 0.733333)
+texture = ExtResource("2_m6drx")
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(544, -440)
+rotation = 3.14159
+texture = ExtResource("3_hw8tn")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 804.0
+offset_top = 562.0
+offset_right = 1117.0
+offset_bottom = 619.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6lj8h")
+text = "Start"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 273.0
+offset_top = 121.0
+offset_right = 932.0
+offset_bottom = 514.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 9.0
+offset_right = 645.0
+offset_bottom = 393.0
+text = "As you awakens, the breathtaking Qubit Peaks loom on the horizon, and the vast Superposition Plains stretch out before her. The first piece of the Quantum Nexus, the Quantum Teleporter, is said to be hidden within this terrain. But the landscape, governed by unstable quantum laws, is riddled with challenges.
+
+1. Beware the erratic Cosmic Rays that dart across the plains. A single touch, and Ella's progress may be jeopardized.
+
+2. As she ventures forth, watch for the quantum gates. Remember, they must be collected when they resonate with Ella's state. Feel the rhythm, sense the resonance, and act swiftly.
+
+3. The journey is taxing on Ella's coherence. Keep an eye out for the shimmering Helium-4 Showers. They're her lifeline, cooling her down and maintaining her stability."
+
+[connection signal="pressed" from="StartButton" to="." method="_on_back_button_pressed"]

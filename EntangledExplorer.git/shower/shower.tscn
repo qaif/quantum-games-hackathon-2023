@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://srs5g3jtfsl8"]
+
+[ext_resource type="Texture2D" uid="uid://bu6fyuc08xakk" path="res://resources/shower1.png" id="1_76ito"]
+[ext_resource type="Script" path="res://shower/shower.gd" id="1_arscv"]
+[ext_resource type="Texture2D" uid="uid://j6os3usrdcdu" path="res://resources/shower2.png" id="2_0upgx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0px4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_76ito")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0upgx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuq04"]
+size = Vector2(50, 89)
+
+[node name="shower" type="Node2D"]
+script = ExtResource("1_arscv")
+metadata/_edit_horizontal_guides_ = [-1.0]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(62, 63)
+scale = Vector2(0.232, 0.26)
+sprite_frames = SubResource("SpriteFrames_0px4i")
+autoplay = "default"
+frame_progress = 0.0432453
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(63, 55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 29)
+shape = SubResource("RectangleShape2D_cuq04")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

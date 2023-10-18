@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://ogc8bm6jl7dl"]
+
+[ext_resource type="Texture2D" uid="uid://cmypt40366wa7" path="res://resources/bg_gameover.png" id="1_15u2j"]
+[ext_resource type="Script" path="res://menus/lose_menu.gd" id="1_ebnff"]
+[ext_resource type="AudioStream" uid="uid://cc520onf2soa2" path="res://resources/Sounds/loading.wav" id="3_vrgic"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pdww"]
+bg_color = Color(0.972549, 0.6, 0.258824, 1)
+
+[node name="loseMenu" type="Node2D"]
+script = ExtResource("1_ebnff")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(576.25, 325)
+scale = Vector2(1.00479, 1.00929)
+texture = ExtResource("1_15u2j")
+
+[node name="Header" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftMargin" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MiddleBox" type="VBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Game Over ! "
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Your state is no longer coherent"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="VBoxContainer/ButtonContainer/MiddleBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_1pdww")
+text = "Back"
+
+[node name="RightMargin" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Footer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_vrgic")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/MiddleBox/BackButton" to="." method="_on_back_button_pressed"]
