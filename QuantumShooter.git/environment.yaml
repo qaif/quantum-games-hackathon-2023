@@ -1,0 +1,9 @@
+name: QuantumShooter
+channels:
+  - defaults
+dependencies:
+  - python
+  - pip
+  - pip:
+      - pygame==2.5.2
+prefix: /Users/matio/anaconda3/envs/QuantumShooter
