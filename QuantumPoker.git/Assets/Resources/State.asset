@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390682c167f4c2746be0877bef55f924, type: 3}
+  m_Name: State
+  m_EditorClassIdentifier: 
+  initialMoneyToSpend: 0
+  initialGatesLimit: 4
+  initialGates:
+  - type: 0
+    count: 3
+  - type: 1
+    count: 1
+  moneyToSpend: 0
+  gatesLimit: 12
+  gates:
+  - type: 0
+    count: 13
+  - type: 1
+    count: 7
+  - type: 2
+    count: 2
+  - type: 4
+    count: 2
+  - type: 7
+    count: 2
+  - type: 6
+    count: 2
+  mode: 2
